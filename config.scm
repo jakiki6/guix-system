@@ -77,7 +77,7 @@
                   (home-directory "/home/laura")
                   (supplementary-groups '("wheel" "netdev" "audio" "video" "kvm"))
 		  (shell (file-append zsh "/bin/zsh"))
-	          (password "$6$laura$fD5qdRCoSiQu4XHSx6l2SBy2OekYfU40jRfIaUUfdFQJXKj3yoyHB3KdQXj/5O9.un48wTKCwYrAXOsUKjJrk0")
+	          (password "$6$laura$fD5qdRCoSiQu4XHSx6l2SBy2OekYfU40jRfIaUUfdFQJXKj3yoyHB3KdQXj/5O9.un48wTKCwYrAXOsUKjJrk0"))
                 %base-user-accounts))
 
   (packages (filter (lambda (x) (not (eq? x nvi))) (append (append (map specification->package '(
