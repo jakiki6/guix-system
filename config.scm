@@ -127,7 +127,7 @@
   (file-systems (cons* (file-system
                          (mount-point "/")
                          (device (uuid
-                                  "ae5b0683-73a1-47ca-a1b1-3f0bb08f0ae0"
+                                  "94564faf-9ed7-4f74-bd7d-3a6ce3c4a512"
                                   'btrfs))
                          (type "btrfs")) %base-file-systems))
 
