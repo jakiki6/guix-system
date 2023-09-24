@@ -1,14 +1,15 @@
 (use-modules (gnu))
-(use-service-modules cups desktop networking ssh xorg sddm)
+(use-service-modules cups desktop networking ssh xorg sddm linux docker sysctl)
 
-;; Import nonfree linux module.
 (use-modules (nongnu packages linux)
              (nongnu system linux-initrd)
 	     (gnu packages shells)
 	     (gnu packages hurd)
 	     (gnu packages nvi)
 	     (gnu packages vim)
+             (gnu packages samba)
 	     (gnu services virtualization)
+             (gnu system setuid)
 	     (guix build-system trivial)
 	     (guix channels)
 	     (guix inferior)
@@ -98,6 +99,12 @@
 		  (guix-publish-configuration
 		   (advertise? #t)))
 
+                 (service gnome-keyring-service-type)
+
+                 (service earlyoom-service-type)
+
+                 (service docker-service-type)
+
 		 (service qemu-binfmt-service-type
 	          (qemu-binfmt-configuration
                    (platforms (lookup-qemu-platforms "arm" "aarch64" "riscv32" "riscv64" "mips" "mips64" "mips64el" "mipsel" "mipsn32" "mipsn32el" "s390x" "sparc" "sparc32plus" "sparc64" "alpha" "ppc" "ppc64" "ppc64le")))))
@@ -110,7 +117,11 @@
                       %default-substitute-urls))
                    (authorized-keys
                     (append (list (plain-file "non-guix.pub" "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
-                      %default-authorized-guix-keys))))))))
+                      %default-authorized-guix-keys))))
+                  (sysctl-service-type config =>
+                    (sysctl-configuration
+                      (settings (append '(("net.ipv4.ip_forward" . "1"))
+                        %default-sysctl-settings))))))))
 
   (bootloader (bootloader-configuration
                 (bootloader grub-bootloader)
@@ -129,7 +140,16 @@
                          (device (uuid
                                   "94564faf-9ed7-4f74-bd7d-3a6ce3c4a512"
                                   'btrfs))
-                         (type "btrfs")) %base-file-systems))
+                         (type "btrfs"))
+                       (file-system
+                         (mount-point "/smb")
+                         (device "//s-files.fritz.box/jakob")
+                         (type "cifs")
+                         (options "username=jakob,password=kira,_netdev")
+                         (mount? #f)) %base-file-systems))
+
+  (setuid-programs (cons (setuid-program (program (file-append cifs-utils "/sbin/mount.cifs")))
+    %setuid-programs))
 
   (name-service-switch %mdns-host-lookup-nss)
 

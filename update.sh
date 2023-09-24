@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo guix system reconfigure config.scm
+sudo $(which guix) system reconfigure config.scm
