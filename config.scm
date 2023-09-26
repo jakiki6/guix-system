@@ -142,6 +142,13 @@
                                   'btrfs))
                          (type "btrfs"))
                        (file-system
+                         (mount-point "/data")
+                         (device (uuid
+                                  "d883b77a-1f15-48ea-94e1-af4e64be9951"
+                                  'xfs))
+                         (type "xfs")
+                         (mount? #f))
+                       (file-system
                          (mount-point "/smb")
                          (device "//s-files.fritz.box/jakob")
                          (type "cifs")
