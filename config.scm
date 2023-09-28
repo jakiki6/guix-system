@@ -125,7 +125,7 @@
 
   (bootloader (bootloader-configuration
                 (bootloader grub-bootloader)
-                (targets (list))
+                (targets (list "/dev/sda" "/dev/sdb"))
                 (keyboard-layout keyboard-layout)
 		(menu-entries (list
 		  (menu-entry
