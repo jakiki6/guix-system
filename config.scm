@@ -8,6 +8,7 @@
 	     (gnu packages nvi)
 	     (gnu packages vim)
              (gnu packages samba)
+             (gnu packages file)
 	     (gnu services virtualization)
              (gnu system setuid)
 	     (guix build-system trivial)
@@ -104,6 +105,9 @@
                  (service earlyoom-service-type)
 
                  (service docker-service-type)
+
+                 (extra-special-file "/usr/bin/file"
+                  (file-append file "/bin/file"))
 
 		 (service qemu-binfmt-service-type
 	          (qemu-binfmt-configuration
