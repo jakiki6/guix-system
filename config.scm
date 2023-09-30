@@ -9,6 +9,7 @@
 	     (gnu packages vim)
              (gnu packages samba)
              (gnu packages file)
+             (gnu packages admin)
 	     (gnu services virtualization)
              (gnu system setuid)
 	     (guix build-system trivial)
@@ -39,9 +40,32 @@
             (symlink (string-append vim "/bin/vim") "vi")))))
     (inputs (list vim))
     (synopsis "Symlink vi to vim")
-    (description "Make vi as symlink to vim. This collides with nvi.")
+    (description "Make vi a symlink to vim. This collides with nvi.")
     (home-page (package-home-page vim))
     (license (package-license vim))))
+
+(define shutdown-as-poweroff
+  (package
+    (name "shutdown-as-poweroff")
+    (version (package-version shepherd))
+    (source #f) 
+    (build-system trivial-build-system)
+    (arguments
+      `(#:modules ((guix build utils))
+        #:builder
+        (begin
+          (use-modules (guix build utils))
+
+          (let* ((out (assoc-ref %outputs "out")) (shepherd (assoc-ref %build-inputs "shepherd")))
+            (mkdir out)
+            (mkdir (string-append out "/sbin"))
+            (chdir (string-append out "/sbin"))
+            (symlink (string-append shepherd "/sbin/shutdown") "poweroff")))))
+    (inputs (list shepherd))
+    (synopsis "Symlink poweroff to shutdown")
+    (description "Make poweroff a symlink to shutdown.")
+    (home-page (package-home-page shepherd))
+    (license (package-license shepherd))))
 
 (operating-system
   (kernel
@@ -84,7 +108,7 @@
 
   (packages (filter (lambda (x) (not (eq? x nvi))) (append (append (map specification->package '(
 	"nss-certs" "vim" "curl" "python" "kexec-tools" "zsh" "git"
-    )) %base-packages) (list vim-as-vi))))
+    )) %base-packages) (list vim-as-vi shutdown-as-poweroff))))
 
   (services
    (remove (lambda (service) (memq (service-kind service) (list gdm-service-type sddm-service-type)))
@@ -106,8 +130,13 @@
 
                  (service docker-service-type)
 
+                 ; workaround: zlib in binutils
                  (extra-special-file "/usr/bin/file"
                   (file-append file "/bin/file"))
+
+                 ; workaround: cado-nfs
+                 (extra-special-file "/bin/kill"
+                  (file-append coreutils "/bin/kill"))
 
 		 (service qemu-binfmt-service-type
 	          (qemu-binfmt-configuration
