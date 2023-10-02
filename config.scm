@@ -11,6 +11,7 @@
              (gnu packages file)
              (gnu packages admin)
              (gnu packages bash)
+             (gnu packages radio)
 	     (gnu services virtualization)
              (gnu system setuid)
 	     (guix build-system trivial)
@@ -91,6 +92,7 @@
      (first (lookup-inferior-packages inferior "linux" "6.4.16"))))
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
+  (kernel-arguments '("modprobe.blacklist=dvb_usb_rtl28xxu"))
 
   (locale "en_US.utf8")
   (timezone "Europe/Berlin")
@@ -108,7 +110,7 @@
                 %base-user-accounts))
 
   (packages (filter (lambda (x) (not (eq? x nvi))) (append (append (map specification->package '(
-	"nss-certs" "vim" "curl" "python" "kexec-tools" "zsh" "git"
+	"nss-certs" "vim" "curl" "python" "kexec-tools" "zsh" "git" "rtl-sdr"
     )) %base-packages) (list vim-as-vi shutdown-as-poweroff))))
 
   (services
@@ -142,6 +144,8 @@
                  ; workaround: like everything
                  (extra-special-file "/bin/bash"
                   (file-append bash "/bin/bash"))
+
+                 (udev-rules-service 'rtl-sdr rtl-sdr)
 
 		 (service qemu-binfmt-service-type
 	          (qemu-binfmt-configuration
