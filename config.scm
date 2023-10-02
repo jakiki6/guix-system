@@ -10,6 +10,7 @@
              (gnu packages samba)
              (gnu packages file)
              (gnu packages admin)
+             (gnu packages bash)
 	     (gnu services virtualization)
              (gnu system setuid)
 	     (guix build-system trivial)
@@ -137,6 +138,10 @@
                  ; workaround: cado-nfs
                  (extra-special-file "/bin/kill"
                   (file-append coreutils "/bin/kill"))
+
+                 ; workaround: like everything
+                 (extra-special-file "/bin/bash"
+                  (file-append bash "/bin/bash"))
 
 		 (service qemu-binfmt-service-type
 	          (qemu-binfmt-configuration
