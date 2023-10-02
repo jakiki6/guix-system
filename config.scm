@@ -13,7 +13,9 @@
              (gnu packages bash)
              (gnu packages radio)
 	     (gnu services virtualization)
+             (gnu services shepherd)
              (gnu system setuid)
+             (guix download)
 	     (guix build-system trivial)
 	     (guix channels)
 	     (guix inferior)
@@ -69,6 +71,18 @@
     (home-page (package-home-page shepherd))
     (license (package-license shepherd))))
 
+(define kexec-shepherd
+  (package
+    (inherit shepherd-0.10)
+    (source (origin
+              (method url-fetch)
+              (uri (origin-uri (package-source shepherd-0.10)))
+              (sha256
+               (base32
+                "0v9ld9gbqdp5ya380fbkdsxa0iqr90gi6yk004ccz3n792nq6wlj"))
+              (patches (list (local-file "shepherd-reboot-kexec.patch")))))
+))
+
 (operating-system
   (kernel
    (let*
@@ -104,7 +118,7 @@
                   (comment "Laura")
                   (group "users")
                   (home-directory "/home/laura")
-                  (supplementary-groups '("wheel" "netdev" "audio" "video" "kvm"))
+                  (supplementary-groups '("wheel" "netdev" "audio" "video" "kvm" "dialout"))
 		  (shell (file-append zsh "/bin/zsh"))
 	          (password "$6$laura$fD5qdRCoSiQu4XHSx6l2SBy2OekYfU40jRfIaUUfdFQJXKj3yoyHB3KdQXj/5O9.un48wTKCwYrAXOsUKjJrk0"))
                 %base-user-accounts))
@@ -164,6 +178,13 @@
                     (sysctl-configuration
                       (settings (append '(("net.ipv4.ip_forward" . "1"))
                         %default-sysctl-settings))))))))
+
+  (essential-services
+     (modify-services (operating-system-default-essential-services
+                       this-operating-system)
+       (shepherd-root-service-type config => (shepherd-configuration
+                                              (inherit config)
+                                              (shepherd kexec-shepherd)))))
 
   (bootloader (bootloader-configuration
                 (bootloader grub-bootloader)

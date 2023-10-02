@@ -1,0 +1,135 @@
+diff --color -ruN shepherd-0.10.2/configure /home/laura/shepherd-0.10.2/configure
+--- shepherd-0.10.2/configure	2023-07-17 19:27:41.000000000 +0200
++++ /home/laura/shepherd-0.10.2/configure	2023-10-02 22:55:00.112278542 +0200
+@@ -640,6 +640,7 @@
+ RB_HALT_SYSTEM
+ RB_AUTOBOOT
+ RB_DISABLE_CAD
++RB_KEXEC
+ O_CLOEXEC
+ _SC_OPEN_MAX
+ FIBERS_OBJECT_DIRECTORY
+@@ -8748,6 +8749,10 @@
+ 
+ fi
+ 
++    if ac_fn_c_compute_int "$LINENO" "RB_KEXEC" "RB_KEXEC"        "#include <sys/reboot.h>"
++then :
++
++fi
+     ;;
+   gnu*)
+     # On GNU/Hurd, the Mach-derived reboot.h uses different names, and
+diff --color -ruN shepherd-0.10.2/configure.ac /home/laura/shepherd-0.10.2/configure.ac
+--- shepherd-0.10.2/configure.ac	2023-07-17 19:26:41.000000000 +0200
++++ /home/laura/shepherd-0.10.2/configure.ac	2023-10-02 22:52:25.424570278 +0200
+@@ -104,6 +104,7 @@
+     AC_COMPUTE_INT([RB_DISABLE_CAD], [RB_DISABLE_CAD], [#include <sys/reboot.h>])
+     AC_COMPUTE_INT([RB_POWER_OFF], [RB_POWER_OFF], [#include <sys/reboot.h>])
+     AC_COMPUTE_INT([RB_SW_SUSPEND], [RB_SW_SUSPEND], [#include <sys/reboot.h>])
++    AC_COMPUTE_INT([RB_KEXEC], [RB_KEXEC], [#include <sys/reboot.h>])
+     ;;
+   gnu*)
+     # On GNU/Hurd, the Mach-derived reboot.h uses different names, and
+@@ -125,6 +126,7 @@
+ AC_SUBST([RB_AUTOBOOT])
+ AC_SUBST([RB_HALT_SYSTEM])
+ AC_SUBST([RB_POWER_OFF])
++AC_SUBST([RB_KEXEC])
+ AC_MSG_RESULT([done])
+ 
+ AC_MSG_CHECKING([<sys/prctl.h> constants])
+diff --color -ruN shepherd-0.10.2/Makefile.in /home/laura/shepherd-0.10.2/Makefile.in
+--- shepherd-0.10.2/Makefile.in	2023-07-17 19:27:42.000000000 +0200
++++ /home/laura/shepherd-0.10.2/Makefile.in	2023-10-02 22:55:32.073044051 +0200
+@@ -583,6 +583,7 @@
+ RB_DISABLE_CAD = @RB_DISABLE_CAD@
+ RB_HALT_SYSTEM = @RB_HALT_SYSTEM@
+ RB_POWER_OFF = @RB_POWER_OFF@
++RB_POWER_OFF = @RB_KEXEC@
+ SED = @SED@
+ SET_MAKE = @SET_MAKE@
+ SFD_CLOEXEC = @SFD_CLOEXEC@
+diff --color -ruN shepherd-0.10.2/modules/shepherd/scripts/reboot.scm /home/laura/shepherd-0.10.2/modules/shepherd/scripts/reboot.scm
+--- shepherd-0.10.2/modules/shepherd/scripts/reboot.scm	2023-04-16 23:32:20.000000000 +0200
++++ /home/laura/shepherd-0.10.2/modules/shepherd/scripts/reboot.scm	2023-10-02 21:40:30.054939771 +0200
+@@ -30,6 +30,8 @@
+ (define (main . args)
+   (initialize-cli)
+ 
++  (define reboot-action 'stop)
++
+   (parameterize ((program-name "reboot"))
+     (let ((socket-file %system-socket-file)
+           (command-args '()))
+@@ -44,13 +46,19 @@
+                       #:argument-name "FILE"
+                       #:description "send commands to FILE"
+                       #:action (lambda (file)
+-                                 (set! socket-file file))))
++                                 (set! socket-file file)))
++                    (option
++                      #:long-name "do-kexec" #:short-name #\k
++                      #:takes-argument? #f
++                      #:description "reboot using kexec"
++                      #:action (lambda () (set! reboot-action 'reboot-kexec))
++                    ))
+ 
+       (set! command-args (reverse command-args))
+       (with-system-error-handling
+        (let ((sock (open-connection socket-file)))
+          ;; Send the command without further ado.
+-         (write-command (shepherd-command 'stop 'root) sock)
++         (write-command (shepherd-command reboot-action 'root) sock)
+ 
+          ;; Receive output if we're not already dead.
+          (match (read sock)
+diff --color -ruN shepherd-0.10.2/modules/shepherd/service.scm /home/laura/shepherd-0.10.2/modules/shepherd/service.scm
+--- shepherd-0.10.2/modules/shepherd/service.scm	2023-07-16 11:30:05.000000000 +0200
++++ /home/laura/shepherd-0.10.2/modules/shepherd/service.scm	2023-10-02 23:09:30.093138689 +0200
+@@ -2786,6 +2786,15 @@
+           (lambda (key)
+             (local-output (l10n "Shutting down..."))
+             (power-off)))))
++
++     (reboot-kexec
++       "Reboot the system and run kexec."
++       (lambda (running)
++        (catch 'quit
++          (cut stop root-service)
++          (lambda (key)
++            (local-output (l10n "Rebooting with kexec..."))
++            (reboot-kexec)))))
+      ;; Evaluate arbitrary code.
+      (load
+       "Load the Scheme code from FILE into shepherd.  This is potentially
+diff --color -ruN shepherd-0.10.2/modules/shepherd/system.scm.in /home/laura/shepherd-0.10.2/modules/shepherd/system.scm.in
+--- shepherd-0.10.2/modules/shepherd/system.scm.in	2023-07-12 17:43:55.000000000 +0200
++++ /home/laura/shepherd-0.10.2/modules/shepherd/system.scm.in	2023-10-02 22:49:14.147976431 +0200
+@@ -26,6 +26,7 @@
+   #:use-module (srfi srfi-26)
+   #:export (disable-reboot-on-ctrl-alt-del
+             reboot
++            reboot-kexec
+             halt
+             power-off
+             max-file-descriptors
+@@ -49,6 +50,7 @@
+ (define RB_HALT_SYSTEM @RB_HALT_SYSTEM@)
+ (define RB_POWER_OFF @RB_POWER_OFF@)
+ (define RB_DISABLE_CAD @RB_DISABLE_CAD@)          ; integer | #f
++(define RB_KEXEC @RB_KEXEC@)
+ 
+ (define (syscall->procedure return-type name argument-types)
+   "Return a procedure that wraps the C function NAME using the dynamic FFI,
+@@ -93,6 +95,10 @@
+   "Perform a hard reset of the system now.  Return #f on failure."
+   (%libc-reboot RB_AUTOBOOT))
+ 
++(define (reboot-kexec)
++  "Execute kernel loaded with 'kexec -l' now.  Return #f on failure."
++  (%libc-reboot RB_KEXEC))
++
+ (define (halt)
+   "Halt the system.  Return #f on failure."
+   (%libc-reboot RB_HALT_SYSTEM))
