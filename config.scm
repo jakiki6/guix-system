@@ -91,7 +91,7 @@
       (channel
        (name 'nonguix)
        (url "https://gitlab.com/nonguix/nonguix")
-       (commit "bb184bd0a8f91beec3a00718759e96c7828853de")
+       (commit "5a0490f23d8cb9a564a2486b2507356cfb328129")
        (introduction
          (make-channel-introduction
           "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
@@ -100,10 +100,10 @@
       (channel
        (name 'guix)
        (url "https://git.savannah.gnu.org/git/guix.git")
-       (commit "c5657608c6eded81dd064271690a507118342328"))))
+       (commit "d69c557d64a9e4cda62c4233c17e9afddbb67d8b"))))
      (inferior
       (inferior-for-channels channels)))
-     (first (lookup-inferior-packages inferior "linux" "6.4.16"))))
+     (first (lookup-inferior-packages inferior "linux" "6.5.5"))))
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
   (kernel-arguments '("modprobe.blacklist=dvb_usb_rtl28xxu"))
