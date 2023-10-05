@@ -135,7 +135,8 @@
 			    (theme "breeze")))
 
                  (set-xorg-configuration
-                  (xorg-configuration (keyboard-layout keyboard-layout)))
+                  (xorg-configuration (keyboard-layout keyboard-layout)
+                   (extra-config (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
 
                  (service guix-publish-service-type
 		  (guix-publish-configuration
