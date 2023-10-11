@@ -22,6 +22,7 @@
   (gnu packages admin)
   (gnu packages bash)
   (gnu packages radio)
+  (gnu packages gcc)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu system setuid)
@@ -166,6 +167,7 @@
                  "zsh"
                  "git"
                  "rtl-sdr"))
+          (list (list gcc "lib"))
           %base-packages)
         (list vim-as-vi shutdown-as-poweroff))))
   (services
