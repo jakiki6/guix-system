@@ -112,7 +112,7 @@
                      (name 'nonguix)
                      (url "https://gitlab.com/nonguix/nonguix")
                      (commit
-                       "5a0490f23d8cb9a564a2486b2507356cfb328129")
+                       "2c67b913505de3594cb84915dbde97af7b8e3fe1")
                      (introduction
                        (make-channel-introduction
                          "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
@@ -122,12 +122,12 @@
                      (name 'guix)
                      (url "https://git.savannah.gnu.org/git/guix.git")
                      (commit
-                       "d69c557d64a9e4cda62c4233c17e9afddbb67d8b"))))
+                       "06acda9715711c406f30b3a314387002244d8792"))))
            (inferior (inferior-for-channels channels)))
       (first (lookup-inferior-packages
                inferior
                "linux"
-               "6.5.5"))))
+               "6.5.7"))))
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
   (kernel-arguments
