@@ -23,6 +23,7 @@
   (gnu packages bash)
   (gnu packages radio)
   (gnu packages gcc)
+  (gnu packages python)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu system setuid)
@@ -64,6 +65,31 @@
       "Make vi a symlink to vim. This collides with nvi.")
     (home-page (package-home-page vim))
     (license (package-license vim))))
+
+(define python3-as-python
+  (package
+    (name "python3-as-python")
+    (version (package-version python-3))
+    (source #f) 
+    (build-system trivial-build-system)
+    (arguments
+      `(#:modules
+        ((guix build utils))
+        #:builder
+        (begin
+          (use-modules (guix build utils))
+          (let* ((out (assoc-ref %outputs "out"))
+                 (python (assoc-ref %build-inputs "python")))
+            (mkdir out)
+            (mkdir (string-append out "/bin"))
+            (chdir (string-append out "/bin"))
+            (symlink (string-append python "/bin/python3") "python")))))
+    (inputs (list python-3))
+    (synopsis "Python 3 + symlink to python")
+    (description
+      "Make python a symlink to python3.")
+    (home-page (package-home-page python-3))
+    (license (package-license python-3))))
 
 (define shutdown-as-poweroff
   (package
@@ -169,7 +195,7 @@
                  "rtl-sdr"))
           (list (list gcc "lib"))
           %base-packages)
-        (list vim-as-vi shutdown-as-poweroff))))
+        (list vim-as-vi shutdown-as-poweroff python3-as-python))))
   (services
     (remove
       (lambda (service)
