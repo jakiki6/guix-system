@@ -28,6 +28,7 @@
   (gnu services shepherd)
   (gnu system setuid)
   (guix download)
+  (guix git-download)
   (guix build-system trivial)
   (guix channels)
   (guix inferior)
@@ -70,7 +71,7 @@
   (package
     (name "python3-as-python")
     (version (package-version python-3))
-    (source #f) 
+    (source #f)
     (build-system trivial-build-system)
     (arguments
       `(#:modules
@@ -83,11 +84,12 @@
             (mkdir out)
             (mkdir (string-append out "/bin"))
             (chdir (string-append out "/bin"))
-            (symlink (string-append python "/bin/python3") "python")))))
+            (symlink
+              (string-append python "/bin/python3")
+              "python")))))
     (inputs (list python-3))
     (synopsis "Python 3 + symlink to python")
-    (description
-      "Make python a symlink to python3.")
+    (description "Make python a symlink to python3.")
     (home-page (package-home-page python-3))
     (license (package-license python-3))))
 
@@ -131,29 +133,24 @@
         (patches
           (list (local-file "shepherd-reboot-kexec.patch")))))))
 
+(define linux-zen
+  (package
+    (inherit linux)
+    (name "linux-zen")
+    (version "6.5.7-zen2")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/zen-kernel/zen-kernel")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+          (base32
+            "0qy3xn7kr16crm7iw1zhm3kpgxpmn66xc4g1yalvghwn6si0n81l"))))))
+
 (operating-system
-  (kernel
-    (let* ((channels
-             (list (channel
-                     (name 'nonguix)
-                     (url "https://gitlab.com/nonguix/nonguix")
-                     (commit
-                       "2c67b913505de3594cb84915dbde97af7b8e3fe1")
-                     (introduction
-                       (make-channel-introduction
-                         "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-                         (openpgp-fingerprint
-                           "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
-                   (channel
-                     (name 'guix)
-                     (url "https://git.savannah.gnu.org/git/guix.git")
-                     (commit
-                       "06acda9715711c406f30b3a314387002244d8792"))))
-           (inferior (inferior-for-channels channels)))
-      (first (lookup-inferior-packages
-               inferior
-               "linux"
-               "6.5.7"))))
+  (kernel linux-zen)
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
   (kernel-arguments
@@ -195,7 +192,9 @@
                  "rtl-sdr"))
           (list (list gcc "lib"))
           %base-packages)
-        (list vim-as-vi shutdown-as-poweroff python3-as-python))))
+        (list vim-as-vi
+              shutdown-as-poweroff
+              python3-as-python))))
   (services
     (remove
       (lambda (service)
