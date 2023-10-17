@@ -26,6 +26,7 @@
   (gnu packages radio)
   (gnu packages gcc)
   (gnu packages python)
+  (gnu packages package-management)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu system setuid)
@@ -127,13 +128,26 @@
     (inherit shepherd-0.10)
     (source
       (origin
-        (method url-fetch)
+        (method (origin-method (package-source shepherd-0.10)))
         (uri (origin-uri (package-source shepherd-0.10)))
         (sha256
           (base32
             "0v9ld9gbqdp5ya380fbkdsxa0iqr90gi6yk004ccz3n792nq6wlj"))
         (patches
-          (list (local-file "shepherd-reboot-kexec.patch")))))))
+          (list (local-file "patches/shepherd-reboot-kexec.patch")))))))
+
+(define guix-patched
+  (package
+    (inherit guix)
+    (source
+      (origin
+        (method (origin-method (package-source guix)))
+        (uri (origin-uri (package-source guix)))
+        (sha256
+          (base32
+            "0g8p0w9qrqbzz3b4fzbvvqpdfgwhlxpz75n3ysa6haima5s19mp3"))
+        (patches
+         (list (local-file "patches/guix-riscv32-system.patch")))))))
 
 (define linux-zen
   (package
@@ -258,6 +272,7 @@
             =>
             (guix-configuration
               (inherit config)
+              (guix guix-patched)
               (substitute-urls
                 (append
                   (list "https://substitutes.nonguix.org")

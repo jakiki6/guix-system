@@ -1,5 +1,4 @@
 update:
-	guix pull
 	sudo $(shell which guix) system reconfigure config.scm
 
 deploy:

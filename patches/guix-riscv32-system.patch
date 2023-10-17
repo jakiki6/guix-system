@@ -1,0 +1,24 @@
+diff --git a/guix/platforms/riscv.scm b/guix/platforms/riscv.scm
+index c716c12c12..07ea4a95c8 100644
+--- a/guix/platforms/riscv.scm
++++ b/guix/platforms/riscv.scm
+@@ -19,7 +19,7 @@
+ (define-module (guix platforms riscv)
+   #:use-module (guix platform)
+   #:use-module (guix records)
+-  #:export (riscv64-linux))
++  #:export (riscv64-linux riscv32-linux))
+ 
+ (define riscv64-linux
+   (platform
+@@ -27,3 +27,10 @@ (define riscv64-linux
+    (system "riscv64-linux")
+    (linux-architecture "riscv")
+    (glibc-dynamic-linker "/lib/ld-linux-riscv64-lp64d.so.1")))
++
++(define riscv32-linux
++  (platform
++   (target "riscv32-linux-gnu")
++   (system "riscv32-linux")
++   (linux-architecture "riscv")
++   (glibc-dynamic-linker "/lib/ld-linux-riscv32-ilp32d.so.1")))
