@@ -136,19 +136,6 @@
         (patches
           (list (local-file "patches/shepherd-reboot-kexec.patch")))))))
 
-(define guix-patched
-  (package
-    (inherit guix)
-    (source
-      (origin
-        (method (origin-method (package-source guix)))
-        (uri (origin-uri (package-source guix)))
-        (sha256
-          (base32
-            "0g8p0w9qrqbzz3b4fzbvvqpdfgwhlxpz75n3ysa6haima5s19mp3"))
-        (patches
-         (list (local-file "patches/guix-riscv32-system.patch")))))))
-
 (define linux-zen
   (package
     (inherit linux)
@@ -272,7 +259,6 @@
             =>
             (guix-configuration
               (inherit config)
-              (guix guix-patched)
               (substitute-urls
                 (append
                   (list "https://substitutes.nonguix.org")
@@ -341,9 +327,8 @@
   (skeletons
     (append
       `((".zshrc"
-         ,(plain-file
-            "zshrc"
-            "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended\necho \"autoload -U compinit && compinit\\nsource ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh\" >> ~/.zshrc\ngit clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions\nexec zsh")))
+         ,(local-file
+            "zshrc")))
       (default-skeletons)))
   (sudoers-file
     (plain-file
