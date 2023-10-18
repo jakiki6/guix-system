@@ -328,7 +328,7 @@
     (append
       `((".zshrc"
          ,(local-file
-            "zshrc")))
+            "files/zshrc")))
       (default-skeletons)))
   (sudoers-file
     (plain-file
