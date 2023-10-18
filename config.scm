@@ -175,7 +175,7 @@
   (timezone "Europe/Berlin")
   (keyboard-layout
     (keyboard-layout "us" "altgr-intl"))
-  (host-name "guix")
+  (host-name "kernelpanicroom")
   (users (cons* (user-account
                   (name "laura")
                   (comment "Laura")
