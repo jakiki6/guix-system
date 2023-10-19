@@ -27,6 +27,7 @@
   (gnu packages gcc)
   (gnu packages python)
   (gnu packages package-management)
+  (gnu packages commencement)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu system setuid)
@@ -123,6 +124,33 @@
     (home-page (package-home-page shepherd))
     (license (package-license shepherd))))
 
+(define gcc-as-cc
+  (package
+    (name "gcc-as-cc")
+    (version (package-version gcc-toolchain))
+    (source #f) 
+    (build-system trivial-build-system)
+    (arguments
+      `(#:modules
+        ((guix build utils))
+        #:builder
+        (begin
+          (use-modules (guix build utils))
+          (let* ((out (assoc-ref %outputs "out"))
+                 (gcc (assoc-ref %build-inputs "gcc-toolchain")))
+            (mkdir out)
+            (mkdir (string-append out "/bin"))
+            (chdir (string-append out "/bin"))
+            (symlink
+              (string-append gcc "/bin/gcc")
+              "cc")))))
+    (propagated-inputs (list gcc-toolchain))
+    (synopsis "Symlink cc to gcc")
+    (description
+      "Make cc a symlink to gcc.")
+    (home-page (package-home-page gcc-toolchain))
+    (license (package-license gcc-toolchain))))
+
 (define kexec-shepherd
   (package
     (inherit shepherd-0.10)
@@ -196,6 +224,7 @@
           (list (list gcc "lib"))
           %base-packages)
         (list vim-as-vi
+              gcc-as-cc
               shutdown-as-poweroff
               python3-as-python))))
   (services
