@@ -168,7 +168,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.5.7-zen2")
+    (version "6.5.8-lqx1")
     (source
       (origin
         (method git-fetch)
@@ -178,7 +178,7 @@
         (file-name (git-file-name name version))
         (sha256
           (base32
-            "0qy3xn7kr16crm7iw1zhm3kpgxpmn66xc4g1yalvghwn6si0n81l"))))))
+            "1f10p7mriwjrgmdfz10vs48xiipdk9ljj884fsj63r5n1g7pz4bf"))))))
 
 (operating-system
   (kernel linux-zen)
