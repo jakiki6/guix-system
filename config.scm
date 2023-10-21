@@ -269,18 +269,12 @@
                       "riscv64"
                       "mips"
                       "mips64"
-                      "mips64el"
-                      "mipsel"
-                      "mipsn32"
-                      "mipsn32el"
                       "s390x"
                       "sparc"
-                      "sparc32plus"
                       "sparc64"
                       "alpha"
                       "ppc"
-                      "ppc64"
-                      "ppc64le")))))
+                      "ppc64")))))
         (modify-services
           %desktop-services
           (guix-service-type
