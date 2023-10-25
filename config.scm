@@ -28,6 +28,8 @@
   (gnu packages commencement)
   (gnu services virtualization)
   (gnu services shepherd)
+  (gnu packages python-xyz)
+  (gnu packages python-crypto)
   (gnu system setuid)
   (guix download)
   (guix git-download)
@@ -89,7 +91,8 @@
                  "rtl-sdr"))
           (list (list gcc "lib"))
           %base-packages)
-        (list vim-as-vi
+        (list nomadnet
+              vim-as-vi
               gcc-as-cc
               shutdown-as-poweroff
               python3-as-python))))
