@@ -26,10 +26,15 @@
   (gnu packages python)
   (gnu packages package-management)
   (gnu packages commencement)
+  (gnu packages linux)
+  (gnu packages java)
+  (gnu packages gtk)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu packages python-xyz)
   (gnu packages python-crypto)
+  (gnu packages version-control)
+  (gnu packages gl)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -93,7 +98,6 @@
                    "socat"
                    "catimg"
                    "webkitgtk-with-libsoup2"
-                   "sqlite"
                    "gtk+"
                    "simplescreenrecorder"
                    "xdg-desktop-portal-wlr"
@@ -140,7 +144,6 @@
                    "gstreamer"
                    "openh264"
                    "gmp"
-                   "yara"
                    "iptables"
                    "cryptsetup"
                    "zlib"
@@ -169,7 +172,6 @@
                    "mtdev"
                    "zip"
                    "gdb"
-                   "gcc-toolchain"
                    "nasm"
                    "cloc"
                    "traceroute"
@@ -319,28 +321,34 @@
                   (multiboot-kernel
                     (file-append cross-mach "/boot/gnumach")))))))
     (file-systems
-      (cons* (file-system
-               (mount-point "/")
-               (device (file-system-label "guix_root"))
-               (type "btrfs"))
-             (file-system
-               (mount-point "/data")
-               (device
-                 (uuid "d883b77a-1f15-48ea-94e1-af4e64be9951"
-                       'xfs))
-               (type "xfs")
-               (mount? #f))
-             (file-system
-               (mount-point "/smb")
-               (device "//s-files.fritz.box/jakob")
-               (type "cifs")
-               (options
-                 (string-append
-                   "username=jakob,password="
-                   secret-smb-password
-                   ",_netdev"))
-               (mount? #f))
-             %base-file-systems))
+      (if (getenv "LIVE_IMAGE")
+        (cons* (file-system
+                 (mount-point "/")
+                 (device (file-system-label "GUIX_IMAGE"))
+                 (type "iso9660"))
+               %base-file-systems)
+        (cons* (file-system
+                 (mount-point "/")
+                 (device (file-system-label "guix_root"))
+                 (type "btrfs"))
+               (file-system
+                 (mount-point "/data")
+                 (device
+                   (uuid "d883b77a-1f15-48ea-94e1-af4e64be9951"
+                         'xfs))
+                 (type "xfs")
+                 (mount? #f))
+               (file-system
+                 (mount-point "/smb")
+                 (device "//s-files.fritz.box/jakob")
+                 (type "cifs")
+                 (options
+                   (string-append
+                     "username=jakob,password="
+                     secret-smb-password
+                     ",_netdev"))
+                 (mount? #f))
+               %base-file-systems)))
     (setuid-programs
       (cons (setuid-program
               (program

@@ -1,3 +1,5 @@
+unexport LIVE_IMAGE
+
 update:
 	sudo $(shell which guix) system reconfigure os.scm
 
@@ -8,7 +10,7 @@ test:
 	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
 
 image:
-	guix system image --image-type=iso9660 os.scm
+	LIVE_IMAGE=1 guix system image --image-type=iso9660 os.scm
 
 format:
 	@./scripts/format.sh
