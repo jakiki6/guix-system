@@ -80,7 +80,7 @@
   (package
     (name "gcc-as-cc")
     (version (package-version gcc-toolchain))
-    (source #f) 
+    (source #f)
     (build-system trivial-build-system)
     (arguments
       `(#:modules
@@ -93,13 +93,10 @@
             (mkdir out)
             (mkdir (string-append out "/bin"))
             (chdir (string-append out "/bin"))
-            (symlink
-              (string-append gcc "/bin/gcc")
-              "cc")))))
+            (symlink (string-append gcc "/bin/gcc") "cc")))))
     (propagated-inputs (list gcc-toolchain))
     (synopsis "Symlink cc to gcc")
-    (description
-      "Make cc a symlink to gcc.")
+    (description "Make cc a symlink to gcc.")
     (home-page (package-home-page gcc-toolchain))
     (license (package-license gcc-toolchain))))
 
@@ -108,10 +105,12 @@
     (inherit shepherd-0.10)
     (source
       (origin
-        (method (origin-method (package-source shepherd-0.10)))
+        (method
+          (origin-method (package-source shepherd-0.10)))
         (uri (origin-uri (package-source shepherd-0.10)))
         (sha256
           (base32
             "0v9ld9gbqdp5ya380fbkdsxa0iqr90gi6yk004ccz3n792nq6wlj"))
         (patches
-          (list (local-file "patches/shepherd-reboot-kexec.patch")))))))
+          (list (local-file
+                  "patches/shepherd-reboot-kexec.patch")))))))

@@ -72,8 +72,7 @@
                       "kvm"
                       "dialout"))
                   (shell (file-append zsh "/bin/zsh"))
-                  (password
-                    (crypt secret-password "laura")))
+                  (password (crypt secret-password "laura")))
                 %base-user-accounts))
   (packages
     (filter
@@ -207,7 +206,11 @@
              (mount-point "/smb")
              (device "//s-files.fritz.box/jakob")
              (type "cifs")
-             (options (string-append "username=jakob,password=" secret-smb-password ",_netdev"))
+             (options
+               (string-append
+                 "username=jakob,password="
+                 secret-smb-password
+                 ",_netdev"))
              (mount? #f))
            %base-file-systems))
   (setuid-programs
@@ -218,9 +221,7 @@
   (name-service-switch %mdns-host-lookup-nss)
   (skeletons
     (append
-      `((".zshrc"
-         ,(local-file
-            "files/zshrc")))
+      `((".zshrc" ,(local-file "files/zshrc")))
       (default-skeletons)))
   (sudoers-file
     (plain-file
