@@ -1,11 +1,14 @@
 update:
-	sudo $(shell which guix) system reconfigure config.scm
+	sudo $(shell which guix) system reconfigure os.scm
 
 deploy:
-	sudo $(shell which guix) system init config.scm /mnt
+	sudo $(shell which guix) system init os.scm /mnt
 
 test:
-	$(shell guix system vm config.scm) -m 6G -smp 4 --enable-kvm
+	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
+
+image:
+	guix system image image.scm
 
 src/secrets.scm: src/secrets.scm.gpg
 	gpg -d $<
