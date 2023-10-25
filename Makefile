@@ -7,7 +7,7 @@ deploy:
 test:
 	$(shell guix system vm config.scm) -m 6G -smp 4 --enable-kvm
 
-secrets.scm: secrets.scm.gpg
+src/secrets.scm: src/secrets.scm.gpg
 	gpg -d $<
 
 .PHONY: update deploy test
