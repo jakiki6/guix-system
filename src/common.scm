@@ -322,10 +322,7 @@
                     (file-append cross-mach "/boot/gnumach")))))))
     (file-systems
       (if (getenv "LIVE_IMAGE")
-        (cons* (file-system
-                 (mount-point "/")
-                 (device (file-system-label "GUIX_IMAGE"))
-                 (type "iso9660"))
+        (append %base-live-file-systems
                %base-file-systems)
         (cons* (file-system
                  (mount-point "/")
