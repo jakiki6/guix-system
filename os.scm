@@ -1,2 +1,2 @@
 (include "src/common.scm")
-os
+my-os

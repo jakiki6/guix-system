@@ -8,7 +8,10 @@ test:
 	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
 
 image:
-	guix system image image.scm
+	guix system image --image-type=iso9660 os.scm
+
+format:
+	@./scripts/format.sh
 
 src/secrets.scm: src/secrets.scm.gpg
 	gpg -d $<

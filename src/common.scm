@@ -31,6 +31,8 @@
   (gnu packages python-xyz)
   (gnu packages python-crypto)
   (gnu system setuid)
+  (gnu system image)
+  (gnu image)
   (guix download)
   (guix git-download)
   (guix build-system trivial)
@@ -48,7 +50,7 @@
 (include "kernel.scm")
 (include "packages.scm")
 
-(define os
+(define my-os
   (operating-system
     (kernel linux-zen)
     (initrd microcode-initrd)
@@ -88,8 +90,135 @@
                    "kexec-tools"
                    "zsh"
                    "git"
+                   "socat"
+                   "catimg"
+                   "webkitgtk-with-libsoup2"
+                   "sqlite"
+                   "gtk+"
+                   "simplescreenrecorder"
+                   "xdg-desktop-portal-wlr"
+                   "ffmpeg"
+                   "nmap"
+                   "cmatrix"
+                   "pinentry"
+                   "libappindicator"
+                   "neofetch"
+                   "zstd"
+                   "upx"
+                   "perl-image-exiftool"
+                   "unzip"
+                   "rust-cargo"
+                   "inkscape"
+                   "gqrx"
+                   "atril"
+                   "gparted"
+                   "python-asdf"
+                   "qemu"
+                   "qbittorrent"
+                   "gimp"
+                   "xdg-desktop-portal-kde"
+                   "xdg-desktop-portal-gtk"
+                   "xdg-desktop-portal"
+                   "vlc"
+                   "pavucontrol"
+                   "flatpak"
+                   "firefox"
+                   "debootstrap"
+                   "cmake"
+                   "feh"
+                   "sdl2-image"
+                   "sdl2"
+                   "gnome-keyring"
+                   "git"
+                   "wine64"
+                   "xen"
+                   "rust"
+                   "i2pd"
+                   "age"
+                   "signify"
+                   "ghc"
+                   "gstreamer"
+                   "openh264"
+                   "gmp"
+                   "yara"
+                   "iptables"
+                   "cryptsetup"
+                   "zlib"
+                   "freeglut"
+                   "glu"
+                   "zig"
+                   "ddd"
+                   "xrandr"
+                   "xinput"
+                   "rocm-bandwidth-test"
+                   "rocminfo"
+                   "rocm-opencl-runtime"
+                   "rocr-runtime"
+                   "xclip"
+                   "node"
+                   "python-pip"
+                   "binwalk"
+                   "mesa-utils"
+                   "mesa"
+                   "ninja"
+                   "linux-libre-headers"
+                   "setxkbmap"
+                   "meson"
+                   "gdk-pixbuf"
+                   "openssh"
+                   "mtdev"
+                   "zip"
+                   "gdb"
+                   "gcc-toolchain"
+                   "nasm"
+                   "cloc"
+                   "traceroute"
+                   "iverilog"
+                   "help2man"
+                   "po4a"
+                   "texinfo"
+                   "libgcrypt"
+                   "msr-tools"
+                   "hexedit"
+                   "gqrx-scanner"
+                   "lua"
+                   "tig"
+                   "readline"
+                   "htop"
+                   "radare2"
+                   "jq"
+                   "pkg-config"
+                   "ncurses"
+                   "acpica"
+                   "perl"
+                   "flex"
+                   "bison"
+                   "libtool"
+                   "m4"
+                   "automake"
+                   "autoconf"
+                   "rsync"
+                   "bc"
+                   "p7zip"
+                   "go"
+                   "make"
+                   "binutils"
+                   "strace"
+                   "patchelf"
+                   "libtree"
+                   "file"
+                   "flatpak-xdg-utils"
+                   "openssl"
+                   "alsa-lib"
+                   "nss-certs"
                    "rtl-sdr"))
-            (list (list gcc "lib"))
+            (list (list gcc "lib")
+                  fuse-2
+                  openjdk17
+                  (list openjdk17 "jdk")
+                  (list git "send-email")
+                  (list gtk "bin")
+                  (list mesa "bin"))
             %base-packages)
           (list nomadnet
                 vim-as-vi
