@@ -1,0 +1,18 @@
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+autoload -U compinit && compinit
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+alias primetime='watch -t -n 1 "factor $(date +%s)"'
+alias copy="xclip -selection copy"
+
+export MOZ_DISABLE_GMP_SANDBOX=1
+export GUIX_LOCPATH="~/.guix-profile/lib/locale"
+export GUIX_PROFILE="~/.guix-profile"
+. "~/.guix-profile/etc/profile"
+export EDITOR=vim
+export LD_LIBRARY_PATH=~/.guix-profile/lib:/run/current-system/profile/lib

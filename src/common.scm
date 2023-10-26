@@ -361,7 +361,7 @@
     (name-service-switch %mdns-host-lookup-nss)
     (skeletons
       (append
-        `((".zshrc" ,(local-file "../files/zshrc")))
+        `((".zshrc" ,(local-file "../files/zshrc_pre")) (".zshrc.post" ,(local-file "../files/zshrc_post")))
         (default-skeletons)))
     (sudoers-file
       (plain-file
