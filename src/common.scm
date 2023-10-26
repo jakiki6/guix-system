@@ -35,6 +35,7 @@
   (gnu packages python-crypto)
   (gnu packages version-control)
   (gnu packages gl)
+  (gnu packages android)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -78,10 +79,14 @@
                         "audio"
                         "video"
                         "kvm"
-                        "dialout"))
+                        "dialout"
+                        "adbusers"))
                     (shell (file-append zsh "/bin/zsh"))
                     (password (crypt secret-password "laura")))
                   %base-user-accounts))
+    (groups
+      (cons* (user-group (name "adbusers"))
+             %base-groups))
     (packages
       (filter
         (lambda (x) (not (eq? x nvi)))
@@ -258,6 +263,7 @@
                   "/bin/bash"
                   (file-append bash "/bin/bash"))
                 (udev-rules-service 'rtl-sdr rtl-sdr)
+                (udev-rules-service 'android android-udev-rules)
                 (service
                   qemu-binfmt-service-type
                   (qemu-binfmt-configuration
@@ -322,8 +328,9 @@
                     (file-append cross-mach "/boot/gnumach")))))))
     (file-systems
       (if (getenv "LIVE_IMAGE")
-        (append %base-live-file-systems
-               %base-file-systems)
+        (append
+          %base-live-file-systems
+          %base-file-systems)
         (cons* (file-system
                  (mount-point "/")
                  (device (file-system-label "guix_root"))
