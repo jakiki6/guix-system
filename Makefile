@@ -9,9 +9,6 @@ deploy: src/secrets.scm
 test: src/secrets.scm
 	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
 
-image: src/secrets.scm
-	LIVE_IMAGE=1 guix system image --image-type=iso9660 os.scm
-
 format:
 	@./scripts/format.sh
 
