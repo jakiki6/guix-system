@@ -1,21 +1,21 @@
 unexport LIVE_IMAGE
 
-update:
+update: src/secrets.scm
 	sudo $(shell which guix) system reconfigure os.scm
 
-deploy:
+deploy: src/secrets.scm
 	sudo $(shell which guix) system init os.scm /mnt
 
-test:
+test: src/secrets.scm
 	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
 
-image:
+image: src/secrets.scm
 	LIVE_IMAGE=1 guix system image --image-type=iso9660 os.scm
 
 format:
 	@./scripts/format.sh
 
 src/secrets.scm: src/secrets.scm.gpg
-	gpg -d $<
+	gpg -d $< > $@
 
 .PHONY: update deploy test

@@ -86,3 +86,41 @@
     (description
       "Off-grid, resilient mesh communication with strong encryption, forward secrecy and extreme privacy.")
     (license license:gpl3)))
+
+(define-public uesave
+  (package
+    (name "uesave")
+    (version "0.2.1")
+    (source
+      (origin
+        (method url-fetch)
+        (uri (crate-uri "uesave" version))
+        (file-name
+          (string-append name "-" version ".tar.gz"))
+        (sha256
+          (base32
+            "0cj3xhx43if01llss1k265zyjq191yk1xn9xcbic7afnn4apggc0"))))
+    (build-system cargo-build-system)
+    (arguments
+      `(#:cargo-inputs
+        (("rust-anyhow" ,rust-anyhow-1)
+         ("rust-byteorder" ,rust-byteorder-1)
+         ("rust-clap" ,rust-clap-4)
+         ("rust-edit" ,rust-edit-0.1)
+         ("rust-indexmap" ,rust-indexmap-1)
+         ("rust-serde" ,rust-serde-1)
+         ("rust-serde-json" ,rust-serde-json-1)
+         ("rust-shell-words" ,rust-shell-words-1)
+         ("rust-tempfile" ,rust-tempfile-3)
+         ("rust-thiserror" ,rust-thiserror-1)
+         ("rust-uuid" ,rust-uuid-1))
+        #:cargo-development-inputs
+        (("rust-pretty-assertions"
+          ,rust-pretty-assertions-1))))
+    (home-page
+      "https://github.com/trumank/uesave-rs")
+    (synopsis
+      "Unreal Engine save file (GVAS) reading/writing")
+    (description
+      "Unreal Engine save file (GVAS) reading/writing")
+    (license license:expat)))

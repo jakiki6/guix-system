@@ -228,6 +228,7 @@
                   (list mesa "bin"))
             %base-packages)
           (list nomadnet
+                uesave
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
