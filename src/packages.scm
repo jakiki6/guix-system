@@ -16,14 +16,14 @@
 (define-public python-rns
   (package
     (name "python-rns")
-    (version "0.6.2")
+    (version "0.6.5")
     (source
       (origin
         (method url-fetch)
         (uri (pypi-uri "rns" version))
         (sha256
           (base32
-            "1mqhdp0cjj5kvmzfa1i4bvg9ixknyb7cslvxg5ah0qfw5wxhjynb"))))
+            "0vxvhfiq8li7paxdwz2as2y0pvf0vpvshzcimmx4mn4gv872d8iv"))))
     (build-system pyproject-build-system)
     (propagated-inputs
       (list python-cryptography python-pyserial))
@@ -44,14 +44,14 @@
 (define-public python-lxmf
   (package
     (name "python-lxmf")
-    (version "0.3.6")
+    (version "0.3.8")
     (source
       (origin
         (method url-fetch)
         (uri (pypi-uri "lxmf" version))
         (sha256
           (base32
-            "1mrny6mxvvsrlvriz2bmsjvy0cf0b0ch83sjvn84881hanzi09vs"))))
+            "1806wvrgs95pli3qjw0svg4vaz29x96vyjs6zilnwja9sflq19ki"))))
     (build-system pyproject-build-system)
     (propagated-inputs (list python-rns))
     (arguments `(#:tests? #f))
@@ -65,14 +65,14 @@
 (define-public nomadnet
   (package
     (name "nomadnet")
-    (version "0.4.0")
+    (version "0.4.2")
     (source
       (origin
         (method url-fetch)
         (uri (pypi-uri "nomadnet" version))
         (sha256
           (base32
-            "160xnpfwdi67iw8r0cyjwmmv12xiz5lf8wiyh1wnsnc337k4vwsh"))))
+            "0jyi8v1qqymgi5b20a1gjj5mcsrbfzign8b3vijpkjp926w1azlm"))))
     (build-system pyproject-build-system)
     (propagated-inputs
       (list python-lxmf
