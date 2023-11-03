@@ -347,7 +347,7 @@
                  (mount? #f))
                (file-system
                  (mount-point "/smb")
-                 (device "//s-files.fritz.box/jakob")
+                 (device "//192.168.69.11/jakob")
                  (type "cifs")
                  (options
                    (string-append
