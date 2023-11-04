@@ -37,12 +37,14 @@
   (gnu packages gl)
   (gnu packages android)
   (gnu packages crates-io)
+  (gnu packages autotools)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
   (guix download)
   (guix git-download)
   (guix build-system trivial)
+  (guix build-system gnu)
   (guix build-system python)
   (guix build-system pyproject)
   (guix build-system cargo)
@@ -231,6 +233,7 @@
             %base-packages)
           (list nomadnet
                 uesave
+                libgfshare
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff

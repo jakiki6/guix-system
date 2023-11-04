@@ -207,3 +207,29 @@
     (description
       "Unreal Engine save file (GVAS) reading/writing")
     (license license:expat)))
+
+(define-public libgfshare
+  (package
+    (name "libgfshare")
+    (version "1.0")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/jcushman/libgfshare")
+               (commit
+                 "beeebe381a3953a3535295b0121e13c0aae1112e")))
+        (file-name (git-file-name name version))
+        (sha256
+          (base32
+            "053gzsy5sv7yjzbnnql2a89f5y0bab173m057z7xxwrpkvqkvcq5"))))
+    (build-system gnu-build-system)
+    (inputs '())
+    (native-inputs (list autoconf automake libtool))
+    (synopsis
+      "Library for Shamir Secret Sharing in the Galois Field 2**8")
+    (description
+      "This library implements what is known as Shamir Secret Sharing.")
+    (home-page
+      "https://github.com/jcushman/libgfshare")
+    (license license:expat)))
