@@ -310,7 +310,8 @@
               (sysctl-configuration
                 (settings
                   (append
-                    '(("net.ipv4.ip_forward" . "1"))
+                    '(("net.ipv4.ip_forward" . "1")
+                      ("kernel.dmesg_restrict" . "0"))
                     %default-sysctl-settings))))))))
     (essential-services
       (modify-services
