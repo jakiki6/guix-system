@@ -8,6 +8,7 @@
   sddm
   linux
   docker
+  audio
   sysctl)
 
 (use-modules
@@ -259,6 +260,9 @@
                 (service gnome-keyring-service-type)
                 (service earlyoom-service-type)
                 (service docker-service-type)
+                (service
+                  mpd-service-type
+                  (mpd-configuration (user "laura")))
                 (extra-special-file
                   "/usr/bin/file"
                   (file-append file "/bin/file"))
