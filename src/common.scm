@@ -262,7 +262,7 @@
                 (service docker-service-type)
                 (service
                   mpd-service-type
-                  (mpd-configuration (user "laura")))
+                  (mpd-configuration (user "mpd")))
                 (extra-special-file
                   "/usr/bin/file"
                   (file-append file "/bin/file"))
