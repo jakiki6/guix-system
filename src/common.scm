@@ -30,6 +30,8 @@
   (gnu packages linux)
   (gnu packages java)
   (gnu packages gtk)
+  (gnu packages gawk)
+  (gnu packages golang)
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu packages python-xyz)
@@ -40,6 +42,7 @@
   (gnu packages crates-io)
   (gnu packages autotools)
   (gnu packages cross-base)
+  (gnu packages golang-check)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -50,6 +53,7 @@
   (guix build-system python)
   (guix build-system pyproject)
   (guix build-system cargo)
+  (guix build-system go)
   ((guix licenses) #:prefix license:)
   (guix channels)
   (guix inferior)
@@ -297,6 +301,15 @@
                 (extra-special-file
                   "/bin/bash"
                   (file-append bash "/bin/bash"))
+                (extra-special-file
+                  "/bin/pwd"
+                  (file-append coreutils "/bin/pwd"))
+                (extra-special-file
+                  "/usr/bin/awk"
+                  (file-append gawk "/bin/awk"))
+                (extra-special-file
+                  "/usr/lib"
+                  (file-append glibc "/lib"))
                 (udev-rules-service 'rtl-sdr rtl-sdr)
                 (udev-rules-service 'android android-udev-rules)
                 (service
