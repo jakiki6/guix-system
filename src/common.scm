@@ -309,7 +309,7 @@
                   (file-append gawk "/bin/awk"))
                 (extra-special-file
                   "/usr/lib"
-                  (file-append glibc "/lib"))
+                  "/run/current-system/profile/lib")
                 (udev-rules-service 'rtl-sdr rtl-sdr)
                 (udev-rules-service 'android android-udev-rules)
                 (service
