@@ -8,7 +8,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.6.1-zen1")
+    (version "6.6.2-zen1")
     (source
       (origin
         (method git-fetch)
@@ -18,4 +18,4 @@
         (file-name (git-file-name name version))
         (sha256
           (base32
-            "13m820wggf6pkp351w06mdn2lfcwbn08ydwksyxilqb88vmr0lpq"))))))
+            "0l97szqyr2i5kfl38hz1bnyd51s3zk4vf4c4xc860gy2fcxaprkl"))))))
