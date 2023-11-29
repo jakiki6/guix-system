@@ -90,7 +90,8 @@
                         "video"
                         "kvm"
                         "dialout"
-                        "adbusers"))
+                        "adbusers"
+                        "docker"))
                     (shell (file-append zsh "/bin/zsh"))
                     (password (crypt secret-password "laura")))
                   %base-user-accounts))
@@ -228,7 +229,8 @@
                    "openssl"
                    "alsa-lib"
                    "nss-certs"
-                   "rtl-sdr"))
+                   "rtl-sdr"
+                   "python-matplotlib"))
             (list (list gcc "lib")
                   fuse-2
                   openjdk17
