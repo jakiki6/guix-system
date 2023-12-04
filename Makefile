@@ -2,7 +2,7 @@ unexport LIVE_IMAGE
 
 update: src/secrets.scm
 	sudo $(shell which guix) system reconfigure os.scm --allow-downgrades
-	sudo python3 scripts/copy_boot.py
+	sudo python3 scripts/copy_kernel.py
 
 deploy: src/secrets.scm
 	sudo $(shell which guix) system init os.scm /mnt
