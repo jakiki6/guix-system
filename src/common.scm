@@ -378,15 +378,26 @@
                   (label "GNU Mach")
                   (multiboot-kernel
                     (file-append cross-mach "/boot/gnumach")))))))
+    (mapped-devices
+     (list (mapped-device
+            (source (uuid "9ed7fd2f-f4ec-485a-a816-11be07e84d10"))
+            (target "root1")
+            (type luks-device-mapping))
+           (mapped-device
+            (source (uuid "81aa6264-1607-439c-8ea6-b5ef981777ab"))
+            (target "root2")
+            (type luks-device-mapping))))
+
     (file-systems
-      (if (getenv "LIVE_IMAGE")
-        (append
-          %base-live-file-systems
-          %base-file-systems)
         (cons* (file-system
                  (mount-point "/")
                  (device (file-system-label "guix_root"))
-                 (type "btrfs"))
+                 (type "btrfs")
+                 (dependencies mapped-devices))
+               (file-system
+                 (mount-point "/boot")
+                 (device (file-system-label "guix_boot"))
+                 (type "ext4"))
                (file-system
                  (mount-point "/data")
                  (device
@@ -404,7 +415,7 @@
                      secret-smb-password
                      ",_netdev"))
                  (mount? #f))
-               %base-file-systems)))
+               %base-file-systems))
     (setuid-programs
       (cons (setuid-program
               (program
