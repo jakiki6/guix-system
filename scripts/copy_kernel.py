@@ -66,6 +66,10 @@ lines.pop(0)
 lines.pop(0)
 lines.pop(0)
 
+for i in range(0, len(lines)):
+    if "search --label --set guix_root" in lines[i]:
+        lines[i] = lines[i].replace("search", "# search")
+
 lines.insert(0, "search --label --set guix_boot")
 lines.insert(0, "# patched already")
 
