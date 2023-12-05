@@ -233,3 +233,28 @@
     (home-page
       "https://github.com/jcushman/libgfshare")
     (license license:expat)))
+
+(define-public bsdiff
+  (package
+    (name "bsdiff")
+    (version "4.3")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/mendsley/bsdiff")
+               (commit
+                 "b817e9491cf7b8699c8462ef9e2657ca4ccd7667")))
+        (file-name (git-file-name name version))
+        (sha256
+          (base32
+            "1f72rpivnvkim2xr4j7p2inm8a84g2kbzbs0shfcbi2qpgxmm8m1"))))
+    (build-system gnu-build-system)
+    (inputs '())
+    (native-inputs (list autoconf automake libtool))
+    (synopsis
+      "Libraries for building and applying patches to binary files.")
+    (description
+      "bsdiff and bspatch are libraries for building and applying patches to binary files.")
+    (home-page "https://github.com/mendsley/bsdiff")
+    (license license:bsd-3)))
