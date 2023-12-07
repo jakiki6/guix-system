@@ -8,7 +8,8 @@
       (bootloader-configuration
         (bootloader grub-bootloader)
         (targets (list "/dev/sda" "/dev/sdb"))
-        (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+        (keyboard-layout
+          (keyboard-layout "us" "altgr-intl"))
         (menu-entries
           (list (menu-entry
                   (label "GNU Mach")

@@ -275,7 +275,7 @@
       (remove
         (lambda (service)
           (memq (service-kind service)
-                (list gdm-service-type sddm-service-type)))
+                (list sddm-service-type)))
         (append
           (list (service plasma-desktop-service-type)
                 (service
@@ -350,6 +350,10 @@
                             "non-guix.pub"
                             "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
                     %default-authorized-guix-keys))))
+            (gdm-service-type
+              config
+              =>
+              (gdm-configuration (auto-suspend? #f)))
             (sysctl-service-type
               config
               =>
