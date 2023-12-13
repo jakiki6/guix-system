@@ -361,7 +361,8 @@
                 (settings
                   (append
                     '(("net.ipv4.ip_forward" . "1")
-                      ("kernel.dmesg_restrict" . "0"))
+                      ("kernel.dmesg_restrict" . "0")
+                      ("kernel.unprivileged_userns_clone" . "1"))
                     %default-sysctl-settings))))))))
     (essential-services
       (modify-services
