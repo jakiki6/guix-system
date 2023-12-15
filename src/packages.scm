@@ -258,3 +258,26 @@
       "bsdiff and bspatch are libraries for building and applying patches to binary files.")
     (home-page "https://github.com/mendsley/bsdiff")
     (license license:bsd-3)))
+
+(define-public libsixel
+  (package
+    (name "libsixel")
+    (version "1.8.6")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/saitoha/libsixel")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+          (base32
+            "1saxdj6sldv01g6w6yk8vr7px4bl31xca3a82j6v1j3fw5rbfphy"))))
+    (build-system gnu-build-system)
+    (inputs '())
+    (synopsis
+      "A SIXEL encoder/decoder implementation.")
+    (description
+      "This package provides encoder/decoder implementation for DEC SIXEL graphics, and some converter programs.")
+    (home-page "https://github.com/saitoha/libsixel")
+    (license license:expat)))

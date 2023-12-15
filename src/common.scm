@@ -243,6 +243,7 @@
                 uesave
                 libgfshare
                 bsdiff
+                libsixel
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
