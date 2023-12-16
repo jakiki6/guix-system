@@ -43,6 +43,9 @@
   (gnu packages autotools)
   (gnu packages cross-base)
   (gnu packages golang-check)
+  (gnu packages crates-graphics)
+  (gnu packages crypto)
+  (gnu packages xdisorg)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -244,6 +247,7 @@
                 libgfshare
                 bsdiff
                 libsixel
+                amdgpu-top
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
