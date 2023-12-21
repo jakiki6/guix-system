@@ -281,6 +281,7 @@
       "This package provides encoder/decoder implementation for DEC SIXEL graphics, and some converter programs.")
     (home-page "https://github.com/saitoha/libsixel")
     (license license:expat)))
+
 (define-public rust-gix-worktree-state-0.4
   (package
     (name "rust-gix-worktree-state")
@@ -12217,3 +12218,26 @@
       "Tool to displays AMDGPU usage.  The tool displays information gathered from\nperformance counters (GRBM, GRBM2), sensors, fdinfo, gpu_metrics and AMDGPU\ndriver.")
     (license license:expat)))
 
+(define-public fceux
+  (package
+    (name "fceux")
+    (version "2.6.6")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/TASEmulators/fceux")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+          (base32
+            "02s5qmxdxpsa71977z9bs5vfhnszn5nr5hk05wns8cm9nshbg7as"))))
+    (build-system cmake-build-system)
+    (arguments `(#:tests? #f))
+    (inputs (list qtbase-5 zlib minizip sdl2))
+    (native-inputs (list pkg-config))
+    (synopsis "FCEUX, a NES Emulator")
+    (description
+      "An open source NES Emulator for Windows and Unix that features solid emulation accuracy and state of the art tools for power users. For some reason casual gamers use it too.")
+    (home-page "https://fceux.com")
+    (license license:gpl2)))

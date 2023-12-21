@@ -46,6 +46,10 @@
   (gnu packages crates-graphics)
   (gnu packages crypto)
   (gnu packages xdisorg)
+  (gnu packages qt)
+  (gnu packages pkg-config)
+  (gnu packages compression)
+  (gnu packages sdl)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -57,6 +61,7 @@
   (guix build-system pyproject)
   (guix build-system cargo)
   (guix build-system go)
+  (guix build-system cmake)
   ((guix licenses) #:prefix license:)
   (guix channels)
   (guix inferior)
@@ -248,6 +253,7 @@
                 bsdiff
                 libsixel
                 amdgpu-top
+                fceux
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
