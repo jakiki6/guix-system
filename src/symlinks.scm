@@ -99,18 +99,3 @@
     (description "Make cc a symlink to gcc.")
     (home-page (package-home-page gcc-toolchain))
     (license (package-license gcc-toolchain))))
-
-(define kexec-shepherd
-  (package
-    (inherit shepherd-0.10)
-    (source
-      (origin
-        (method
-          (origin-method (package-source shepherd-0.10)))
-        (uri (origin-uri (package-source shepherd-0.10)))
-        (sha256
-          (base32
-            "0v9ld9gbqdp5ya380fbkdsxa0iqr90gi6yk004ccz3n792nq6wlj"))
-        (patches
-          (list (local-file
-                  "patches/shepherd-reboot-kexec.patch")))))))

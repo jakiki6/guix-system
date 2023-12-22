@@ -50,6 +50,7 @@
   (gnu packages pkg-config)
   (gnu packages compression)
   (gnu packages sdl)
+  (gnu packages logging)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -254,6 +255,7 @@
                 libsixel
                 amdgpu-top
                 fceux
+                glog-bumped
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
