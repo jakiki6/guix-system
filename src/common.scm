@@ -52,6 +52,8 @@
   (gnu packages compression)
   (gnu packages sdl)
   (gnu packages logging)
+  (gnu packages popt)
+  (gnu packages tls)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -324,8 +326,7 @@
                     (user (user-account (name "mpd") (group "mpd")))))
                 (service
                   syncthing-service-type
-                  (syncthing-configuration
-                    (user "laura")))
+                  (syncthing-configuration (user "laura")))
                 (extra-special-file
                   "/usr/bin/file"
                   (file-append file "/bin/file"))
