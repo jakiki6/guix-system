@@ -34,6 +34,7 @@
   (gnu packages golang)
   (gnu services virtualization)
   (gnu services shepherd)
+  (gnu services syncthing)
   (gnu packages python-xyz)
   (gnu packages python-crypto)
   (gnu packages version-control)
@@ -321,6 +322,10 @@
                   mpd-service-type
                   (mpd-configuration
                     (user (user-account (name "mpd") (group "mpd")))))
+                (service
+                  syncthing-service-type
+                  (syncthing-configuration
+                    (user "laura")))
                 (extra-special-file
                   "/usr/bin/file"
                   (file-append file "/bin/file"))
