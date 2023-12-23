@@ -13,30 +13,6 @@
           (list (local-file
                   "../patches/shepherd-reboot-kexec.patch")))))))
 
-(define glog-bumped
-  (package
-    (inherit glog)
-    (version "0.6.0")
-    (source
-      (origin
-        (method (origin-method (package-source glog)))
-        (uri (git-reference
-               (url (package-home-page glog))
-               (commit "v0.6.0")))
-        (sha256
-          (base32
-            "17014q25c99qyis6l3fwxidw6222bb269fdlr74gn7pzmzg4lvg3"))))
-    (arguments
-      `(#:phases
-        (modify-phases
-          %standard-phases
-          (add-after
-            'install
-            'symlink-library
-            (lambda* (#:key outputs build-inputs #:allow-other-keys)
-              (chdir (string-append (assoc-ref outputs "out") "/lib"))
-              (symlink "libglog.so.0" "libglog.so.1"))))))))
-
 (define-public python-rns
   (package
     (name "python-rns")

@@ -258,7 +258,6 @@
                 libsixel
                 amdgpu-top
                 fceux
-                glog-bumped
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff
