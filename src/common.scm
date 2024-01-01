@@ -305,7 +305,6 @@
                   guix-publish-service-type
                   (guix-publish-configuration (advertise? #t)))
                 (service gnome-keyring-service-type)
-                (service earlyoom-service-type)
                 (service docker-service-type)
                 (service
                   oci-container-service-type
