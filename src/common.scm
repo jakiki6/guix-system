@@ -56,6 +56,7 @@
   (gnu packages tls)
   (gnu packages linux)
   (gnu packages llvm)
+  (gnu packages containers)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -246,8 +247,6 @@
                    "alsa-lib"
                    "nss-certs"
                    "rtl-sdr"
-                   "distrobox"
-                   "podman"
                    "python-matplotlib"))
             (list (list gcc "lib")
                   fuse-2
@@ -264,6 +263,7 @@
                 libsixel
                 amdgpu-top
                 fceux
+                distrobox-bumped
                 vim-as-vi
                 gcc-as-cc
                 shutdown-as-poweroff

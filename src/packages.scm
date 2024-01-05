@@ -12241,3 +12241,17 @@
       "An open source NES Emulator for Windows and Unix that features solid emulation accuracy and state of the art tools for power users. For some reason casual gamers use it too.")
     (home-page "https://fceux.com")
     (license license:gpl2)))
+
+(define-public distrobox-bumped
+  (package
+    (inherit distrobox)
+    (version "1.6.0.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/89luca89/distrobox")
+             (commit version)))
+       (sha256
+        (base32 "0kj02phzikz9rddcx2apq3a8zwwfaawc3sfkd4q7f85lpnjxfsji"))
+       (file-name (git-file-name (package-name distrobox) version))))))
