@@ -54,6 +54,8 @@
   (gnu packages logging)
   (gnu packages popt)
   (gnu packages tls)
+  (gnu packages linux)
+  (gnu packages llvm)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -71,6 +73,8 @@
   (guix inferior)
   (guix packages)
   (guix store)
+  (guix utils)
+  (ice-9 match)
   (srfi srfi-1))
 
 (include "secrets.scm")
@@ -242,6 +246,8 @@
                    "alsa-lib"
                    "nss-certs"
                    "rtl-sdr"
+                   "distrobox"
+                   "podman"
                    "python-matplotlib"))
             (list (list gcc "lib")
                   fuse-2
