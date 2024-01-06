@@ -88,17 +88,17 @@
         (sha256
           (base32
             "1b7ji0zb0wbpl92zrjrqh69cm8n7vyq7a7smsww01agvr1nd8djc"))))
-    (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17)))
+    (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17 python-3)))
     (arguments
       (substitute-keyword-arguments (package-arguments linux)
         ((#:phases phases)
           #~(modify-phases #$phases
-            (add-before 'configure 'my-patches
+            (add-after 'configure 'my-patches
               (lambda _
                 (setenv "LLVM" "1")
                 (setenv "LLVM_IAS" "1")
                 (setenv "KCFLAGS" "-O3 -march=skylake -pipe")
-                (let ((port (open-file ".config" "w"))
+                (let ((port (open-file ".config" "a"))
                   (extra-configuration
                     #$(config->string
                       (append '(("CONFIG_LTO" . #t)
@@ -110,6 +110,4 @@
                                 %default-extra-linux-options))))
                     (display extra-configuration port)
                     (close-port port))
-                (invoke "make" "oldconfig")
-                (rename-file
-                  ".config" "arch/x86/configs/x86_64_defconfig")))))))))
+                (invoke "make" "oldconfig")))))))))
