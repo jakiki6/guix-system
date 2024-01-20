@@ -12247,11 +12247,13 @@
     (inherit distrobox)
     (version "1.6.0.1")
     (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/89luca89/distrobox")
-             (commit version)))
-       (sha256
-        (base32 "0kj02phzikz9rddcx2apq3a8zwwfaawc3sfkd4q7f85lpnjxfsji"))
-       (file-name (git-file-name (package-name distrobox) version))))))
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/89luca89/distrobox")
+               (commit version)))
+        (sha256
+          (base32
+            "0kj02phzikz9rddcx2apq3a8zwwfaawc3sfkd4q7f85lpnjxfsji"))
+        (file-name
+          (git-file-name (package-name distrobox) version))))))

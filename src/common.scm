@@ -247,9 +247,9 @@
                    "alsa-lib"
                    "nss-certs"
                    "rtl-sdr"
-                   "python-matplotlib"))
-            (list (list gcc "lib")
-                  fuse-2
+                   "python-matplotlib"
+                   "clang-toolchain"))
+            (list fuse-2
                   openjdk17
                   (list openjdk17 "jdk")
                   (list git "send-email")
@@ -265,33 +265,8 @@
                 fceux
                 distrobox-bumped
                 vim-as-vi
-                gcc-as-cc
                 shutdown-as-poweroff
-                python3-as-python)
-          (list (cross-gcc "aarch64-linux-gnu")
-                (cross-binutils "aarch64-linux-gnu")
-                (cross-gcc "arm-linux-gnueabihf")
-                (cross-binutils "arm-linux-gnueabihf")
-                (cross-gcc "i586-pc-gnu")
-                (cross-binutils "i586-pc-gnu")
-                (cross-gcc "i686-linux-gnu")
-                (cross-binutils "i686-linux-gnu")
-                (cross-gcc "i686-w64-mingw32")
-                (cross-binutils "i686-w64-mingw32")
-                (cross-gcc "mips64el-linux-gnu")
-                (cross-binutils "mips64el-linux-gnu")
-                (cross-gcc "powerpc-linux-gnu")
-                (cross-binutils "powerpc-linux-gnu")
-                (cross-gcc "powerpc64-linux-gnu")
-                (cross-binutils "powerpc64-linux-gnu")
-                (cross-gcc "powerpc64le-linux-gnu")
-                (cross-binutils "powerpc64le-linux-gnu")
-                (cross-gcc "riscv64-linux-gnu")
-                (cross-binutils "riscv64-linux-gnu")
-                (cross-gcc "x86_64-linux-gnu")
-                (cross-binutils "x86_64-linux-gnu")
-                (cross-gcc "x86_64-w64-mingw32")
-                (cross-binutils "x86_64-w64-mingw32")))))
+                python3-as-python))))
     (services
       (remove
         (lambda (service)
