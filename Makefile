@@ -3,6 +3,7 @@ unexport LIVE_IMAGE
 update: src/secrets.scm
 	sudo $(shell which guix) system reconfigure os.scm --allow-downgrades
 	sudo python3 scripts/copy_kernel.py
+	guix upgrade
 
 deploy: src/secrets.scm
 	sudo $(shell which guix) system init os.scm /mnt
@@ -13,7 +14,12 @@ test: src/secrets.scm
 format:
 	@./scripts/format.sh
 
+gc:
+	guix gc
+	sudo guix system delete-generations
+	sudo python3 scripts/copy_kernel.py
+
 src/secrets.scm: src/secrets.scm.gpg
 	gpg -d $< > $@
 
-.PHONY: update deploy test
+.PHONY: update deploy test gc
