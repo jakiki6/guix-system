@@ -252,6 +252,7 @@
             (list fuse-2
                   openjdk17
                   (list openjdk17 "jdk")
+                  (list gcc "lib")
                   (list git "send-email")
                   (list gtk "bin")
                   (list mesa "bin"))
