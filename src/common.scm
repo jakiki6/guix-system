@@ -248,7 +248,7 @@
                    "nss-certs"
                    "rtl-sdr"
                    "python-matplotlib"
-                   "clang-toolchain"))
+                   "gcc-toolchain"))
             (list fuse-2
                   openjdk17
                   (list openjdk17 "jdk")
