@@ -77,7 +77,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.7.2-zen1")
+    (version "6.7.4-zen1")
     (source
       (origin
         (method git-fetch)
@@ -87,7 +87,7 @@
         (file-name (git-file-name name version))
         (sha256
           (base32
-            "0k2hcvq8djjmq4cb1lsaj0rklsbpjbfsg7l3ibj1yz244m05r113"))))
+            "1vk2xfvqx4kplngw8n2c4xxqwxjyiij0dvbynm2y35nf04l6p9bx"))))
     (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17 python-3)))
     (arguments
       (substitute-keyword-arguments (package-arguments linux)
@@ -97,7 +97,7 @@
               (lambda _
                 (setenv "LLVM" "1")
                 (setenv "LLVM_IAS" "1")
-                (setenv "KCFLAGS" "-O3 -march=skylake -pipe")
+                (setenv "KCFLAGS" "-O2 -march=skylake -pipe")
                 (let ((port (open-file ".config" "a"))
                   (extra-configuration
                     #$(config->string

@@ -308,9 +308,6 @@
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
                 (extra-special-file
-                  "/usr/bin/file"
-                  (file-append file "/bin/file"))
-                (extra-special-file
                   "/bin/kill"
                   (file-append coreutils "/bin/kill"))
                 (extra-special-file
@@ -320,11 +317,11 @@
                   "/bin/pwd"
                   (file-append coreutils "/bin/pwd"))
                 (extra-special-file
-                  "/usr/bin/awk"
-                  (file-append gawk "/bin/awk"))
-                (extra-special-file
                   "/usr/lib"
                   "/run/current-system/profile/lib")
+                (extra-special-file
+                  "/usr/bin"
+                  "/run/current-system/profile/bin")
                 (udev-rules-service 'rtl-sdr rtl-sdr)
                 (udev-rules-service 'android android-udev-rules)
                 (service
