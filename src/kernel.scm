@@ -23,6 +23,9 @@
     ("CONFIG_IKCONFIG_PROC" . #t) 
     ;; Some very mild hardening.
     ("CONFIG_SECURITY_DMESG_RESTRICT" . #t) 
+    ;; Custom
+    ("CONFIG_STRICT_DEVMEM" . #f)
+    ("CONFIG_IO_STRICT_DEVMEM" . #f)
     ;; All kernels should have NAMESPACES options enabled
     ("CONFIG_NAMESPACES" . #t) 
     ("CONFIG_UTS_NS" . #t) 
