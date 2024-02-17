@@ -80,7 +80,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.7.4-zen1")
+    (version "6.7.5-zen1")
     (source
       (origin
         (method git-fetch)
@@ -90,7 +90,7 @@
         (file-name (git-file-name name version))
         (sha256
           (base32
-            "1vk2xfvqx4kplngw8n2c4xxqwxjyiij0dvbynm2y35nf04l6p9bx"))))
+            "1f7czivsmqzhcbckcyi058lqwa4qds03fmylqa1wa4sybrq4diri"))))
     (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17 python-3)))
     (arguments
       (substitute-keyword-arguments (package-arguments linux)
