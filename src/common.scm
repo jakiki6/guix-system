@@ -89,7 +89,7 @@
     (initrd microcode-initrd)
     (firmware (list linux-firmware))
     (kernel-arguments
-      '("modprobe.blacklist=dvb_usb_rtl28xxu"))
+      '("modprobe.blacklist=dvb_usb_rtl28xxu" "mitigations=off"))
     (locale "en_US.utf8")
     (timezone "Europe/Berlin")
     (keyboard-layout
