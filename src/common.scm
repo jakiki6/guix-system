@@ -57,6 +57,7 @@
   (gnu packages linux)
   (gnu packages llvm)
   (gnu packages containers)
+  (gnu packages cpio)
   (gnu system setuid)
   (gnu system image)
   (gnu image)

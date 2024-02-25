@@ -26,6 +26,7 @@
     ;; Custom
     ("CONFIG_STRICT_DEVMEM" . #f)
     ("CONFIG_IO_STRICT_DEVMEM" . #f)
+    ("CONFIG_IKHEADERS" . #t)
     ;; All kernels should have NAMESPACES options enabled
     ("CONFIG_NAMESPACES" . #t) 
     ("CONFIG_UTS_NS" . #t) 
@@ -80,7 +81,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.7.5-zen1")
+    (version "6.7.6-zen1")
     (source
       (origin
         (method git-fetch)
@@ -90,8 +91,8 @@
         (file-name (git-file-name name version))
         (sha256
           (base32
-            "1f7czivsmqzhcbckcyi058lqwa4qds03fmylqa1wa4sybrq4diri"))))
-    (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17 python-3)))
+            "1qvnv5jmzf1ziarvxyr81j8cpfnag7vvkpnfja6haba7yjavgvkc"))))
+    (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-17 lld-17 python-3 cpio)))
     (arguments
       (substitute-keyword-arguments (package-arguments linux)
         ((#:phases phases)
