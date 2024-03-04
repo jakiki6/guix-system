@@ -12257,3 +12257,51 @@
             "0kj02phzikz9rddcx2apq3a8zwwfaawc3sfkd4q7f85lpnjxfsji"))
         (file-name
           (git-file-name (package-name distrobox) version))))))
+
+(define-public kubo
+  (package
+    (name "kubo")
+    (version "0.27.0")
+    (source
+     (origin
+       (method url-fetch/tarbomb)
+       (uri (string-append
+             "https://dist.ipfs.io/kubo/v" version
+             "/kubo-source.tar.gz"))
+       (sha256
+        (base32 "1xl5ys4xx6ww0vsyhv76d93yydgqq87x7vxx65d0d8i90pc5arf5"))
+       (file-name (string-append name "-" version "-source"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:unpack-path "github.com/ipfs/kubo"
+      #:import-path "github.com/ipfs/kubo/cmd/ipfs"
+      #:go go-1.21
+      #:phases
+      #~(modify-phases %standard-phases
+          ;; https://github.com/ipfs/kubo/blob/master/docs/command-completion.md
+          (add-after 'install 'install-bashcompletion
+            (lambda _
+              (let ((completiondir (string-append #$output
+                                                  "/etc/bash_completion.d")))
+                (mkdir-p completiondir)
+                (with-output-to-file (string-append completiondir "/ipfs")
+                  (lambda _
+                    (invoke #$(if (%current-target-system)
+                                  "ipfs"
+                                  #~(string-append #$output "/bin/ipfs"))
+                            "commands" "completion" "bash")))))))))
+    (inputs '())
+    (native-inputs
+     (append (if (%current-target-system)
+                 (list this-package)
+                 '())
+             (list python-minimal-wrapper zsh)))
+    (home-page "https://ipfs.tech")
+    (synopsis "Go implementation of IPFS, a peer-to-peer hypermedia protocol")
+    (description "IPFS is a global, versioned, peer-to-peer file system.  It
+combines good ideas from Git, BitTorrent, Kademlia, SFS, and the Web.  It is
+like a single bittorrent swarm, exchanging git objects.  IPFS provides an
+interface as simple as the HTTP web, but with permanence built in.  You can
+also mount the world at @code{/ipfs}.")
+    (license license:expat)))

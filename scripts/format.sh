@@ -1,5 +1,5 @@
 #!/bin/sh
-for i in $(find . -type f | grep .scm$ | grep -v kernel); do
+for i in $(find . -type f | grep .scm$ | grep -v kernel | grep -v packages); do
 	cat $i | ./scripts/scmfmt > ${i}_
     cp ${i}_ /tmp/
 	mv ${i}_ $i
