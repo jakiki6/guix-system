@@ -267,6 +267,7 @@
             %base-packages)
           (list nomadnet
                 uesave
+                kubo
                 libgfshare
                 bsdiff
                 libsixel
