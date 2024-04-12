@@ -8,7 +8,7 @@
         (uri (origin-uri (package-source shepherd-0.10)))
         (sha256
           (base32
-            "1vxghlxnxajx2iciqmjia49c5hkir8li0gv29kl55frhn2zgxilf"))
+            "0206r2l914qjahzd1qill57r1qcg1x8faj0f6qv3x42wqx6x28ky"))
         (patches
           (list (local-file
                   "../patches/shepherd-reboot-kexec.patch")))))))
