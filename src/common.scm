@@ -115,8 +115,7 @@
                         "video"
                         "kvm"
                         "dialout"
-                        "adbusers"
-                        "docker"))
+                        "adbusers"))
                     (shell (file-append zsh "/bin/zsh"))
                     (password (crypt secret-password "laura")))
                   %base-user-accounts))
@@ -296,19 +295,19 @@
                   guix-publish-service-type
                   (guix-publish-configuration (advertise? #t)))
                 (service gnome-keyring-service-type)
-                (service docker-service-type)
-                (service
-                  oci-container-service-type
-                  (list (oci-container-configuration
-                          (image "ipfs/kubo:latest")
-                          (provision "ipfs")
-                          (ports (list "4001:4001"
-                                       "4001:4001/udp"
-                                       "127.0.0.1:8080:8080"
-                                       "127.0.0.1:5001:5001"))
-                          (volumes
-                            (list "/ipfs_data:/data/ipfs"
-                                  "/ipfs_export:/export")))))
+;                (service docker-service-type)
+;                (service
+;                  oci-container-service-type
+;                  (list (oci-container-configuration
+;                          (image "ipfs/kubo:latest")
+;                          (provision "ipfs")
+;                          (ports (list "4001:4001"
+;                                       "4001:4001/udp"
+;                                       "127.0.0.1:8080:8080"
+;                                       "127.0.0.1:5001:5001"))
+;                          (volumes
+;                            (list "/ipfs_data:/data/ipfs"
+;                                  "/ipfs_export:/export")))))
                 (service
                   mpd-service-type
                   (mpd-configuration
