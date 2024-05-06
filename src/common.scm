@@ -295,8 +295,8 @@
                 (service gnome-keyring-service-type)
                 (service
                   mpd-service-type
-                  (mpd-configuration
-                    (user (user-account (name "mpd") (group "mpd")))))
+                  (mpd-configuration (music-directory "/home/laura/music") (playlist-directory "/home/laura/playlist")
+                    (user (user-account (name "laura") (group "users")))))
                 (service
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
