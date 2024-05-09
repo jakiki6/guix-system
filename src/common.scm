@@ -100,8 +100,7 @@
         "mitigations=off"))
     (locale "en_US.utf8")
     (timezone "Europe/Berlin")
-    (keyboard-layout
-      (keyboard-layout "de" "us"))
+    (keyboard-layout (keyboard-layout "de" "us"))
     (host-name #f)
     (users (cons* (user-account
                     (name "laura")
@@ -295,7 +294,9 @@
                 (service gnome-keyring-service-type)
                 (service
                   mpd-service-type
-                  (mpd-configuration (music-directory "/home/laura/music") (playlist-directory "/home/laura/playlist")
+                  (mpd-configuration
+                    (music-directory "/home/laura/music")
+                    (playlist-directory "/home/laura/playlist")
                     (user (user-account (name "laura") (group "users")))))
                 (service
                   syncthing-service-type
@@ -359,7 +360,9 @@
             (gdm-service-type
               config
               =>
-              (gdm-configuration (auto-suspend? #f)))
+              (gdm-configuration
+                (auto-suspend? #f)
+                (wayland? #t)))
             (sysctl-service-type
               config
               =>
@@ -368,7 +371,8 @@
                   (append
                     '(("net.ipv4.ip_forward" . "1")
                       ("kernel.dmesg_restrict" . "0")
-                      ("kernel.unprivileged_userns_clone" . "1"))
+                      ("kernel.unprivileged_userns_clone" . "1")
+                      ("net.ipv4.conf.enp2s0.send_redirects" . "0"))
                     %default-sysctl-settings))))))))
     (essential-services
       (modify-services
