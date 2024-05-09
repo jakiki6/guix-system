@@ -1,0 +1,13 @@
+diff --git a/include/crypto/algapi.h b/include/crypto/algapi.h
+index 7a4a71af6..f6ec33a72 100644
+--- a/include/crypto/algapi.h
++++ b/include/crypto/algapi.h
+@@ -21,7 +21,7 @@
+  */
+ #define MAX_ALGAPI_BLOCKSIZE		160
+ #define MAX_ALGAPI_ALIGNMASK		127
+-#define MAX_CIPHER_BLOCKSIZE		16
++#define MAX_CIPHER_BLOCKSIZE		64
+ #define MAX_CIPHER_ALIGNMASK		15
+ 
+ #ifdef ARCH_DMA_MINALIGN
