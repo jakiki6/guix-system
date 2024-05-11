@@ -114,7 +114,8 @@
                         "video"
                         "kvm"
                         "dialout"
-                        "adbusers"))
+                        "adbusers"
+                        "docker"))
                     (shell (file-append zsh "/bin/zsh"))
                     (password (crypt secret-password "laura")))
                   %base-user-accounts))
@@ -301,6 +302,7 @@
                 (service
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
+                (service docker-service-type)
                 (extra-special-file
                   "/bin/kill"
                   (file-append coreutils "/bin/kill"))
