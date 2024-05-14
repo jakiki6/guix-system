@@ -394,7 +394,6 @@
                 (service
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
-                (service docker-service-type)
                 (extra-special-file
                   "/bin/kill"
                   (file-append coreutils "/bin/kill"))
