@@ -81,7 +81,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.8.9-zen1")
+    (version "6.9.1-zen1")
     (source
       (origin
         (method git-fetch)
@@ -92,7 +92,7 @@
         (patches (list (local-file "../patches/linux-max-cipher-blocksize.patch")))
         (sha256
           (base32
-            "1wva92wk0pxii4f6hn27kssgrz8yy38kk38w2wm5hh1qyz3ij1vj"))))
+            "1a6jqi474kf3353nx927wj5yqx6pcr3nz9qzrpb1vlrq9mwr7jls"))))
     (native-inputs (modify-inputs (package-native-inputs linux) (prepend clang-18 lld-18 python-3 cpio)))
     (arguments
       (substitute-keyword-arguments (package-arguments linux)
