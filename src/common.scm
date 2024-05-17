@@ -66,6 +66,7 @@
   (gnu packages crates-tls)
   (gnu packages fonts)
   (gnu packages xorg)
+  (gnu packages ipfs)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
