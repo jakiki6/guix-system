@@ -73,6 +73,18 @@ for i in range(0, len(lines)):
 lines.insert(0, "search --label --set guix_boot")
 lines.insert(0, "# patched already")
 
+for i in range(0, len(lines)):
+    if lines[i] == "set timeout=5":
+        c = lines[i+1:i+7]
+
+        c[0] = "menuentry \"Kernel dev\" {"
+        c[2] = c[2].split(" ")
+        c[2][3] = "/kernel"
+        c[2] = " ".join(c[2])
+
+        for j in range(len(c) - 1, -1, -1):
+            lines.insert(i + 7, c[j])
+
 content = "\n".join(lines)
 
 with open("/boot/grub/grub.cfg", "w") as f:
