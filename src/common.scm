@@ -388,12 +388,6 @@
 ;                            (list "/ipfs_data:/data/ipfs"
 ;                                  "/ipfs_export:/export")))))
                 (service
-                  mpd-service-type
-                  (mpd-configuration
-                    (music-directory "/home/laura/music")
-                    (playlist-directory "/home/laura/playlist")
-                    (user (user-account (name "laura") (group "users")))))
-                (service
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
                 (extra-special-file
