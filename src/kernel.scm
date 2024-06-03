@@ -102,14 +102,12 @@
               (lambda _
                 (setenv "LLVM" "1")
                 (setenv "LLVM_IAS" "1")
-                (setenv "KCFLAGS" "-O2 -march=skylake -pipe")
                 (let ((port (open-file ".config" "a"))
                   (extra-configuration
                     #$(config->string
                       (append '(("CONFIG_LTO" . #t)
                                 ("CONFIG_LTO_CLANG" . #t) 
                                 ("CONFIG_ARCH_SUPPORTS_LTO_CLANG" . #t)
-                                ("CONFIG_ARCH_SUPPORTS_LTO_CLANG_THIN" . #t)
                                 ("CONFIG_HAS_LTO_CLANG" . #t)
                                 ("CONFIG_LTO_CLANG_FULL" . #t))
                                 %default-extra-linux-options))))
