@@ -95,7 +95,7 @@
 
 (define base-os
   (operating-system
-    (kernel linux-zen)
+    (kernel linux)
     (initrd microcode-initrd)
     (firmware (list linux-firmware))
     (kernel-arguments
