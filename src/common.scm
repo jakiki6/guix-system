@@ -144,7 +144,9 @@
                    "mesa-utils"
                    "mesa"
                    "linux-libre-headers"
-                   "openssh"))
+                   "openssh"
+                   "hyprland"
+                   "xdg-desktop-portal-hyprland"))
             (list fuse-2
                   openjdk17
                   (list openjdk17 "jdk")
@@ -250,18 +252,6 @@
                       (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
                 (service gnome-keyring-service-type)
                 (service docker-service-type)
-;                (service
-;                  oci-container-service-type
-;                  (list (oci-container-configuration
-;                          (image "ipfs/kubo:latest")
-;                          (provision "ipfs")
-;                          (ports (list "4001:4001"
-;                                       "4001:4001/udp"
-;                                       "127.0.0.1:8080:8080"
-;                                       "127.0.0.1:5001:5001"))
-;                          (volumes
-;                            (list "/ipfs_data:/data/ipfs"
-;                                  "/ipfs_export:/export")))))
                 (service
                   syncthing-service-type
                   (syncthing-configuration (user "laura")))
