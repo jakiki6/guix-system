@@ -146,7 +146,8 @@
                    "linux-libre-headers"
                    "openssh"
                    "hyprland"
-                   "xdg-desktop-portal-hyprland"))
+                   "xdg-desktop-portal-hyprland"
+                   "distrobox"))
             (list fuse-2
                   openjdk17
                   (list openjdk17 "jdk")
