@@ -100,7 +100,8 @@
     (firmware (list linux-firmware))
     (kernel-arguments
       '("modprobe.blacklist=dvb_usb_rtl28xxu"
-        "mitigations=off"))
+        "mitigations=off"
+        "iomem=relaxed"))
     (locale "en_US.utf8")
     (timezone "Europe/Berlin")
     (keyboard-layout (keyboard-layout "de" "us"))
