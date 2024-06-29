@@ -138,10 +138,6 @@
                    "kexec-tools"
                    "zsh"
                    "git"
-                   "rocm-bandwidth-test"
-                   "rocminfo"
-                   "rocm-opencl-runtime"
-                   "rocr-runtime"
                    "mesa-utils"
                    "mesa"
                    "linux-libre-headers"
@@ -274,7 +270,6 @@
                   "/run/current-system/profile/bin")
                 (udev-rules-service 'rtl-sdr rtl-sdr)
                 (udev-rules-service 'android android-udev-rules)
-                (service virtual-build-machine-service-type)
                 (service
                   qemu-binfmt-service-type
                   (qemu-binfmt-configuration
