@@ -143,6 +143,7 @@
                    "linux-libre-headers"
                    "openssh"
                    "hyprland"
+                   "swaylock"
                    "xdg-desktop-portal-hyprland"
                    "distrobox"))
             (list fuse-2
