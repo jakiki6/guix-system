@@ -87,7 +87,8 @@
   (guix utils)
   (ice-9 match)
   (srfi srfi-1)
-  (srfi srfi-9 gnu))
+  (srfi srfi-9 gnu)
+  (system base syntax))
 
 (include "secrets.scm")
 (include "symlinks.scm")
@@ -95,29 +96,29 @@
 (include "packages.scm")
 
 (define (apply-base OS)
-  (set-fields
-    OS
-    ((operating-system-kernel) linux)
-    ((operating-system-initrd) microcode-initrd)
-    ((operating-system-firmware)
+  (operating-system
+    (inherit OS)
+    (kernel linux)
+    (initrd microcode-initrd)
+    (firmware
      (list linux-firmware))
-    ((operating-system-kernel-arguments)
-     '("modprobe.blacklist=dvb_usb_rtl28xxu"
-       "mitigations=off"
-       "iomem=relaxed"))
-    ((operating-system-locale) "en_US.utf8")
-    ((operating-system-timezone) "Europe/Berlin")
-    ((operating-system-keyboard-layout)
+    (arguments
+     (list "modprobe.blacklist=dvb_usb_rtl28xxu"
+           "mitigations=off"
+           "iomem=relaxed"))
+    (locale "en_US.utf8")
+    (timezone "Europe/Berlin")
+    (keyboard-layout
      (keyboard-layout "de" "us"))
-    ((operating-system-packages)
+    (packages
      (filter
        (lambda (x) (not (eq? x nvi)))
        (operating-system-packages OS)))))
 
 (define (apply-personal-config OS)
-  (set-fields
-    OS
-    ((operating-system-users)
+  (operating-system
+    (inherit OS)
+    (users
      (cons* (user-account
               (name "laura")
               (comment "Laura")
@@ -135,11 +136,10 @@
               (shell (file-append zsh "/bin/zsh"))
               (password (crypt secret-password "laura")))
             (operating-system-users OS)))
-    ((operating-system-groups)
-     (cons* (user-group
-              (name "adbusers")
-              (operating-system-groups OS))))
-    ((operating-system-sudoers-file)
+    (groups
+     (cons* (user-group (name "adbusers"))
+            (operating-system-groups OS)))
+    (sudoers-file
      (plain-file
        "sudoers"
        (string-append
@@ -147,19 +147,19 @@
          (format #f "~a ALL = NOPASSWD: ALL~%" "laura"))))))
 
 (define (add-base-packages OS)
-  (set-fields
-    OS
-    ((operating-system-packages)
+  (operating-system
+    (inherit OS)
+    (packages
      (append
        (map specification->package
-            '("vim"
-              "curl"
-              "python"
-              "kexec-tools"
-              "zsh"
-              "git"
-              "linux-libre-headers"
-              "openssh"))
+            (list "vim"
+                  "curl"
+                  "python"
+                  "kexec-tools"
+                  "zsh"
+                  "git"
+                  "linux-libre-headers"
+                  "openssh"))
        (list fuse-2
              openjdk17
              (list openjdk17 "jdk")
@@ -169,9 +169,9 @@
              shutdown-as-poweroff
              python3-as-python)
        (operating-system-packages OS)))
-    ((operating-system-name-service-switch)
+    (name-service-switch
      %mdns-host-lookup-nss)
-    ((operating-system-skeletons)
+    (system-skeletons
      (append
        `((".zshrc" ,(local-file "../files/zshrc_pre"))
          (".zshrc.post"
@@ -181,9 +181,9 @@
        (operating-system-skeletons OS)))))
 
 (define (add-desktop-packages OS)
-  (set-fields
-    PS
-    ((operating-system-packages)
+  (operating-system
+    (inherit OS)
+    (packages
      (append
        (map specification->package
             '("mesa"
@@ -271,16 +271,16 @@
              font-winitzki-cyrillic
              font-xfree86-type1)
        (operating-system-packages OS)))
-    ((operating-system-setuid-programs)
+    (setuid-programs
      (cons (operating-system-setuid-programs OS)
            (setuid-program
              (program
                (file-append cifs-utils "/sbin/mount.cifs")))))))
 
 (define (add-base-services OS)
-  (set-fields
-    OS
-    ((operating-system-services)
+  (operating-system
+    (inherit OS)
+    (services
      (modify-services
        (filter
          (lambda (x)
@@ -351,7 +351,7 @@
                  ("kernel.dmesg_restrict" . "0")
                  ("kernel.unprivileged_userns_clone" . "1"))
                %default-sysctl-settings))))))
-    ((operating-system-essential-services)
+    (essential-services
      (modify-services
        (operating-system-default-essential-services OS)
        (shepherd-root-service-type
@@ -362,9 +362,9 @@
            (shepherd kexec-shepherd)))))))
 
 (define (add-desktop-services OS)
-  (set-fields
-    OS
-    ((operating-system-services)
+  (operating-system
+    (inherit OS)
+    (services
      (append
        (list (service plasma-desktop-service-type)
              (service
@@ -382,14 +382,10 @@
        (operating-system-services OS)))))
 
 (define (prepare-base OS)
-  (apply-base OS)
-  (add-base-packages OS)
-  (add-base-services OS))
+  (add-base-services (add-base-packages (apply-base OS))))
 
 (define (prepare-desktop OS)
-  (prepare-base OS)
-  (add-desktop-packages OS)
-  (add-desktop-services OS))
+  (add-desktop-services (add-desktop-packages (prepare-base OS))))
 
 (define (personalize OS)
   (apply-personal-config OS))
