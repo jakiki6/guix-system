@@ -86,276 +86,310 @@
   (guix store)
   (guix utils)
   (ice-9 match)
-  (srfi srfi-1))
+  (srfi srfi-1)
+  (srfi srfi-9 gnu))
 
 (include "secrets.scm")
 (include "symlinks.scm")
 (include "kernel.scm")
 (include "packages.scm")
 
-(define base-os
-  (operating-system
-    (kernel linux)
-    (initrd microcode-initrd)
-    (firmware (list linux-firmware))
-    (kernel-arguments
-      '("modprobe.blacklist=dvb_usb_rtl28xxu"
-        "mitigations=off"
-        "iomem=relaxed"))
-    (locale "en_US.utf8")
-    (timezone "Europe/Berlin")
-    (keyboard-layout (keyboard-layout "de" "us"))
-    (host-name #f)
-    (users (cons* (user-account
-                    (name "laura")
-                    (comment "Laura")
-                    (group "users")
-                    (home-directory "/home/laura")
-                    (supplementary-groups
-                      '("wheel"
-                        "netdev"
-                        "audio"
-                        "video"
-                        "kvm"
-                        "dialout"
-                        "adbusers"
-                        "docker"))
-                    (shell (file-append zsh "/bin/zsh"))
-                    (password (crypt secret-password "laura")))
-                  %base-user-accounts))
-    (groups
-      (cons* (user-group (name "adbusers"))
-             %base-groups))
-    (packages
-      (filter
-        (lambda (x) (not (eq? x nvi)))
-        (append
-          (append
-            (map specification->package
-                 '("vim"
-                   "curl"
-                   "python"
-                   "kexec-tools"
-                   "zsh"
-                   "git"
-                   "mesa-utils"
-                   "mesa"
-                   "linux-libre-headers"
-                   "openssh"
-                   "hyprland"
-                   "swaylock"
-                   "xdg-desktop-portal-hyprland"
-                   "distrobox"))
-            (list fuse-2
-                  openjdk17
-                  (list openjdk17 "jdk")
-                  (list gcc "lib")
-                  (list git "send-email")
-                  (list gtk "bin")
-                  (list mesa "bin"))
-            %base-packages)
-          (list vim-as-vi
-                shutdown-as-poweroff
-                python3-as-python)
-          (list font-adobe-source-code-pro
-                font-adobe-source-han-sans
-                font-adobe-source-sans-pro
-                font-adobe-source-serif-pro
-                font-anonymous-pro
-                font-anonymous-pro-minus
-                font-awesome
-                font-bitstream-vera
-                font-blackfoundry-inria
-                font-cns11643
-                font-cns11643-swjz
-                font-comic-neue
-                font-culmus
-                font-dejavu
-                font-dosis
-                font-dseg
-                font-fantasque-sans
-                font-fira-code
-                font-fira-mono
-                font-fira-sans
-                font-fontna-yasashisa-antique
-                font-gnu-freefont
-                font-gnu-unifont
-                font-go
-                font-google-material-design-icons
-                font-google-noto
-                font-google-roboto
-                font-hack
-                font-hermit
-                font-ibm-plex
-                font-inconsolata
-                font-iosevka
-                font-iosevka-aile
-                font-iosevka-etoile
-                font-iosevka-slab
-                font-iosevka-term
-                font-iosevka-term-slab
-                font-ipa-mj-mincho
-                font-jetbrains-mono
-                font-lato
-                font-liberation
-                font-linuxlibertine
-                font-lohit
-                font-meera-inimai
-                font-mononoki
-                font-mplus-testflight
-                font-opendyslexic
-                font-public-sans
-                font-rachana
-                font-sarasa-gothic
-                font-sil-andika
-                font-sil-charis
-                font-sil-gentium
-                font-tamzen
-                font-terminus
-                font-tex-gyre
-                font-un
-                font-vazir
-                font-wqy-microhei
-                font-wqy-zenhei
-                font-adobe100dpi
-                font-adobe75dpi
-                font-cronyx-cyrillic
-                font-dec-misc
-                font-isas-misc
-                font-micro-misc
-                font-misc-cyrillic
-                font-misc-ethiopic
-                font-misc-misc
-                font-mutt-misc
-                font-schumacher-misc
-                font-screen-cyrillic
-                font-sony-misc
-                font-sun-misc
-                font-util
-                font-winitzki-cyrillic
-                font-xfree86-type1))))
-    (services
-      (remove
-        (lambda (service)
-          (memq (service-kind service)
-                (list sddm-service-type)))
-        (append
-          (list (service plasma-desktop-service-type)
-                (service
-                  sddm-service-type
-                  (sddm-configuration (theme "breeze")))
-                (set-xorg-configuration
-                  (xorg-configuration
-                    (keyboard-layout keyboard-layout)
-                    (extra-config
-                      (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
-                (service gnome-keyring-service-type)
-                (service docker-service-type)
-                (service
-                  syncthing-service-type
-                  (syncthing-configuration (user "laura")))
-                (extra-special-file
-                  "/bin/kill"
-                  (file-append coreutils "/bin/kill"))
-                (extra-special-file
-                  "/bin/bash"
-                  (file-append bash "/bin/bash"))
-                (extra-special-file
-                  "/bin/pwd"
-                  (file-append coreutils "/bin/pwd"))
-                (extra-special-file
-                  "/usr/lib"
-                  "/run/current-system/profile/lib")
-                (extra-special-file
-                  "/usr/bin"
-                  "/run/current-system/profile/bin")
-                (udev-rules-service 'rtl-sdr rtl-sdr)
-                (udev-rules-service 'android android-udev-rules)
-                (service
-                  qemu-binfmt-service-type
-                  (qemu-binfmt-configuration
-                    (platforms
-                      (lookup-qemu-platforms
-                        "arm"
-                        "aarch64"
-                        "riscv32"
-                        "riscv64"
-                        "mips"
-                        "mips64"
-                        "s390x"
-                        "sparc"
-                        "sparc64"
-                        "alpha"
-                        "ppc"
-                        "ppc64")))))
-          (modify-services
-            %desktop-services
-            (guix-service-type
-              config
-              =>
-              (guix-configuration
-                (inherit config)
-                (substitute-urls
-                  (append
-                    (list "https://substitutes.nonguix.org")
-                    %default-substitute-urls))
-                (authorized-keys
-                  (append
-                    (list (plain-file
-                            "non-guix.pub"
-                            "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
-                    %default-authorized-guix-keys))))
-            (special-files-service-type
-              config
-              =>
-              (list (car config)))
-            (gdm-service-type
-              config
-              =>
-              (gdm-configuration
-                (auto-suspend? #f)
-                (wayland? #t)))
-            (sysctl-service-type
-              config
-              =>
-              (sysctl-configuration
-                (settings
-                  (append
-                    '(("net.ipv4.ip_forward" . "1")
-                      ("kernel.dmesg_restrict" . "0")
-                      ("kernel.unprivileged_userns_clone" . "1")
-                      ("net.ipv4.conf.enp2s0.send_redirects" . "0"))
-                    %default-sysctl-settings))))))))
-    (essential-services
-      (modify-services
-        (operating-system-default-essential-services
-          this-operating-system)
-        (shepherd-root-service-type
-          config
-          =>
-          (shepherd-configuration
-            (inherit config)
-            (shepherd kexec-shepherd)))))
-    (bootloader #f)
-    (mapped-devices #f)
-    (file-systems #f)
-    (setuid-programs
-      (cons (setuid-program
-              (program
-                (file-append cifs-utils "/sbin/mount.cifs")))
-            %setuid-programs))
-    (name-service-switch %mdns-host-lookup-nss)
-    (skeletons
-      (append
-        `((".zshrc" ,(local-file "../files/zshrc_pre"))
-          (".zshrc.post"
-           ,(local-file "../files/zshrc_post"))
-          ("channels.scm"
-           ,(local-file "../files/channels.scm")))
-        (default-skeletons)))
-    (sudoers-file
-      (plain-file
-        "sudoers"
-        (string-append
-          (plain-file-content %sudoers-specification)
-          (format #f "~a ALL = NOPASSWD: ALL~%" "laura"))))))
+(define (apply-base OS)
+  (set-fields
+    OS
+    ((operating-system-kernel) linux)
+    ((operating-system-initrd) microcode-initrd)
+    ((operating-system-firmware)
+     (list linux-firmware))
+    ((operating-system-kernel-arguments)
+     '("modprobe.blacklist=dvb_usb_rtl28xxu"
+       "mitigations=off"
+       "iomem=relaxed"))
+    ((operating-system-locale) "en_US.utf8")
+    ((operating-system-timezone) "Europe/Berlin")
+    ((operating-system-keyboard-layout)
+     (keyboard-layout "de" "us"))
+    ((operating-system-packages)
+     (filter
+       (lambda (x) (not (eq? x nvi)))
+       (operating-system-packages OS)))))
+
+(define (apply-personal-config OS)
+  (set-fields
+    OS
+    ((operating-system-users)
+     (cons* (user-account
+              (name "laura")
+              (comment "Laura")
+              (group "users")
+              (home-directory "/home/laura")
+              (supplementary-groups
+                '("wheel"
+                  "netdev"
+                  "audio"
+                  "video"
+                  "kvm"
+                  "dialout"
+                  "adbusers"
+                  "docker"))
+              (shell (file-append zsh "/bin/zsh"))
+              (password (crypt secret-password "laura")))
+            (operating-system-users OS)))
+    ((operating-system-groups)
+     (cons* (user-group
+              (name "adbusers")
+              (operating-system-groups OS))))
+    ((operating-system-sudoers-file)
+     (plain-file
+       "sudoers"
+       (string-append
+         (plain-file-content %sudoers-specification)
+         (format #f "~a ALL = NOPASSWD: ALL~%" "laura"))))))
+
+(define (add-base-packages OS)
+  (set-fields
+    OS
+    ((operating-system-packages)
+     (append
+       (map specification->package
+            '("vim"
+              "curl"
+              "python"
+              "kexec-tools"
+              "zsh"
+              "git"
+              "linux-libre-headers"
+              "openssh"))
+       (list fuse-2
+             openjdk17
+             (list openjdk17 "jdk")
+             (list gcc "lib")
+             (list git "send-email"))
+       (list vim-as-vi
+             shutdown-as-poweroff
+             python3-as-python)
+       (operating-system-packages OS)))
+    ((operating-system-name-service-switch)
+     %mdns-host-lookup-nss)
+    ((operating-system-skeletons)
+     (append
+       `((".zshrc" ,(local-file "../files/zshrc_pre"))
+         (".zshrc.post"
+          ,(local-file "../files/zshrc_post"))
+         ("channels.scm"
+          ,(local-file "../files/channels.scm")))
+       (operating-system-skeletons OS)))))
+
+(define (add-desktop-packages OS)
+  (set-fields
+    PS
+    ((operating-system-packages)
+     (append
+       (map specification->package
+            '("mesa"
+              "mesa-utils"
+              "hyprland"
+              "swaylock"
+              "xdg-desktop-portal-hyprland"
+              "distrobox"))
+       (list (list gtk "bin") (list mesa "bin"))
+       (list font-adobe-source-code-pro
+             font-adobe-source-han-sans
+             font-adobe-source-sans-pro
+             font-adobe-source-serif-pro
+             font-anonymous-pro
+             font-anonymous-pro-minus
+             font-awesome
+             font-bitstream-vera
+             font-blackfoundry-inria
+             font-cns11643
+             font-cns11643-swjz
+             font-comic-neue
+             font-culmus
+             font-dejavu
+             font-dosis
+             font-dseg
+             font-fantasque-sans
+             font-fira-code
+             font-fira-mono
+             font-fira-sans
+             font-fontna-yasashisa-antique
+             font-gnu-freefont
+             font-gnu-unifont
+             font-go
+             font-google-material-design-icons
+             font-google-noto
+             font-google-roboto
+             font-hack
+             font-hermit
+             font-ibm-plex
+             font-inconsolata
+             font-iosevka
+             font-iosevka-aile
+             font-iosevka-etoile
+             font-iosevka-slab
+             font-iosevka-term
+             font-iosevka-term-slab
+             font-ipa-mj-mincho
+             font-jetbrains-mono
+             font-lato
+             font-liberation
+             font-linuxlibertine
+             font-lohit
+             font-meera-inimai
+             font-mononoki
+             font-mplus-testflight
+             font-opendyslexic
+             font-public-sans
+             font-rachana
+             font-sarasa-gothic
+             font-sil-andika
+             font-sil-charis
+             font-sil-gentium
+             font-tamzen
+             font-terminus
+             font-tex-gyre
+             font-un
+             font-vazir
+             font-wqy-microhei
+             font-wqy-zenhei
+             font-adobe100dpi
+             font-adobe75dpi
+             font-cronyx-cyrillic
+             font-dec-misc
+             font-isas-misc
+             font-micro-misc
+             font-misc-cyrillic
+             font-misc-ethiopic
+             font-misc-misc
+             font-mutt-misc
+             font-schumacher-misc
+             font-screen-cyrillic
+             font-sony-misc
+             font-sun-misc
+             font-util
+             font-winitzki-cyrillic
+             font-xfree86-type1)
+       (operating-system-packages OS)))
+    ((operating-system-setuid-programs)
+     (cons (operating-system-setuid-programs OS)
+           (setuid-program
+             (program
+               (file-append cifs-utils "/sbin/mount.cifs")))))))
+
+(define (add-base-services OS)
+  (set-fields
+    OS
+    ((operating-system-services)
+     (modify-services
+       (filter
+         (lambda (x)
+           (not (eq? (service-kind) sddm-service-type)))
+         (append
+           (service docker-service-type)
+           (service docker-service-type)
+           (service
+             syncthing-service-type
+             (syncthing-configuration (user "laura")))
+           (extra-special-file
+             "/bin/kill"
+             (file-append coreutils "/bin/kill"))
+           (extra-special-file
+             "/bin/bash"
+             (file-append bash "/bin/bash"))
+           (extra-special-file
+             "/bin/pwd"
+             (file-append coreutils "/bin/pwd"))
+           (extra-special-file
+             "/usr/lib"
+             "/run/current-system/profile/lib")
+           (extra-special-file
+             "/usr/bin"
+             "/run/current-system/profile/bin")
+           (udev-rules-service 'rtl-sdr rtl-sdr)
+           (udev-rules-service 'android android-udev-rules)
+           (service
+             qemu-binfmt-service-type
+             (qemu-binfmt-configuration
+               (platforms
+                 (lookup-qemu-platforms
+                   "arm"
+                   "aarch64"
+                   "riscv32"
+                   "riscv64"
+                   "mips"
+                   "mips64"
+                   "s390x"
+                   "sparc"
+                   "sparc64"
+                   "alpha"
+                   "ppc"
+                   "ppc64"))))
+           (operating-system-services OS)))
+       (guix-service-type
+         config
+         =>
+         (guix-configuration
+           (inherit config)
+           (substitute-urls
+             (append
+               (list "https://substitutes.nonguix.org")
+               %default-substitute-urls))
+           (authorized-keys
+             (append
+               (list (plain-file
+                       "non-guix.pub"
+                       "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
+               %default-authorized-guix-keys))))
+       (sysctl-service-type
+         config
+         =>
+         (sysctl-configuration
+           (settings
+             (append
+               '(("net.ipv4.ip_forward" . "1")
+                 ("kernel.dmesg_restrict" . "0")
+                 ("kernel.unprivileged_userns_clone" . "1"))
+               %default-sysctl-settings))))))
+    ((operating-system-essential-services)
+     (modify-services
+       (operating-system-default-essential-services OS)
+       (shepherd-root-service-type
+         config
+         =>
+         (shepherd-configuration
+           (inherit config)
+           (shepherd kexec-shepherd)))))))
+
+(define (add-desktop-services OS)
+  (set-fields
+    OS
+    ((operating-system-services)
+     (append
+       (list (service plasma-desktop-service-type)
+             (service
+               sddm-service-type
+               (sddm-configuration (theme "breeze")))
+             (set-xorg-configuration
+               (xorg-configuration
+                 (keyboard-layout keyboard-layout)
+                 (extra-config
+                   (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
+             (service gnome-keyring-service-type)
+             (service
+               syncthing-service-type
+               (syncthing-configuration (user "laura"))))
+       (operating-system-services OS)))))
+
+(define (prepare-base OS)
+  (apply-base OS)
+  (add-base-packages OS)
+  (add-base-services OS))
+
+(define (prepare-desktop OS)
+  (prepare-base OS)
+  (add-desktop-packages OS)
+  (add-desktop-services OS))
+
+(define (personalize OS)
+  (apply-personal-config OS))

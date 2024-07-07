@@ -2,7 +2,6 @@
 
 (define my-os
   (operating-system
-    (inherit base-os)
     (host-name "kernelpanicroom")
     (bootloader
       (bootloader-configuration
@@ -55,4 +54,8 @@
                (mount? #f))
              %base-file-systems))))
 
-my-os
+(let ((OS my-os))
+  (begin
+    (prepare-desktop OS)
+    (personalize OS)
+    OS))
