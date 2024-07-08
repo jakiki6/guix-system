@@ -54,8 +54,4 @@
                (mount? #f))
              %base-file-systems))))
 
-(let ((OS my-os))
-  (begin
-    (prepare-desktop OS)
-    (personalize OS)
-    OS))
+(personalize (prepare-desktop my-os))

@@ -101,7 +101,7 @@
     (kernel linux)
     (initrd microcode-initrd)
     (firmware (list linux-firmware))
-    (arguments
+    (kernel-arguments
       (list "modprobe.blacklist=dvb_usb_rtl28xxu"
             "mitigations=off"
             "iomem=relaxed"))
@@ -167,7 +167,7 @@
               python3-as-python)
         (operating-system-packages OS)))
     (name-service-switch %mdns-host-lookup-nss)
-    (system-skeletons
+    (skeletons
       (append
         `((".zshrc" ,(local-file "../files/zshrc_pre"))
           (".zshrc.post"
@@ -268,10 +268,10 @@
               font-xfree86-type1)
         (operating-system-packages OS)))
     (setuid-programs
-      (cons (operating-system-setuid-programs OS)
-            (setuid-program
+      (cons (setuid-program
               (program
-                (file-append cifs-utils "/sbin/mount.cifs")))))))
+                (file-append cifs-utils "/sbin/mount.cifs")))
+            (operating-system-setuid-programs OS)))))
 
 (define (add-base-services OS)
   (operating-system
@@ -280,47 +280,47 @@
       (modify-services
         (filter
           (lambda (x)
-            (not (eq? (service-kind) sddm-service-type)))
+            (not (eq? (service-kind x) sddm-service-type)))
           (append
-            (service docker-service-type)
-            (service docker-service-type)
-            (service
-              syncthing-service-type
-              (syncthing-configuration (user "laura")))
-            (extra-special-file
-              "/bin/kill"
-              (file-append coreutils "/bin/kill"))
-            (extra-special-file
-              "/bin/bash"
-              (file-append bash "/bin/bash"))
-            (extra-special-file
-              "/bin/pwd"
-              (file-append coreutils "/bin/pwd"))
-            (extra-special-file
-              "/usr/lib"
-              "/run/current-system/profile/lib")
-            (extra-special-file
-              "/usr/bin"
-              "/run/current-system/profile/bin")
-            (udev-rules-service 'rtl-sdr rtl-sdr)
-            (udev-rules-service 'android android-udev-rules)
-            (service
-              qemu-binfmt-service-type
-              (qemu-binfmt-configuration
-                (platforms
-                  (lookup-qemu-platforms
-                    "arm"
-                    "aarch64"
-                    "riscv32"
-                    "riscv64"
-                    "mips"
-                    "mips64"
-                    "s390x"
-                    "sparc"
-                    "sparc64"
-                    "alpha"
-                    "ppc"
-                    "ppc64"))))
+            (list (service docker-service-type)
+                  (service docker-service-type)
+                  (service
+                    syncthing-service-type
+                    (syncthing-configuration (user "laura")))
+                  (extra-special-file
+                    "/bin/kill"
+                    (file-append coreutils "/bin/kill"))
+                  (extra-special-file
+                    "/bin/bash"
+                    (file-append bash "/bin/bash"))
+                  (extra-special-file
+                    "/bin/pwd"
+                    (file-append coreutils "/bin/pwd"))
+                  (extra-special-file
+                    "/usr/lib"
+                    "/run/current-system/profile/lib")
+                  (extra-special-file
+                    "/usr/bin"
+                    "/run/current-system/profile/bin")
+                  (udev-rules-service 'rtl-sdr rtl-sdr)
+                  (udev-rules-service 'android android-udev-rules)
+                  (service
+                    qemu-binfmt-service-type
+                    (qemu-binfmt-configuration
+                      (platforms
+                        (lookup-qemu-platforms
+                          "arm"
+                          "aarch64"
+                          "riscv32"
+                          "riscv64"
+                          "mips"
+                          "mips64"
+                          "s390x"
+                          "sparc"
+                          "sparc64"
+                          "alpha"
+                          "ppc"
+                          "ppc64")))))
             (operating-system-services OS)))
         (guix-service-type
           config
