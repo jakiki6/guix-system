@@ -283,7 +283,6 @@
             (not (eq? (service-kind x) sddm-service-type)))
           (append
             (list (service docker-service-type)
-                  (service docker-service-type)
                   (service
                     syncthing-service-type
                     (syncthing-configuration (user "laura")))
@@ -321,7 +320,7 @@
                           "alpha"
                           "ppc"
                           "ppc64")))))
-            (operating-system-services OS)))
+            (operating-system-user-services OS)))
         (guix-service-type
           config
           =>
@@ -368,14 +367,14 @@
                 (sddm-configuration (theme "breeze")))
               (set-xorg-configuration
                 (xorg-configuration
-                  (keyboard-layout keyboard-layout)
+                  (keyboard-layout (operating-system-keyboard-layout OS))
                   (extra-config
                     (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
               (service gnome-keyring-service-type)
               (service
                 syncthing-service-type
                 (syncthing-configuration (user "laura"))))
-        (operating-system-services OS)))))
+        (operating-system-user-services OS)))))
 
 (define (prepare-base OS)
   (add-base-services
