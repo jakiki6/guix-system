@@ -280,12 +280,9 @@
       (modify-services
         (filter
           (lambda (x)
-            (not (eq? (service-kind x) sddm-service-type)))
+            (not (memq (service-kind x) '(sddm-service-type))))
           (append
             (list (service docker-service-type)
-                  (service
-                    syncthing-service-type
-                    (syncthing-configuration (user "laura")))
                   (extra-special-file
                     "/bin/kill"
                     (file-append coreutils "/bin/kill"))
@@ -336,6 +333,12 @@
                         "non-guix.pub"
                         "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
                 %default-authorized-guix-keys))))
+        (gdm-service-type
+          config
+          =>
+          (gdm-configuration
+            (auto-suspend? #f)
+            (wayland? #t)))
         (sysctl-service-type
           config
           =>
@@ -362,12 +365,10 @@
     (services
       (append
         (list (service plasma-desktop-service-type)
-              (service
-                sddm-service-type
-                (sddm-configuration (theme "breeze")))
               (set-xorg-configuration
                 (xorg-configuration
-                  (keyboard-layout (operating-system-keyboard-layout OS))
+                  (keyboard-layout
+                    (operating-system-keyboard-layout OS))
                   (extra-config
                     (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
               (service gnome-keyring-service-type)
