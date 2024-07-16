@@ -351,7 +351,7 @@
                 %default-sysctl-settings))))))
     (essential-services
       (modify-services
-        (operating-system-default-essential-services OS)
+        (operating-system-default-essential-services this-operating-system)
         (shepherd-root-service-type
           config
           =>
