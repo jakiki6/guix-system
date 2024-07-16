@@ -339,6 +339,10 @@
           (gdm-configuration
             (auto-suspend? #f)
             (wayland? #t)))
+        (special-files-service-type
+          config
+          =>
+          (list (car config)))
         (sysctl-service-type
           config
           =>
@@ -351,7 +355,8 @@
                 %default-sysctl-settings))))))
     (essential-services
       (modify-services
-        (operating-system-default-essential-services this-operating-system)
+        (operating-system-default-essential-services
+          this-operating-system)
         (shepherd-root-service-type
           config
           =>
