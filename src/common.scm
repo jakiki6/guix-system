@@ -379,7 +379,8 @@
               (service gnome-keyring-service-type)
               (service
                 syncthing-service-type
-                (syncthing-configuration (user "laura"))))
+                (syncthing-configuration (user "laura")))
+              (service ipfs-service-type))
         (operating-system-user-services OS)))))
 
 (define (prepare-base OS)
