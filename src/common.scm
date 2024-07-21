@@ -383,6 +383,21 @@
               (service ipfs-service-type))
         (operating-system-user-services OS)))))
 
+(define (add-laptop-services OS)
+  (operating-system
+    (inherit OS)
+    (services
+      (append
+        (list (service
+                wpa-supplicant-service-type
+                (wpa-supplicant-configuration
+                  (config-file
+                    (plain-file
+                      "wpa_supplicant.cfg"
+                      secrets-wpa-config)))))
+        (operating-system-user-services OS)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (prepare-base OS)
   (add-base-services
     (add-base-packages (apply-base OS))))
