@@ -13,7 +13,7 @@
             (keyboard-layout
               (keyboard-layout "us" "altgr-intl"))
             (theme (grub-theme
-                     (image (local-file "files/background.png"))))))
+                     (image (local-file "../files/background.png"))))))
         (mapped-devices
           (list (mapped-device
                   (source "/dev/sda2")

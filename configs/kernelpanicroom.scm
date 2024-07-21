@@ -12,7 +12,7 @@
             (targets (list "/dev/sda" "/dev/sdb"))
             (keyboard-layout
               (keyboard-layout "us" "altgr-intl"))
-            (theme (grub-theme (image (local-file "files/background.png"))))
+            (theme (grub-theme (image (local-file "../files/background.png"))))
             (menu-entries
               (list (menu-entry
                       (label "GNU Mach")
