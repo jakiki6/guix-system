@@ -2,6 +2,7 @@
 !#
 
 (use-modules (ice-9 pretty-print))
+(use-modules (guix gexp))
 
 ;; Helper methods for maintaining comments and whitespace.
 (define (copy-line-comment)
