@@ -406,5 +406,8 @@
   (add-desktop-services
     (add-desktop-packages (prepare-base OS))))
 
+(define (prepare-laptop OS)
+  (add-laptop-services OS))
+
 (define (personalize OS)
   (apply-personal-config OS))

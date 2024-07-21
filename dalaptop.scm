@@ -2,32 +2,22 @@
 
 (define my-os
   (personalize
-    (prepare-desktop
+    (prepare-laptop
       (operating-system
-        (host-name "kernelpanicroom")
+        (host-name "dalaptop")
         (services %desktop-services)
         (bootloader
           (bootloader-configuration
             (bootloader grub-bootloader)
-            (targets (list "/dev/sda" "/dev/sdb"))
+            (targets (list "/dev/sda"))
             (keyboard-layout
               (keyboard-layout "us" "altgr-intl"))
-            (theme (grub-theme (image (local-file "files/background.png"))))
-            (menu-entries
-              (list (menu-entry
-                      (label "GNU Mach")
-                      (multiboot-kernel
-                        (file-append cross-mach "/boot/gnumach")))))))
+            (theme (grub-theme
+                     (image (local-file "files/background.png"))))))
         (mapped-devices
           (list (mapped-device
-                  (source
-                    (uuid "9ed7fd2f-f4ec-485a-a816-11be07e84d10"))
+                  (source "/dev/sda2")
                   (target "root1")
-                  (type luks-device-mapping))
-                (mapped-device
-                  (source
-                    (uuid "81aa6264-1607-439c-8ea6-b5ef981777ab"))
-                  (target "root2")
                   (type luks-device-mapping))))
         (file-systems
           (cons* (file-system
@@ -40,13 +30,6 @@
                    (device (file-system-label "guix_boot"))
                    (type "ext4"))
                  (file-system
-                   (mount-point "/data")
-                   (device
-                     (uuid "d883b77a-1f15-48ea-94e1-af4e64be9951"
-                           'xfs))
-                   (type "xfs")
-                   (mount? #f))
-                 (file-system
                    (mount-point "/smb")
                    (device "//192.168.69.11/jakob")
                    (type "cifs")
@@ -54,7 +37,8 @@
                      (string-append
                        "username=jakob,password="
                        secret-smb-password
-                       ",_netdev")))
+                       ",_netdev"))
+                   (mount? #f))
                  %base-file-systems))))))
 
 my-os
