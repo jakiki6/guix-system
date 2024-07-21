@@ -1,4 +1,4 @@
-(include "src/common.scm")
+(include "../src/common.scm")
 
 (define my-os
   (personalize

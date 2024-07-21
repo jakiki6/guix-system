@@ -4,7 +4,7 @@ update: src/secrets.scm
 	./scripts/update.sh
 
 deploy: src/secrets.scm
-	sudo $(shell which guix) system init $(shell hostname).scm /mnt
+	sudo $(shell which guix) system init configs/$(shell hostname).scm /mnt
 
 test: src/secrets.scm
 	$(shell guix system vm os.scm) -m 6G -smp 4 --enable-kvm
