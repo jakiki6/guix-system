@@ -33,6 +33,7 @@
                    (mount-point "/smb")
                    (device "//192.168.69.11/jakob")
                    (type "cifs")
+                   (mount-may-fail? #t)
                    (options
                      (string-append
                        "username=jakob,password="
