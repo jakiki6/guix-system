@@ -67,6 +67,7 @@
   (gnu packages fonts)
   (gnu packages xorg)
   (gnu packages ipfs)
+  (gnu packages hardware)
   (gnu system setuid)
   (gnu system image)
   (gnu image)

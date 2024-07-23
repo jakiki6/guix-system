@@ -14,7 +14,10 @@
               (keyboard-layout "us" "altgr-intl"))
             (theme (grub-theme (image (local-file "../files/background.png"))))
             (menu-entries
-              (list (menu-entry
+              (list 
+                (menu-entry (label "Memtest86+") (multiboot-kernel (file-append memtest86+ "/lib/memtest86+/memtest.bin")))
+
+(menu-entry
                       (label "GNU Mach")
                       (multiboot-kernel
                         (file-append cross-mach "/boot/gnumach")))))))
