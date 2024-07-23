@@ -43,7 +43,7 @@ with open("/boot/grub/grub.cfg", "r") as f:
     content = f.read()
 
 lines = content.split("\n")
-p = re.compile(".*(\\/gnu\\/store\\/[a-zA-Z0-9_\\-.+\\/]+(grub-image\\.png|grub-locales|grub-keymap.[a-z]+|gnumach)).*")
+p = re.compile(".*(\\/gnu\\/store\\/[a-zA-Z0-9_\\-.+\\/]+(grub-image\\.png|grub-locales|grub-keymap.[a-z]+|gnumach|memtest.bin)).*")
 for line in lines:
     match = p.match(line)
 
