@@ -35,6 +35,7 @@
   (gnu services virtualization)
   (gnu services shepherd)
   (gnu services syncthing)
+  (gnu services admin)
   (gnu packages python-xyz)
   (gnu packages python-crypto)
   (gnu packages version-control)
@@ -95,6 +96,7 @@
 (include "symlinks.scm")
 (include "kernel.scm")
 (include "packages.scm")
+(include "services.scm")
 
 (define (apply-base OS)
   (operating-system
@@ -381,7 +383,7 @@
               (service
                 syncthing-service-type
                 (syncthing-configuration (user "laura")))
-              (service ipfs-service-type))
+              (service kubo-service-type))
         (operating-system-user-services OS)))))
 
 (define (add-laptop-services OS)
