@@ -85,6 +85,9 @@ for i in range(0, len(lines)):
         for j in range(len(c) - 1, -1, -1):
             lines.insert(i + 7, c[j])
 
+    if "memtest" in lines[i] and "multiboot" in lines[i]:
+        lines[i] = lines[i].replace("multiboot", "linux")
+
 content = "\n".join(lines)
 
 with open("/boot/grub/grub.cfg", "w") as f:
