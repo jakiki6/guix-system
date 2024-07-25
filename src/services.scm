@@ -14,7 +14,11 @@
                          #:group
                          "users"
                          #:environment-variables
-                         (list "IPFS_PATH=/ipfs_data" (string-append "PATH=/run/setuid-programs:" (ungexp fuse-2) "/bin")))))
+                         (list "IPFS_PATH=/ipfs_data"
+                               (string-append
+                                 "PATH=/run/setuid-programs:"
+                                 (ungexp fuse-2)
+                                 "/bin")))))
           (stop (gexp (make-kill-destructor))))))
 
 (define %kubo-log-rotation
