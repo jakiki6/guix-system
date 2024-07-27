@@ -52,6 +52,7 @@ for line in lines:
         copy(match.group(1))
 
 if "# patched already\n" in content:
+    print("grub.cfg is already patched")
     exit(0)
 
 with open("/boot/grub/grub.cfg.old", "w") as f:
