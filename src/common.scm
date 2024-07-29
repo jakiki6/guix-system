@@ -190,7 +190,8 @@
                "hyprland"
                "swaylock"
                "xdg-desktop-portal-hyprland"
-               "distrobox"))
+               "distrobox"
+               "waydroid"))
         (list (list gtk "bin") (list mesa "bin"))
         (list font-adobe-source-code-pro
               font-adobe-source-han-sans
@@ -301,6 +302,9 @@
                   (extra-special-file
                     "/usr/bin"
                     "/run/current-system/profile/bin")
+                  (extra-special-file
+                    "/usr/share"
+                    "/run/current-system/profile/share")
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
                   (service
