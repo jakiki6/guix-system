@@ -69,6 +69,7 @@
   (gnu packages xorg)
   (gnu packages ipfs)
   (gnu packages hardware)
+  (laura services utils)
   (gnu system setuid)
   (gnu system image)
   (gnu image)
@@ -307,6 +308,7 @@
                     "/run/current-system/profile/share")
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
+                  (service waydroid-service-type)
                   (service
                     qemu-binfmt-service-type
                     (qemu-binfmt-configuration
