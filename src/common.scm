@@ -310,6 +310,7 @@
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
                   (service waydroid-service-type)
+                  (service hurd-vm-service-type)
                   (service
                     qemu-binfmt-service-type
                     (qemu-binfmt-configuration
