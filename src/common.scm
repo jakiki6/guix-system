@@ -288,6 +288,7 @@
             (not (memq (service-kind x) '(sddm-service-type))))
           (append
             (list (service docker-service-type)
+                  (service containerd-service-type)
                   (extra-special-file
                     "/bin/kill"
                     (file-append coreutils "/bin/kill"))
