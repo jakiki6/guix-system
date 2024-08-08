@@ -225,12 +225,6 @@
               font-hermit
               font-ibm-plex
               font-inconsolata
-              font-iosevka
-              font-iosevka-aile
-              font-iosevka-etoile
-              font-iosevka-slab
-              font-iosevka-term
-              font-iosevka-term-slab
               font-ipa-mj-mincho
               font-jetbrains-mono
               font-lato
@@ -243,7 +237,6 @@
               font-opendyslexic
               font-public-sans
               font-rachana
-              font-sarasa-gothic
               font-sil-andika
               font-sil-charis
               font-sil-gentium
