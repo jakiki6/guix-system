@@ -98,6 +98,7 @@
 (include "kernel.scm")
 (include "packages.scm")
 (include "services.scm")
+(include "childhurd.scm")
 
 (define (apply-base OS)
   (operating-system
@@ -303,7 +304,11 @@
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
                   (service waydroid-service-type)
-                  (service hurd-vm-service-type)
+                  (service
+                    hurd-vm-service-type
+                    (hurd-vm-configuration
+                      (os childhurd-os)
+                      (disk-size (* 1024 1024 1024 16))))
                   (service
                     qemu-binfmt-service-type
                     (qemu-binfmt-configuration
