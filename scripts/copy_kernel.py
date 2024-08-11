@@ -67,7 +67,7 @@ else:
     lines.pop(0)
 
     for i in range(0, len(lines)):
-        if "search --label --set guix_root" in lines[i]:
+        if "search --label --set" in lines[i]:
             lines[i] = lines[i].replace("search", "# search")
 
     lines.insert(0, "search --label --set guix_boot")
@@ -98,16 +98,6 @@ print("Building grub image")
 tempdir = tempfile.TemporaryDirectory()
 os.chdir(tempdir.name)
 
-os.system("rm $(find /boot | grep \\\\.sig$)")
-
-with open("script", "w") as f:
-    f.write("Key-Type: 1\nKey-Length: 2048\nSubkey-Type: 1\nSubkey-Length: 2048\nName-Real: grub key\nName-Email: grub@example.com\nExpire-Date: 0\n%no-protection\n")
-
-os.system("GNUPGHOME=$(pwd) gpg --batch --gen-key script")
-os.system("GNUPGHOME=$(pwd) gpg --armor --export > gpg.key")
-os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --pubkey gpg.key --output /boot/EFI/BOOT/BOOTX64.EFI")
-
-os.system("for i in $(find /boot/grub -type f | grep -v \\\\.sig$); do echo Signing $i; GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
-os.system("for i in $(find /boot/gnu -type f | grep bzImage); do GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
+os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --output /boot/EFI/BOOT/BOOTX64.EFI \"boot/grub/grub.cfg=/boot/grub/grub.cfg\" \"gnu=/boot/gnu\"")
 
 os.system("sbctl sign /boot/EFI/BOOT/BOOTX64.EFI")
