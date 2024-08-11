@@ -109,3 +109,5 @@ os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/li
 
 os.system("for i in $(find /boot/grub -type f | grep -v \\\\.sig$); do echo Signing $i; GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
 os.system("for i in $(find /boot/gnu -type f | grep bzImage); do GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
+
+os.system("sbctl sign /boot/EFI/BOOT/BOOTX64.EFI")
