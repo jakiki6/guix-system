@@ -8,8 +8,11 @@
         (services %desktop-services)
         (bootloader
           (bootloader-configuration
-            (bootloader grub-bootloader)
-            (targets (list "/dev/sda" "/dev/sdb"))
+            (bootloader
+              (bootloader
+                (inherit grub-efi-removable-bootloader)
+                (package grub-efi-fixed)))
+            (targets (list "/boot"))
             (keyboard-layout
               (keyboard-layout "us" "altgr-intl"))
             (theme (grub-theme

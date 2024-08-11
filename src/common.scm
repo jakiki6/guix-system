@@ -69,6 +69,7 @@
   (gnu packages xorg)
   (gnu packages ipfs)
   (gnu packages hardware)
+  (gnu packages bootloaders)
   (laura services utils)
   (gnu system setuid)
   (gnu system image)

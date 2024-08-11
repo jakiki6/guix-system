@@ -23,6 +23,42 @@
     (home-page (package-home-page vim))
     (license (package-license vim))))
 
+(define grub-efi-fixed
+  (package
+    (name "grub-efi-fixed")
+    (version (package-version grub-efi))
+    (source #f)
+    (build-system trivial-build-system)
+    (arguments
+      `(#:modules
+        ((guix build utils))
+        #:builder
+        (begin
+          (use-modules (guix build utils))
+          (let* ((out (assoc-ref %outputs "out"))
+                 (grub (assoc-ref %build-inputs "grub-efi"))
+                 (bash (assoc-ref %build-inputs "bash")))
+            (copy-recursively grub out)
+            (chdir (string-append out "/sbin"))
+            (copy-file "grub-install" ".grub-install")
+            (make-file-writable "grub-install")
+            (define port (open-output-file "grub-install"))
+            (display
+              (string-append
+                "#!"
+                bash
+                "/bin/sh\nexec "
+                out
+                "/sbin/.grub-install --target=x86_64-efi $@\n")
+              port)
+            (close port)
+            (chmod "grub-install" 493)))))
+    (inputs (list grub-efi bash))
+    (synopsis "")
+    (description "")
+    (home-page "")
+    (license (package-license grub-efi))))
+
 (define python3-as-python
   (package
     (name "python3-as-python")
