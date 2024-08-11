@@ -45,7 +45,7 @@
                  (file-system
                    (mount-point "/boot")
                    (device (file-system-label "guix_boot"))
-                   (type "ext4"))
+                   (type "vfat"))
                  (file-system
                    (mount-point "/data")
                    (device
