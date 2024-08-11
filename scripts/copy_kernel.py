@@ -1,4 +1,4 @@
-import os, re, shutil, sys
+import os, re, shutil, sys, tempfile
 
 if os.getuid() != 0:
     print("[!] I need root")
@@ -53,43 +53,59 @@ for line in lines:
 
 if "# patched already\n" in content:
     print("grub.cfg is already patched")
-    exit(0)
+else:
+    with open("/boot/grub/grub.cfg.old", "w") as f:
+        f.write(content)
 
-with open("/boot/grub/grub.cfg.old", "w") as f:
-    f.write(content)
+    print("Patching grub.cfg")
 
-print("Patching grub.cfg")
+    while not lines[0].startswith("# Set 'root' to the partition that contains /gnu/store."):
+        lines.pop(0)
 
-while not lines[0].startswith("# Set 'root' to the partition that contains /gnu/store."):
+    lines.pop(0)
+    lines.pop(0)
     lines.pop(0)
 
-lines.pop(0)
-lines.pop(0)
-lines.pop(0)
+    for i in range(0, len(lines)):
+        if "search --label --set guix_root" in lines[i]:
+            lines[i] = lines[i].replace("search", "# search")
 
-for i in range(0, len(lines)):
-    if "search --label --set guix_root" in lines[i]:
-        lines[i] = lines[i].replace("search", "# search")
+    lines.insert(0, "search --label --set guix_boot")
+    lines.insert(0, "# patched already")
 
-lines.insert(0, "search --label --set guix_boot")
-lines.insert(0, "# patched already")
+    for i in range(0, len(lines)):
+        if lines[i] == "set timeout=5":
+            c = lines[i+1:i+7]
 
-for i in range(0, len(lines)):
-    if lines[i] == "set timeout=5":
-        c = lines[i+1:i+7]
+            c[0] = "menuentry \"Kernel dev\" {"
+            c[2] = c[2].split(" ")
+            c[2][3] = "/kernel"
+            c[2] = " ".join(c[2])
 
-        c[0] = "menuentry \"Kernel dev\" {"
-        c[2] = c[2].split(" ")
-        c[2][3] = "/kernel"
-        c[2] = " ".join(c[2])
+            for j in range(len(c) - 1, -1, -1):
+                lines.insert(i + 7, c[j])
 
-        for j in range(len(c) - 1, -1, -1):
-            lines.insert(i + 7, c[j])
+        if "memtest" in lines[i] and "multiboot" in lines[i]:
+            lines[i] = lines[i].replace("multiboot", "linux")
 
-    if "memtest" in lines[i] and "multiboot" in lines[i]:
-        lines[i] = lines[i].replace("multiboot", "linux")
+    content = "\n".join(lines)
 
-content = "\n".join(lines)
+    with open("/boot/grub/grub.cfg", "w") as f:
+        f.write(content)
 
-with open("/boot/grub/grub.cfg", "w") as f:
-    f.write(content)
+print("Building grub image")
+
+tempdir = tempfile.TemporaryDirectory()
+os.chdir(tempdir.name)
+
+os.system("rm $(find /boot | grep \\\\.sig$)")
+
+with open("script", "w") as f:
+    f.write("Key-Type: 1\nKey-Length: 2048\nSubkey-Type: 1\nSubkey-Length: 2048\nName-Real: grub key\nName-Email: grub@example.com\nExpire-Date: 0\n%no-protection\n")
+
+os.system("GNUPGHOME=$(pwd) gpg --batch --gen-key script")
+os.system("GNUPGHOME=$(pwd) gpg --armor --export > gpg.key")
+os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --pubkey gpg.key --output /boot/EFI/BOOT/BOOTX64.EFI")
+
+os.system("for i in $(find /boot/grub -type f | grep -v \\\\.sig$); do echo Signing $i; GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
+os.system("for i in $(find /boot/gnu -type f | grep bzImage); do GNUPGHOME=$(pwd) gpg --detach-sign $i; done")
