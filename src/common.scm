@@ -304,12 +304,6 @@
                     "/run/current-system/profile/share")
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
-                  (service waydroid-service-type)
-                  (service
-                    hurd-vm-service-type
-                    (hurd-vm-configuration
-                      (os childhurd-os)
-                      (disk-size (* 1024 1024 1024 16))))
                   (service
                     qemu-binfmt-service-type
                     (qemu-binfmt-configuration
@@ -387,6 +381,12 @@
                   (extra-config
                     (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
               (service gnome-keyring-service-type)
+              (service waydroid-service-type)
+              (service
+                hurd-vm-service-type
+                (hurd-vm-configuration
+                  (os childhurd-os)
+                  (disk-size (* 1024 1024 1024 16))))
               (service
                 syncthing-service-type
                 (syncthing-configuration (user "laura")))

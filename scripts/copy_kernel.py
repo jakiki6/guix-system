@@ -1,5 +1,8 @@
 import os, re, shutil, sys, tempfile
 
+if os.path.isfile("/.nocopy"):
+    exit(0)
+
 efi = os.path.isdir("/sys/firmware/efi")
 
 if os.getuid() != 0:
