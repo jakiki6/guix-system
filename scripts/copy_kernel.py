@@ -1,5 +1,7 @@
 import os, re, shutil, sys, tempfile
 
+efi = os.path.isdir("/sys/firmware/efi")
+
 if os.getuid() != 0:
     print("[!] I need root")
     exit(1)
@@ -68,9 +70,11 @@ else:
 
     for i in range(0, len(lines)):
         if "search --label --set" in lines[i]:
+            if not efi and "boot" in lines[i]:
+                continue
+
             lines[i] = lines[i].replace("search", "# search")
 
-    lines.insert(0, "search --label --set guix_boot")
     lines.insert(0, "# patched already")
 
     for i in range(0, len(lines)):
@@ -93,17 +97,18 @@ else:
     with open("/boot/grub/grub.cfg", "w") as f:
         f.write(content)
 
-print("Building grub image")
+if efi:
+    print("Building grub image")
 
-tempdir = tempfile.TemporaryDirectory()
-os.chdir(tempdir.name)
+    tempdir = tempfile.TemporaryDirectory()
+    os.chdir(tempdir.name)
 
-if os.path.isfile("/boot/EFI/BOOT/BOOTX64.EFI"):
-    os.system("mv /boot/EFI/BOOT/BOOTX64.EFI /boot/EFI/BOOT/BOOTX64.EFI.OLD")
+    if os.path.isfile("/boot/EFI/BOOT/BOOTX64.EFI"):
+        os.system("mv /boot/EFI/BOOT/BOOTX64.EFI /boot/EFI/BOOT/BOOTX64.EFI.OLD")
 
-os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --output /boot/EFI/BOOT/BOOTX64.EFI \"boot/grub/grub.cfg=/boot/grub/grub.cfg\" \"gnu=/boot/gnu\"")
+    os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --output /boot/EFI/BOOT/BOOTX64.EFI \"boot/grub/grub.cfg=/boot/grub/grub.cfg\" \"gnu=/boot/gnu\"")
 
-os.system("sbctl sign /boot/EFI/BOOT/BOOTX64.EFI")
-os.system("sync")
+    os.system("sbctl sign /boot/EFI/BOOT/BOOTX64.EFI")
+    os.system("sync")
 
 print("Done")
