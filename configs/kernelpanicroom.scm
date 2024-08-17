@@ -55,7 +55,8 @@
                      (uuid "d883b77a-1f15-48ea-94e1-af4e64be9951"
                            'xfs))
                    (type "xfs")
-                   (mount-may-fail? #t))
+                   (mount-may-fail? #t)
+                   (mount? #f))
                  (file-system
                    (mount-point "/smb")
                    (device "//192.168.69.11/jakob")
