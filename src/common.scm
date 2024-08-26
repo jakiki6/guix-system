@@ -14,6 +14,7 @@
 (use-modules
   (nongnu packages linux)
   (nongnu system linux-initrd)
+  (nongnu packages firmware)
   (gnu packages shells)
   (gnu packages hurd)
   (gnu packages nvi)
@@ -36,6 +37,7 @@
   (gnu services shepherd)
   (gnu services syncthing)
   (gnu services admin)
+  (gnu services dbus)
   (gnu packages python-xyz)
   (gnu packages python-crypto)
   (gnu packages version-control)
@@ -382,6 +384,8 @@
                     (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
               (service gnome-keyring-service-type)
               (service waydroid-service-type)
+              (simple-service 'fwupd-dbus dbus-root-service-type (list fwupd-nonfree))
+              (simple-service 'fwupd-polkit polkit-service-type (list fwupd-nonfree))
               (service
                 hurd-vm-service-type
                 (hurd-vm-configuration
