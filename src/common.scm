@@ -331,13 +331,17 @@
             (inherit config)
             (substitute-urls
               (append
-                (list "https://substitutes.nonguix.org")
+                (list "https://substitutes.nonguix.org"
+                      "https://guix.bordeaux.inria.fr")
                 %default-substitute-urls))
             (authorized-keys
               (append
                 (list (plain-file
                         "non-guix.pub"
-                        "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
+                        "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))")
+                      (plain-file
+                        "hpc.pub"
+                        "(public-key (ecc (curve Ed25519) (q #89FBA276A976A8DE2A69774771A92C8C879E0F24614AAAAE23119608707B3F06#)))"))
                 %default-authorized-guix-keys))))
         (gdm-service-type
           config
@@ -384,8 +388,14 @@
                     (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
               (service gnome-keyring-service-type)
               (service waydroid-service-type)
-              (simple-service 'fwupd-dbus dbus-root-service-type (list fwupd-nonfree))
-              (simple-service 'fwupd-polkit polkit-service-type (list fwupd-nonfree))
+              (simple-service
+                'fwupd-dbus
+                dbus-root-service-type
+                (list fwupd-nonfree))
+              (simple-service
+                'fwupd-polkit
+                polkit-service-type
+                (list fwupd-nonfree))
               (service
                 hurd-vm-service-type
                 (hurd-vm-configuration
