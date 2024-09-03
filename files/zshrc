@@ -3,7 +3,7 @@ if [ ! -d ~/.oh-my-zsh ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 fi
 
-if [ ! -f ~/.config/hypr ]; then
+if [ ! -d ~/.config/hypr ]; then
     mkdir -p ~/.config
     git clone https://github.com/jakiki6/hyprland-config ~/.config/hypr
 fi

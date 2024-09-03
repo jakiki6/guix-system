@@ -7,9 +7,10 @@
   (gnu home)
   (gnu packages)
   (gnu services)
-  (guix transformations)
   (guix gexp)
-  (gnu home services shells))
+  (guix channels)
+  (gnu home services shells)
+  (gnu home services guix))
 (home-environment
   (packages
     (list (specification->package "dragon-drop")
@@ -89,7 +90,6 @@
           (list (specification->package "rust") "rust-src")
           (list (specification->package "rust") "tools")
           (list (specification->package "rust") "cargo")
-          (specification->package "python-asdf")
           (specification->package "wayvnc")
           (specification->package "fwupd-nonfree")
           (specification->package "gzdoom")
@@ -131,7 +131,6 @@
           (specification->package "sdl-gfx")
           (specification->package "sdl-ttf")
           (specification->package "sdl-mixer")
-          (specification->package "sdl")
           (specification->package "ffmpeg")
           (specification->package "sdl2-image")
           (specification->package "sdl2")
