@@ -26,3 +26,32 @@ export GUIX_PROFILE="~/.guix-profile"
 . "~/.guix-profile/etc/profile"
 export EDITOR=vim
 export LD_LIBRARY_PATH=~/.guix-profile/lib:/run/current-system/profile/lib
+
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
+
+if [ -f /run/current-system/profile/bin/guix ]; then
+    . "$GUIX_PROFILE/etc/profile"
+    source ~/.guix-profile/etc/profile.d/nix.sh
+else
+    if [ -f /etc/alpine-release ]; then
+        export PS1="(alpine) $PS1"
+        unalias grep
+    else
+        export PS1="($(cat /etc/os-release | grep ^ID | cut -d"=" -f2)) $PS1"
+        if [ -f "$HOME/.cargo/env" ]; then
+            . "$HOME/.cargo/env"
+        fi  
+
+        export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+
+        export PATH="$PATH:/usr/lib/git-core"
+        unset CURL_CA_BUNDLE GIT_SSL_CAINFO NIX_SSL_CERT_FILE SSL_CERT_DIR SSL_CERT_FILE
+        export EDITOR=vim
+    fi  
+fi
+
+alias primetime='watch -t -n 1 "factor \$(date +%s)"'
+alias xmlfmt="xmllint --format -"
+export LLVM_COMPILER=clang
+export MPLBACKEND=qtagg
+export CC=gcc
