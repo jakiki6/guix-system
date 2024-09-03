@@ -177,11 +177,7 @@
     (name-service-switch %mdns-host-lookup-nss)
     (skeletons
       (append
-        `((".zshrc" ,(local-file "../files/zshrc_pre"))
-          (".zshrc.post"
-           ,(local-file "../files/zshrc_post"))
-          ("channels.scm"
-           ,(local-file "../files/channels.scm")))
+        `((".zshrc" ,(local-file "../files/zshrc")))
         (operating-system-skeletons OS)))))
 
 (define (add-desktop-packages OS)
