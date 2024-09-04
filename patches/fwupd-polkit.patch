@@ -1,3 +1,19 @@
+diff --color --recursive --text --unified a/data/remotes.d/meson.build b/data/remotes.d/meson.build
+--- a/data/remotes.d/meson.build	2024-09-04 14:26:24.184820002 +0200
++++ b/data/remotes.d/meson.build	2024-09-04 15:30:50.518818153 +0200
+@@ -1,10 +1,6 @@
+-if build_standalone and get_option('lvfs') != 'false'
++if build_standalone
+   con3 = configuration_data()
+-  if get_option('lvfs') == 'disabled'
+-    con3.set('enabled', 'false')
+-  else
+-    con3.set('enabled', 'true')
+-  endif
++  con3.set('enabled', 'true')
+   if libxmlb.version().version_compare('>= 0.3.3')
+     con3.set('compression', 'xz')
+   else
 diff --color --recursive --text --unified a/meson.build b/meson.build
 --- a/meson.build	2024-09-04 14:26:24.240821336 +0200
 +++ b/meson.build	2024-09-04 15:09:17.890926147 +0200
@@ -10,3 +26,4 @@ diff --color --recursive --text --unified a/meson.build b/meson.build
  endif
  if build_daemon
    if not polkit.found()
+
