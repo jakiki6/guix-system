@@ -173,7 +173,8 @@
               (list git "send-email"))
         (list vim-as-vi
               shutdown-as-poweroff
-              python3-as-python)
+              python3-as-python
+              fwupd-patched)
         (operating-system-packages OS)))
     (name-service-switch %mdns-host-lookup-nss)
     (skeletons
