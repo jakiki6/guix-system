@@ -90,7 +90,6 @@
           (list (specification->package "rust") "tools")
           (list (specification->package "rust") "cargo")
           (specification->package "wayvnc")
-          (specification->package "fwupd-nonfree")
           (specification->package "gzdoom")
           (specification->package "maven")
           (specification->package "hyperrogue")

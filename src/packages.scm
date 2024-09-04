@@ -12,3 +12,10 @@
         (patches
           (list (local-file
                   "../patches/shepherd-reboot-kexec.patch")))))))
+
+(define fwupd-patched
+  ((options->transformation
+     '((with-patch
+         .
+         "fwupd-nonfree=patches/fwupd-polkit.patch")))
+   fwupd-nonfree))

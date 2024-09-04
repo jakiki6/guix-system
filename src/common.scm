@@ -85,6 +85,7 @@
   (guix build-system cargo)
   (guix build-system go)
   (guix build-system cmake)
+  (guix transformations)
   ((guix licenses) #:prefix license:)
   (guix channels)
   (guix inferior)
@@ -387,11 +388,11 @@
               (simple-service
                 'fwupd-dbus
                 dbus-root-service-type
-                (list fwupd-nonfree))
+                (list fwupd-patched))
               (simple-service
                 'fwupd-polkit
                 polkit-service-type
-                (list fwupd-nonfree))
+                (list fwupd-patched))
               (service
                 hurd-vm-service-type
                 (hurd-vm-configuration
