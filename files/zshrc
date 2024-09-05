@@ -55,3 +55,4 @@ alias xmlfmt="xmllint --format -"
 export LLVM_COMPILER=clang
 export MPLBACKEND=qtagg
 export CC=gcc
+export IPFS_PATH=/ipfs_data
