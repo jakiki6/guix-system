@@ -412,7 +412,8 @@
           (specification->package "font-fira-code")
           (specification->package "font-comic-neue")
           (specification->package "font-liberation")
-          (specification->package "fatfsck-static")))
+          (specification->package "fatfsck-static")
+          (specification->package "gtkwave")))
   (services
     (list (service
             home-zsh-service-type
