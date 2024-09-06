@@ -413,7 +413,8 @@
           (specification->package "font-comic-neue")
           (specification->package "font-liberation")
           (specification->package "fatfsck-static")
-          (specification->package "gtkwave")))
+          (specification->package "gtkwave")
+          (specification->package "diffoscope")))
   (services
     (list (service
             home-zsh-service-type
