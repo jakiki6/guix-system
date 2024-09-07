@@ -419,7 +419,8 @@
           (specification->package "perl-io-socket-ssl")
           (specification->package "perl-mime-base64")
           (specification->package "perl-authen-sasl")
-          (specification->package "verilator")))
+          (specification->package "verilator")
+          (specification->package "gcc-cross-riscv64-linux-gnu-toolchain")))
   (services
     (list (service
             home-zsh-service-type
