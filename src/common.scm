@@ -120,6 +120,11 @@
 (include "services.scm")
 (include "childhurd.scm")
 
+(define gdm-patch-file 
+  (with-store store
+    (run-with-store store
+      (text-file "gdm.patch" secret-gdm-patch))))
+
 (define (apply-base OS)
   (operating-system
     (inherit OS)
@@ -361,6 +366,7 @@
           config
           =>
           (gdm-configuration
+            (gdm ((options->transformation `((with-patch . ,(string-append "gdm=" gdm-patch-file)))) gdm))
             (auto-suspend? #f)
             (wayland? #t)))
         (special-files-service-type
