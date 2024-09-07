@@ -415,7 +415,10 @@
           (specification->package "fatfsck-static")
           (specification->package "gtkwave")
           (specification->package "diffoscope")
-          (specification->package "wasmtime")))
+          (specification->package "wasmtime")
+          (specification->package "perl-io-socket-ssl")
+          (specification->package "perl-mime-base64")
+          (specification->package "perl-authen-sasl")))
   (services
     (list (service
             home-zsh-service-type
