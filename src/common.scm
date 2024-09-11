@@ -120,9 +120,11 @@
 (include "services.scm")
 (include "childhurd.scm")
 
-(define gdm-patch-file 
-  (with-store store
-    (run-with-store store
+(define gdm-patch-file
+  (with-store
+    store
+    (run-with-store
+      store
       (text-file "gdm.patch" secret-gdm-patch))))
 
 (define (apply-base OS)
@@ -323,6 +325,12 @@
                   (extra-special-file
                     "/usr/share"
                     "/run/current-system/profile/share")
+                  (extra-special-file
+                    "/lib/ld-linux-x86-64.so.2"
+                    (file-append glibc "/lib/ld-linux-x86-64.so.2"))
+                  (extra-special-file
+                    "/lib64/ld-linux-x86-64.so.2"
+                    (file-append glibc "/lib/ld-linux-x86-64.so.2"))
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
                   (service
@@ -366,7 +374,11 @@
           config
           =>
           (gdm-configuration
-            (gdm ((options->transformation `((with-patch . ,(string-append "gdm=" gdm-patch-file)))) gdm))
+            (gdm ((options->transformation
+                    `((with-patch
+                        unquote
+                        (string-append "gdm=" gdm-patch-file))))
+                  gdm))
             (auto-suspend? #f)
             (wayland? #t)))
         (special-files-service-type
