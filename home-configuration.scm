@@ -17,7 +17,7 @@
           (specification->package "mumi")
           (specification->package "calibre")
           (specification->package "sbctl")
-          (specification->package "gcc-toolchain")
+          (specification->package "rocm-toolchain")
           (list (specification->package "openjdk") "jdk")
           (specification->package "go")
           (specification->package "haunt")
@@ -419,7 +419,8 @@
           (specification->package "perl-mime-base64")
           (specification->package "perl-authen-sasl")
           (specification->package "verilator")
-          (specification->package "gcc-cross-riscv64-linux-gnu-toolchain")))
+          (specification->package "gcc-cross-riscv64-linux-gnu-toolchain")
+          (specification->package "hipify")))
   (services
     (list (service
             home-zsh-service-type
