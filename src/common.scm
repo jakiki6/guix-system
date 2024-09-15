@@ -118,7 +118,6 @@
 (include "kernel.scm")
 (include "packages.scm")
 (include "services.scm")
-(include "childhurd.scm")
 
 (define gdm-patch-file
   (with-store
@@ -428,11 +427,6 @@
                 'fwupd-polkit
                 polkit-service-type
                 (list fwupd-patched))
-              (service
-                hurd-vm-service-type
-                (hurd-vm-configuration
-                  (os childhurd-os)
-                  (disk-size (* 1024 1024 1024 16))))
               (service
                 syncthing-service-type
                 (syncthing-configuration (user "laura")))
