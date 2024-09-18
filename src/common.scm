@@ -187,7 +187,9 @@
                    "zsh"
                    "git"
                    "linux-libre-headers"
-                   "openssh"))
+                   "openssh"
+                   "iproute2"
+                   "iptables"))
         (list fuse-2
               openjdk17
               (list openjdk17 "jdk")
