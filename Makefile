@@ -13,9 +13,10 @@ format:
 	@./scripts/format.sh
 
 gc:
-	guix gc
 	sudo guix system delete-generations
 	sudo python3 scripts/copy_kernel.py
+	guix home delete-generations
+	guix gc
 
 src/secrets.scm: src/secrets.scm.gpg
 	gpg -d $< > $@
