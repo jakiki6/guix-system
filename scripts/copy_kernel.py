@@ -4,6 +4,7 @@ if os.path.isfile("/.nocopy"):
     exit(0)
 
 efi = os.path.isdir("/sys/firmware/efi")
+XEN = False
 
 if os.getuid() != 0:
     print("[!] I need root")
@@ -81,13 +82,14 @@ else:
     lines.insert(0, "# patched already")
 
     for i in range(0, len(lines)):
-        if "# search --label --set guix_root" in lines[i]:
-            lines[i] = "  multiboot2 /gnu/xen.gz placeholder"
-            lines[i+1] = lines[i+1].strip().split(" ")
-            lines[i+1].insert(2, "placeholder")
-            lines[i+1][0] = "module2"
-            lines[i+1] = "  " + " ".join(lines[i+1])
-            lines[i+2] = "  module2 --nounzip " + lines[i+2].split(" ")[-1]
+        if XEN:
+            if "# search --label --set guix_root" in lines[i]:
+                lines[i] = "  multiboot2 /gnu/xen.gz placeholder"
+                lines[i+1] = lines[i+1].strip().split(" ")
+                lines[i+1].insert(2, "placeholder")
+                lines[i+1][0] = "module2"
+                lines[i+1] = "  " + " ".join(lines[i+1])
+                lines[i+2] = "  module2 --nounzip " + lines[i+2].split(" ")[-1]
 
         if "memtest" in lines[i] and "multiboot" in lines[i]:
             lines[i] = lines[i].replace("multiboot", "linux")
