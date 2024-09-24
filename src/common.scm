@@ -131,6 +131,7 @@
     (inherit OS)
     (kernel linux)
     (initrd microcode-initrd)
+    (initrd-modules (append (list "xen-privcmd") %base-initrd-modules))
     (firmware (list linux-firmware))
     (kernel-arguments
       (list "modprobe.blacklist=dvb_usb_rtl28xxu"
