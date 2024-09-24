@@ -4,7 +4,7 @@ if os.path.isfile("/.nocopy"):
     exit(0)
 
 efi = os.path.isdir("/sys/firmware/efi")
-XEN = False
+XEN = True
 
 if os.getuid() != 0:
     print("[!] I need root")
@@ -84,7 +84,7 @@ else:
     for i in range(0, len(lines)):
         if XEN:
             if "# search --label --set guix_root" in lines[i]:
-                lines[i] = "  multiboot2 /gnu/xen.gz placeholder"
+                lines[i] = "  multiboot2 /gnu/xen.gz placeholder dom0_max_vcpus=4 dom0_vcpus_pin"
                 lines[i+1] = lines[i+1].strip().split(" ")
                 lines[i+1].insert(2, "placeholder")
                 lines[i+1][0] = "module2"
