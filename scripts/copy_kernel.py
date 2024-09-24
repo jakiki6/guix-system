@@ -81,16 +81,13 @@ else:
     lines.insert(0, "# patched already")
 
     for i in range(0, len(lines)):
-        if lines[i] == "set timeout=5":
-            c = lines[i+1:i+7]
-
-            c[0] = "menuentry \"Kernel dev\" {"
-            c[2] = c[2].split(" ")
-            c[2][3] = "/kernel"
-            c[2] = " ".join(c[2])
-
-            for j in range(len(c) - 1, -1, -1):
-                lines.insert(i + 7, c[j])
+        if "# search --label --set guix_root" in lines[i]:
+            lines[i] = "  multiboot2 /gnu/xen.gz placeholder"
+            lines[i+1] = lines[i+1].strip().split(" ")
+            lines[i+1].insert(2, "placeholder")
+            lines[i+1][0] = "module2"
+            lines[i+1] = "  " + " ".join(lines[i+1])
+            lines[i+2] = "  module2 --nounzip " + lines[i+2].split(" ")[-1]
 
         if "memtest" in lines[i] and "multiboot" in lines[i]:
             lines[i] = lines[i].replace("multiboot", "linux")
@@ -109,6 +106,7 @@ if efi:
     if os.path.isfile("/boot/EFI/BOOT/BOOTX64.EFI"):
         os.system("mv /boot/EFI/BOOT/BOOTX64.EFI /boot/EFI/BOOT/BOOTX64.EFI.OLD")
 
+    os.system("cat $(guix build xen)/boot/xen.gz > /boot/gnu/xen.gz")
     os.system("grub-mkstandalone -O x86_64-efi --directory=$(guix build grub-efi)/lib/grub/x86_64-efi --modules $(find /boot/grub | grep \\\\.mod$ | cut -d/ -f5 | cut -d. -f1) --output /boot/EFI/BOOT/BOOTX64.EFI \"boot/grub/grub.cfg=/boot/grub/grub.cfg\" \"gnu=/boot/gnu\"")
 
     os.system("sbctl sign /boot/EFI/BOOT/BOOTX64.EFI")
