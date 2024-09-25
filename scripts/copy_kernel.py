@@ -4,7 +4,7 @@ if os.path.isfile("/.nocopy"):
     exit(0)
 
 efi = os.path.isdir("/sys/firmware/efi")
-XEN = True
+XEN = False
 
 if os.getuid() != 0:
     print("[!] I need root")
