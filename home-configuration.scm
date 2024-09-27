@@ -9,8 +9,12 @@
   (gnu services)
   (guix gexp)
   (guix channels)
+  (guix packages)
+  (guix git-download)
   (gnu home services shells)
-  (gnu home services guix))
+  (gnu home services guix)
+  (gnu home services))
+
 (home-environment
   (packages
     (list (specification->package "dragon-drop")
@@ -427,6 +431,39 @@
             home-zsh-service-type
             (home-zsh-configuration
               (zshrc (list (local-file "./files/zshrc" "zshrc")))))
+          (simple-service
+            'config-service
+            home-files-service-type
+            `((".config/hypr"
+               ,(origin
+                  (method git-fetch)
+                  (uri (git-reference
+                         (url "https://github.com/jakiki6/hyprland-config.git")
+                         (commit
+                           "e89ceb7c27bb7392fe7e9e6848ce36f36ba030c4")))
+                  (sha256
+                    (base32
+                      "14z58pi15rxwdz19mipfwjzaf04s9k7dl7jlhirxdwkfi48pq9mc")))
+               (".oh-my-zsh"
+                ,(origin
+                   (method git-fetch)
+                   (uri (git-reference
+                          (url "https://github.com/ohmyzsh/ohmyzsh.git")
+                          (commit
+                            "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
+                   (sha256
+                     (base32
+                       "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
+               (".zsh/zsh-auto-suggestions"
+                ,(origin
+                   (method git-fetch)
+                   (uri (git-reference
+                          (url "https://github.com/ohmyzsh/ohmyzsh.git")
+                          (commit
+                            "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
+                   (sha256
+                     (base32
+                       "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq")))))))
           (simple-service
             'variant-packages-service
             home-channels-service-type
