@@ -63,12 +63,9 @@
           (specification->package "kdenlive")
           (specification->package "krdc")
           (specification->package "polkit-kde-agent")
-          (specification->package "xdg-desktop-portal-kde")
           (specification->package "xdot")
           (specification->package "yosys")
-          (specification->package "xdg-desktop-portal-gtk")
           (specification->package "wireshark")
-          (specification->package "xdg-desktop-portal-wlr")
           (specification->package "mpd")
           (specification->package "wireplumber")
           (specification->package "zig")
@@ -443,7 +440,7 @@
                            "e89ceb7c27bb7392fe7e9e6848ce36f36ba030c4")))
                   (sha256
                     (base32
-                      "14z58pi15rxwdz19mipfwjzaf04s9k7dl7jlhirxdwkfi48pq9mc")))
+                      "14z58pi15rxwdz19mipfwjzaf04s9k7dl7jlhirxdwkfi48pq9mc"))))
                (".oh-my-zsh"
                 ,(origin
                    (method git-fetch)
@@ -454,16 +451,16 @@
                    (sha256
                      (base32
                        "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
-               (".zsh/zsh-auto-suggestions"
+               (".zsh/zsh-autosuggestions"
                 ,(origin
                    (method git-fetch)
                    (uri (git-reference
-                          (url "https://github.com/ohmyzsh/ohmyzsh.git")
+                          (url "https://github.com/zsh-users/zsh-autosuggestions")
                           (commit
-                            "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
+                            "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
                    (sha256
                      (base32
-                       "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq")))))))
+                       "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))))
           (simple-service
             'variant-packages-service
             home-channels-service-type
