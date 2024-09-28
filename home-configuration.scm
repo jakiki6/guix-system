@@ -437,10 +437,10 @@
                   (uri (git-reference
                          (url "https://github.com/jakiki6/hyprland-config.git")
                          (commit
-                           "e89ceb7c27bb7392fe7e9e6848ce36f36ba030c4")))
+                           "2ed8c6abaca804645150e5715b629758b2b35527")))
                   (sha256
                     (base32
-                      "14z58pi15rxwdz19mipfwjzaf04s9k7dl7jlhirxdwkfi48pq9mc"))))
+                      "0l343az7d62jyn99ljq0wrpv2mac10lmpnslxs12fl93d8v8zs29"))))
                (".oh-my-zsh"
                 ,(origin
                    (method git-fetch)
