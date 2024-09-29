@@ -422,7 +422,8 @@
           (specification->package "verilator")
           (specification->package
             "gcc-cross-riscv64-linux-gnu-toolchain")
-          (specification->package "hipify")))
+          (specification->package "hipify")
+          (list (specification->package "bind") "utils")))
   (services
     (list (service
             home-zsh-service-type
@@ -441,26 +442,26 @@
                   (sha256
                     (base32
                       "0l343az7d62jyn99ljq0wrpv2mac10lmpnslxs12fl93d8v8zs29"))))
-               (".oh-my-zsh"
-                ,(origin
-                   (method git-fetch)
-                   (uri (git-reference
-                          (url "https://github.com/ohmyzsh/ohmyzsh.git")
-                          (commit
-                            "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
-                   (sha256
-                     (base32
-                       "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
-               (".zsh/zsh-autosuggestions"
-                ,(origin
-                   (method git-fetch)
-                   (uri (git-reference
-                          (url "https://github.com/zsh-users/zsh-autosuggestions")
-                          (commit
-                            "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
-                   (sha256
-                     (base32
-                       "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))))
+              (".oh-my-zsh"
+               ,(origin
+                  (method git-fetch)
+                  (uri (git-reference
+                         (url "https://github.com/ohmyzsh/ohmyzsh.git")
+                         (commit
+                           "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
+                  (sha256
+                    (base32
+                      "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
+              (".zsh/zsh-autosuggestions"
+               ,(origin
+                  (method git-fetch)
+                  (uri (git-reference
+                         (url "https://github.com/zsh-users/zsh-autosuggestions")
+                         (commit
+                           "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
+                  (sha256
+                    (base32
+                      "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))))
           (simple-service
             'variant-packages-service
             home-channels-service-type
