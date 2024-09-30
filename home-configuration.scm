@@ -423,7 +423,8 @@
           (specification->package
             "gcc-cross-riscv64-linux-gnu-toolchain")
           (specification->package "hipify")
-          (list (specification->package "bind") "utils")))
+          (list (specification->package "bind") "utils")
+          (specification->package "leopard")))
   (services
     (list (service
             home-zsh-service-type
