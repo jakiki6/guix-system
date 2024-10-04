@@ -218,7 +218,8 @@
                "swaylock"
                "xdg-desktop-portal-hyprland"
                "distrobox"
-               "waydroid"))
+               "waydroid"
+               "konsole"))
         (list (list gtk "bin") (list mesa "bin"))
         (list font-adobe-source-code-pro
               font-adobe-source-han-sans
@@ -412,14 +413,7 @@
     (inherit OS)
     (services
       (append
-        (list (service plasma-desktop-service-type)
-              (set-xorg-configuration
-                (xorg-configuration
-                  (keyboard-layout
-                    (operating-system-keyboard-layout OS))
-                  (extra-config
-                    (list "Section \"Monitor\"\n\tIdentifier\t\"HDMI-A-0\"\n\tOption\t\t\"Position\"\t\"1280 0\"\n\tOption\t\t\"Primary\"\t\"true\"\nEndSection\n\nSection \"Monitor\"\n\tIdentifier\t\"DVI-D-0\"\n\tOption\t\t\"Position\"\t\"0 13\"\nEndSection\n"))))
-              (service gnome-keyring-service-type)
+        (list (service gnome-keyring-service-type)
               (service waydroid-service-type)
               (simple-service
                 'fwupd-dbus
