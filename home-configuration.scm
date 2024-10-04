@@ -438,8 +438,7 @@
                   (method git-fetch)
                   (uri (git-reference
                          (url "https://github.com/jakiki6/hyprland-config.git")
-                         (commit
-                           "2ed8c6abaca804645150e5715b629758b2b35527")))
+                         (commit (gethostname))))
                   (sha256
                     (base32
                       "0l343az7d62jyn99ljq0wrpv2mac10lmpnslxs12fl93d8v8zs29"))))
