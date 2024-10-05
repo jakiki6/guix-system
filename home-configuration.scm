@@ -424,7 +424,8 @@
             "gcc-cross-riscv64-linux-gnu-toolchain")
           (specification->package "hipify")
           (list (specification->package "bind") "utils")
-          (specification->package "leopard")))
+          (specification->package "leopard")
+          (specification->package "ricochet-refresh")))
   (services
     (list (service
             home-zsh-service-type
