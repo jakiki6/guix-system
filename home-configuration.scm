@@ -15,6 +15,11 @@
   (gnu home services guix)
   (gnu home services))
 
+(define %hashes
+  (list
+    (cons "kernelpanicroom" "07c3lrr7q248jy6g5i1nhw2iapi0k03jymy8jim8liy7zxghib87")
+    (cons "dalaptop" "1187xnmf9fjmmmfnn6g46pb19sr4j8x68z5pqdsck2f1smlnqwlb")))
+
 (home-environment
   (packages
     (list (specification->package "dragon-drop")
@@ -438,10 +443,10 @@
                   (method git-fetch)
                   (uri (git-reference
                          (url "https://github.com/jakiki6/hyprland-config.git")
-                         (commit "f0dcb9c74e69ccda07c2b920b2cd032b94931130")))
+                         (commit (gethostname))))
                   (sha256
                     (base32
-                      "0l343az7d62jyn99ljq0wrpv2mac10lmpnslxs12fl93d8v8zs29"))))
+                      (assoc-ref %hashes (gethostname))))))
               (".oh-my-zsh"
                ,(origin
                   (method git-fetch)
