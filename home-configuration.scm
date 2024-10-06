@@ -183,7 +183,6 @@
           (specification->package "cabal-install")
           (specification->package "udftools")
           (specification->package "clang")
-          (specification->package "llvm")
           (specification->package "mympd")
           (specification->package "vlang")
           (specification->package "lld")
@@ -439,7 +438,7 @@
                   (method git-fetch)
                   (uri (git-reference
                          (url "https://github.com/jakiki6/hyprland-config.git")
-                         (commit (gethostname))))
+                         (commit "f0dcb9c74e69ccda07c2b920b2cd032b94931130")))
                   (sha256
                     (base32
                       "0l343az7d62jyn99ljq0wrpv2mac10lmpnslxs12fl93d8v8zs29"))))
