@@ -335,6 +335,7 @@
                     (file-append glibc "/lib/ld-linux-x86-64.so.2"))
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
+                  (service wine-binfmt-service-type)
                   (service
                     qemu-binfmt-service-type
                     (qemu-binfmt-configuration
