@@ -429,7 +429,8 @@
           (specification->package "hipify")
           (list (specification->package "bind") "utils")
           (specification->package "leopard")
-          (specification->package "ricochet-refresh")))
+          (specification->package "ricochet-refresh")
+          (specification->package "openscad")))
   (services
     (list (service
             home-zsh-service-type
