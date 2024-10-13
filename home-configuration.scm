@@ -13,7 +13,8 @@
   (guix git-download)
   (gnu home services shells)
   (gnu home services guix)
-  (gnu home services))
+  (gnu home services)
+  (laura home services wine))
 
 (define %hashes
   (list
@@ -436,6 +437,8 @@
             home-zsh-service-type
             (home-zsh-configuration
               (zshrc (list (local-file "./files/zshrc" "zshrc")))))
+          (service
+            home-wineserver-service-type)
           (simple-service
             'config-service
             home-files-service-type
