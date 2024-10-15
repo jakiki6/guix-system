@@ -194,6 +194,7 @@
           (specification->package "lld")
           (specification->package "mtools")
           (specification->package "python-next")
+          (list (specification->package "python-next") "tk")
           (specification->package "python-pystache")
           (specification->package "testdisk")
           (specification->package "pkgconf")
