@@ -24,7 +24,7 @@
          (branch "master"))
        (channel
          (name 'guix-science)
-         (url "https://github.com/guix-science/guix-science.git")
+         (url "https://codeberg.org/guix-science/guix-science")
          (introduction
            (make-channel-introduction
              "b1fe5aaff3ab48e798a4cce02f0212bc91f423dc"
