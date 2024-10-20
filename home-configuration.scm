@@ -17,6 +17,8 @@
   (laura home services wine)
   (laura home services audio))
 
+(include "src/secrets.scm")
+
 (define %hashes
   (list
     (cons "kernelpanicroom" "07c3lrr7q248jy6g5i1nhw2iapi0k03jymy8jim8liy7zxghib87")
@@ -71,7 +73,7 @@
           (specification->package "krdc")
           (specification->package "polkit-kde-agent")
           (specification->package "xdot")
-;          (specification->package "yosys")
+          (specification->package "yosys")
           (specification->package "wireshark")
           (specification->package "mpd")
           (specification->package "wireplumber")
@@ -434,7 +436,8 @@
           (specification->package "leopard")
           (specification->package "ricochet-refresh")
           (specification->package "openscad")
-          (specification->package "yt-dlp")))
+          (specification->package "yt-dlp")
+          (specification->package "mutt")))
   (services
     (list (service
             home-zsh-service-type
@@ -475,7 +478,9 @@
                            "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
                   (sha256
                     (base32
-                      "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))))
+                      "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))
+              (".mutt/muttrc"
+               ,(plain-file "muttrc" secret-muttrc))))
           (simple-service
             'variant-packages-service
             home-channels-service-type
