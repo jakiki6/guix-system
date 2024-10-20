@@ -14,7 +14,8 @@
   (gnu home services shells)
   (gnu home services guix)
   (gnu home services)
-  (laura home services wine))
+  (laura home services wine)
+  (laura home services audio))
 
 (define %hashes
   (list
@@ -70,7 +71,7 @@
           (specification->package "krdc")
           (specification->package "polkit-kde-agent")
           (specification->package "xdot")
-          (specification->package "yosys")
+;          (specification->package "yosys")
           (specification->package "wireshark")
           (specification->package "mpd")
           (specification->package "wireplumber")
@@ -441,6 +442,8 @@
               (zshrc (list (local-file "./files/zshrc" "zshrc")))))
           (service
             home-wineserver-service-type)
+          (service
+            home-pulseaudio-service-type)
           (simple-service
             'config-service
             home-files-service-type
