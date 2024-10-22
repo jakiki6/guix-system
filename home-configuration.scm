@@ -437,7 +437,8 @@
           (specification->package "ricochet-refresh")
           (specification->package "openscad")
           (specification->package "yt-dlp")
-          (specification->package "mutt")))
+          (specification->package "mutt")
+          (specification->package "git-repo")))
   (services
     (list (service
             home-zsh-service-type

@@ -200,11 +200,7 @@
               python3-as-python
               fwupd-patched)
         (operating-system-packages OS)))
-    (name-service-switch %mdns-host-lookup-nss)
-    (skeletons
-      (append
-        `((".zshrc" ,(local-file "../files/zshrc")))
-        (operating-system-skeletons OS)))))
+    (name-service-switch %mdns-host-lookup-nss)))
 
 (define (add-desktop-packages OS)
   (operating-system
