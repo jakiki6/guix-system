@@ -86,6 +86,7 @@
   (gnu packages check)
   (gnu packages man)
   (gnu packages gettext)
+  (gnu packages texinfo)
   (laura services utils)
   (gnu system setuid)
   (gnu system image)
@@ -211,8 +212,6 @@
              '("mesa"
                "mesa-utils"
                "hyprland"
-               "swaylock"
-               "xdg-desktop-portal-hyprland"
                "distrobox"
                "waydroid"
                "konsole"))

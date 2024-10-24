@@ -3,15 +3,23 @@
     (inherit shepherd-0.10)
     (source
       (origin
-        (method
-          (origin-method (package-source shepherd-0.10)))
-        (uri (origin-uri (package-source shepherd-0.10)))
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://git.savannah.gnu.org/git/shepherd.git")
+               (commit "6ad9aab13ab36d33624ec34b9952acadac19672e")))
         (sha256
           (base32
-            "0k40n9qm5r5rqf94isa1857ghd4329zc5rjf3ll2572gpiw3ij4x"))
+            "08gddq3ss2dniw0cgfbsydhmvbm78xfna083jdjrs88wxyzdvmrz"))
         (patches
           (list (local-file
-                  "../patches/shepherd-reboot-kexec.patch")))))))
+                  "../patches/shepherd-reboot-kexec.patch")))))
+    (native-inputs (append (package-native-inputs shepherd-0.10) (list
+      `("autoconf" ,autoconf)
+      `("gettext-minimal" ,gettext-minimal)
+      `("automake" ,automake)
+      `("help2man" ,help2man)
+      `("textinfo" ,texinfo-7)
+)))))
 
 (define-public fwupd-patched
   (package
