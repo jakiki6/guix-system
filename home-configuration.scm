@@ -438,7 +438,8 @@
           (specification->package "openscad")
           (specification->package "yt-dlp")
           (specification->package "mutt")
-          (specification->package "git-repo")))
+          (specification->package "git-repo")
+          (specification->package "libusb")))
   (services
     (list (service
             home-zsh-service-type

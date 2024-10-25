@@ -13,13 +13,12 @@
         (patches
           (list (local-file
                   "../patches/shepherd-reboot-kexec.patch")))))
-    (native-inputs (append (package-native-inputs shepherd-0.10) (list
-      `("autoconf" ,autoconf)
-      `("gettext-minimal" ,gettext-minimal)
-      `("automake" ,automake)
-      `("help2man" ,help2man)
-      `("textinfo" ,texinfo-7)
-)))))
+    (native-inputs (modify-inputs (package-native-inputs shepherd-0.10)
+                     (prepend autoconf)
+                     (prepend gettext-minimal)
+                     (prepend automake)
+                     (prepend help2man)
+                     (prepend texinfo-7)))))
 
 (define-public fwupd-patched
   (package
