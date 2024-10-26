@@ -21,8 +21,8 @@
 
 (define %hashes
   (list
-    (list "kernelpanicroom" "0942c6119806e47939fa0238bbe5d9216ddf1673" "1a6ml38w2435mb8wq6j4aqgk4s8j9rzxdx7g3xq3l3ckahsyyydc")
-    (list "dalaptop" "3f13300a817e98d7bbb138be8cad6dcfd5d5f016" "16i78xnzpds8zx21hwd34909hm2fvpfys4l1y8vvgsmknys8sa7l")))
+    (list "kernelpanicroom" "fc2c972683d3ac2af88263cac9033dc888b8a930" "1kj7cf1b1yzs1csj7qwhfh5iz79as3kgfvgr24fjm11v69870r72")
+    (list "dalaptop" "1fd8fda5b8a580fbc870aa891445d6e95f4c6fea" "109qvplml3r19z75lg4zgpks21f4sb99j25zz77ss8pacz9ck93h")))
 
 (home-environment
   (packages
@@ -439,7 +439,9 @@
           (specification->package "yt-dlp")
           (specification->package "mutt")
           (specification->package "git-repo")
-          (specification->package "libusb")))
+          (specification->package "libusb")
+          (specification->package "alacritty")
+          (specification->package "qtwayland")))
   (services
     (list (service
             home-zsh-service-type
