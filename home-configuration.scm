@@ -11,6 +11,9 @@
   (guix channels)
   (guix packages)
   (guix git-download)
+  (guix download)
+  (guix build-system copy)
+  ((guix licenses) #:prefix license:)
   (gnu home services shells)
   (gnu home services guix)
   (gnu home services)
@@ -21,8 +24,25 @@
 
 (define %hashes
   (list
-    (list "kernelpanicroom" "fc2c972683d3ac2af88263cac9033dc888b8a930" "1kj7cf1b1yzs1csj7qwhfh5iz79as3kgfvgr24fjm11v69870r72")
-    (list "dalaptop" "1fd8fda5b8a580fbc870aa891445d6e95f4c6fea" "109qvplml3r19z75lg4zgpks21f4sb99j25zz77ss8pacz9ck93h")))
+    (list "kernelpanicroom" "aa3c1b019a5cd1ae1fc96c6dbc60955551d2dd97" "15465x47ld92nfr8g98mv6zsacj5lkz5732l4cj9c5wwxvk84jiq")
+    (list "dalaptop" "54e1ab65ccedac3bed74a5c4c921d177fce2d0ec" "1gd08hxsj1lxancyf1hszzgqc434nvjygcmvgcad2dg6aywpkkcz")))
+
+(define breezex-cursor
+  (package
+    (name "breezex-cursor")
+    (version "2.0.1")
+    (source
+      (origin
+        (method url-fetch)
+          (uri "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Dark.tar.xz")
+          (sha256
+            (base32
+              "0lxnam952dv4qly0v3a5g0bxj0jcxx4dv47jwmgmdwdhcqs79pwc"))))
+    (build-system copy-build-system)
+    (home-page "https://github.com/ful1e5/BreezeX_Cursor")
+    (synopsis "")
+    (description "")
+    (license license:gpl3)))
 
 (home-environment
   (packages
@@ -484,7 +504,8 @@
                     (base32
                       "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))
               (".mutt/muttrc"
-               ,(plain-file "muttrc" secret-muttrc))))
+               ,(plain-file "muttrc" secret-muttrc))
+              (".icons/BreezeX" ,breezex-cursor)))
           (simple-service
             'variant-packages-service
             home-channels-service-type
