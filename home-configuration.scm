@@ -305,7 +305,7 @@
           (specification->package "mkp224o")
           (specification->package "netcat")
           (specification->package "par2cmdline")
-          (specification->package "unrar")
+          (specification->package "unrar-free")
           (specification->package "minetest-mineclone")
           (specification->package "iucode-tool")
           (specification->package "gperf")
