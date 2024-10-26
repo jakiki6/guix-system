@@ -21,8 +21,8 @@
 
 (define %hashes
   (list
-    (cons "kernelpanicroom" "07c3lrr7q248jy6g5i1nhw2iapi0k03jymy8jim8liy7zxghib87")
-    (cons "dalaptop" "1187xnmf9fjmmmfnn6g46pb19sr4j8x68z5pqdsck2f1smlnqwlb")))
+    (list "kernelpanicroom" "0942c6119806e47939fa0238bbe5d9216ddf1673" "1a6ml38w2435mb8wq6j4aqgk4s8j9rzxdx7g3xq3l3ckahsyyydc")
+    (list "dalaptop" "3f13300a817e98d7bbb138be8cad6dcfd5d5f016" "16i78xnzpds8zx21hwd34909hm2fvpfys4l1y8vvgsmknys8sa7l")))
 
 (home-environment
   (packages
@@ -457,10 +457,10 @@
                   (method git-fetch)
                   (uri (git-reference
                          (url "https://github.com/jakiki6/hyprland-config.git")
-                         (commit (gethostname))))
+                         (commit (car (assoc-ref %hashes (gethostname))))))
                   (sha256
                     (base32
-                      (assoc-ref %hashes (gethostname))))))
+                      (cadr (assoc-ref %hashes (gethostname)))))))
               (".oh-my-zsh"
                ,(origin
                   (method git-fetch)
