@@ -18,15 +18,14 @@
   (gnu home services guix)
   (gnu home services)
   (laura home services wine)
-  (laura home services audio)
-  (laura home services kde))
+  (laura home services audio))
 
 (include "src/secrets.scm")
 
 (define %hashes
   (list
-    (list "kernelpanicroom" "aa3c1b019a5cd1ae1fc96c6dbc60955551d2dd97" "15465x47ld92nfr8g98mv6zsacj5lkz5732l4cj9c5wwxvk84jiq")
-    (list "dalaptop" "54e1ab65ccedac3bed74a5c4c921d177fce2d0ec" "1gd08hxsj1lxancyf1hszzgqc434nvjygcmvgcad2dg6aywpkkcz")))
+    (list "kernelpanicroom" "9ed57baa1135434da47e36a4e777990db68e68b4" "0d1ngisqz94cxl08jzq24nxc53lps5ic8635g4dflv6b71vzgs50")
+    (list "dalaptop" "aca8d79da0c6b2a51c2db50436b44f39f24217cc" "0rlrc13ln360g6whbcpn7bw2jpvlpqli93p9wziv0gvasb9pw4q3")))
 
 (define breezex-cursor
   (package
@@ -475,8 +474,6 @@
             home-wineserver-service-type)
           (service
             home-pulseaudio-service-type)
-          (service
-            home-kdeconnectd-service-type)
           (simple-service
             'config-service
             home-files-service-type
