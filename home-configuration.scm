@@ -18,7 +18,8 @@
   (gnu home services guix)
   (gnu home services)
   (laura home services wine)
-  (laura home services audio))
+  (laura home services audio)
+  (laura home services kde))
 
 (include "src/secrets.scm")
 
@@ -461,7 +462,10 @@
           (specification->package "git-repo")
           (specification->package "libusb")
           (specification->package "alacritty")
-          (specification->package "qtwayland")))
+          (specification->package "qtwayland")
+          (specification->package "kdeconnect")
+          (specification->package "libfive")
+          (specification->package "wl-screenrec")))
   (services
     (list (service
             home-zsh-service-type
@@ -471,6 +475,8 @@
             home-wineserver-service-type)
           (service
             home-pulseaudio-service-type)
+          (service
+            home-kdeconnectd-service-type)
           (simple-service
             'config-service
             home-files-service-type
