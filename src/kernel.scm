@@ -69,7 +69,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.9.1-zen1")
+    (version "6.11.5-zen1")
     (source
       (origin
         (method git-fetch)
@@ -82,7 +82,7 @@
                   "../patches/linux-max-cipher-blocksize.patch")))
         (sha256
           (base32
-            "1a6jqi474kf3353nx927wj5yqx6pcr3nz9qzrpb1vlrq9mwr7jls"))))
+            "1w342k54ns6rwkk13l9f7h0qzikn6hbnb2ydxyqalrmll8n2g237"))))
     (native-inputs
       (modify-inputs
         (package-native-inputs linux)

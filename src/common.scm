@@ -359,6 +359,7 @@
                 (list "https://substitutes.nonguix.org"
                       "https://guix.bordeaux.inria.fr")
                 %default-substitute-urls))
+            (discover? #t)
             (authorized-keys
               (append
                 (list (plain-file
