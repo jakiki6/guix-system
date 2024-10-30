@@ -360,6 +360,7 @@
                       "https://guix.bordeaux.inria.fr")
                 %default-substitute-urls))
             (discover? #t)
+            (extra-options '("--gc-keep-derivations=yes" "--gc-keep-outputs=yes" "--cores=6"))
             (authorized-keys
               (append
                 (list (plain-file
