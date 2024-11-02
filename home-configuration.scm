@@ -464,7 +464,9 @@
           (specification->package "qtwayland")
           (specification->package "kdeconnect")
           (specification->package "libfive")
-          (specification->package "wl-screenrec")))
+          (specification->package "wl-screenrec")
+          (specification->package "kate")
+          (specification->package "okular")))
   (services
     (list (service
             home-zsh-service-type
