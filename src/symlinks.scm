@@ -105,7 +105,7 @@
             (symlink
               (string-append shepherd "/sbin/shutdown")
               "poweroff")))))
-    (inputs (list kexec-shepherd))
+    (inputs (list (specification->package "shepherd")))
     (synopsis "Symlink poweroff to shutdown")
     (description
       "Make poweroff a symlink to shutdown.")

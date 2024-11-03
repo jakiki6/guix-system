@@ -1,25 +1,3 @@
-(define kexec-shepherd
-  (package
-    (inherit shepherd-0.10)
-    (source
-      (origin
-        (method git-fetch)
-        (uri (git-reference
-               (url "https://git.savannah.gnu.org/git/shepherd.git")
-               (commit "6ad9aab13ab36d33624ec34b9952acadac19672e")))
-        (sha256
-          (base32
-            "08gddq3ss2dniw0cgfbsydhmvbm78xfna083jdjrs88wxyzdvmrz"))
-        (patches
-          (list (local-file
-                  "../patches/shepherd-reboot-kexec.patch")))))
-    (native-inputs (modify-inputs (package-native-inputs shepherd-0.10)
-                     (prepend autoconf)
-                     (prepend gettext-minimal)
-                     (prepend automake)
-                     (prepend help2man)
-                     (prepend texinfo-7)))))
-
 (define-public fwupd-patched
   (package
     (name "fwupd")

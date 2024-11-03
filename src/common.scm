@@ -404,7 +404,7 @@
           =>
           (shepherd-configuration
             (inherit config)
-            (shepherd kexec-shepherd)))))))
+            (shepherd (specification->package "shepherd"))))))))
 
 (define (add-desktop-services OS)
   (operating-system
