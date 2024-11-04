@@ -24,8 +24,8 @@
 
 (define %hashes
   (list
-    (list "kernelpanicroom" "9ed57baa1135434da47e36a4e777990db68e68b4" "0d1ngisqz94cxl08jzq24nxc53lps5ic8635g4dflv6b71vzgs50")
-    (list "dalaptop" "aca8d79da0c6b2a51c2db50436b44f39f24217cc" "0rlrc13ln360g6whbcpn7bw2jpvlpqli93p9wziv0gvasb9pw4q3")))
+    (list "kernelpanicroom" "f521c216dbcf64a5d1a33cb67660fe72e19104d8" "0p95d2w93408xra8m4wwxv7mgla9ps1v49y1x4rsycidqvb2srxk")
+    (list "dalaptop" "c9e193dd66ad335bf299223ad34cf83dd269a2b1" "10wgihncd214v91rijhsvnh6ik4y8dv4jklgcd6j43l5asskfnxd")))
 
 (define breezex-cursor
   (package
