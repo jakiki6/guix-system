@@ -24,8 +24,8 @@
 
 (define %hashes
   (list
-    (list "kernelpanicroom" "f521c216dbcf64a5d1a33cb67660fe72e19104d8" "0p95d2w93408xra8m4wwxv7mgla9ps1v49y1x4rsycidqvb2srxk")
-    (list "dalaptop" "c9e193dd66ad335bf299223ad34cf83dd269a2b1" "10wgihncd214v91rijhsvnh6ik4y8dv4jklgcd6j43l5asskfnxd")))
+    (list "kernelpanicroom" "cb12548acda76686025d5153a995dd411ea6c2c6" "1bdvk7w0944irpbj0pv8xyx58ha7pfzlxcgbixj226sk5jn8p0jr")
+    (list "dalaptop" "dd86bc6db8bb14af86a77df535d1e87d524c94b1" "0pwl94wpiymgv6g8b685xjsri1i8szkmmhyq342b6nyns7b17y7d")))
 
 (define breezex-cursor
   (package
@@ -443,7 +443,7 @@
           (specification->package "font-liberation")
           (specification->package "fatfsck-static")
           (specification->package "gtkwave")
-          (specification->package "diffoscope")
+;          (specification->package "diffoscope")
           (specification->package "wasmtime")
           (specification->package "perl-io-socket-ssl")
           (specification->package "perl-mime-base64")
