@@ -291,7 +291,8 @@
       (cons (setuid-program
               (program
                 (file-append cifs-utils "/sbin/mount.cifs")))
-            (operating-system-setuid-programs OS)))))
+            (operating-system-setuid-programs OS)))
+    (skeletons (cons `("home.scm" ,(local-file "../home-configuration.scm")) (operating-system-skeletons OS)))))
 
 (define (add-base-services OS)
   (operating-system
