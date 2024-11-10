@@ -16,6 +16,7 @@
   ((guix licenses) #:prefix license:)
   (gnu home services shells)
   (gnu home services guix)
+  (gnu home services shepherd)
   (gnu home services)
   (laura home services wine)
   (laura home services audio))
@@ -476,6 +477,9 @@
             home-wineserver-service-type)
           (service
             home-pulseaudio-service-type)
+          (service home-shepherd-service-type
+            (home-shepherd-configuration
+              (shepherd (specification->package "shepherd"))))
           (simple-service
             'config-service
             home-files-service-type
@@ -546,4 +550,13 @@
                          "b1fe5aaff3ab48e798a4cce02f0212bc91f423dc"
                          (openpgp-fingerprint
                            "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
+                   (channel
+                     (name 'shepherd)
+                     (url "https://git.savannah.gnu.org/git/shepherd.git")
+                     (branch "main")
+                     (introduction
+                      (make-channel-introduction
+                       "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
+                       (openpgp-fingerprint
+                        "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
                    %default-channels)))))
