@@ -139,7 +139,6 @@
           (specification->package "x11vnc")
           (specification->package "winetricks")
           (specification->package "libxfce4ui")
-          (specification->package "mpv")
           (specification->package "flatpak")
           (specification->package "gparted")
           (specification->package "cantata")
@@ -467,7 +466,9 @@
           (specification->package "libfive")
           (specification->package "wl-screenrec")
           (specification->package "kate")
-          (specification->package "okular")))
+          (specification->package "okular")
+          (specification->package "mpv")
+          (specification->package "CasioEmu")))
   (services
     (list (service
             home-zsh-service-type
