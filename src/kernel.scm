@@ -69,7 +69,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.11.5-zen1")
+    (version "6.11.8-zen1")
     (source
       (origin
         (method git-fetch)
@@ -82,7 +82,7 @@
                   "../patches/linux-max-cipher-blocksize.patch")))
         (sha256
           (base32
-            "1w342k54ns6rwkk13l9f7h0qzikn6hbnb2ydxyqalrmll8n2g237"))))
+            "08fghj8hvbgr5imk2hhl2iadz4w3agxznzh21772hpmsljjr1rhq"))))
     (native-inputs
       (modify-inputs
         (package-native-inputs linux)
@@ -99,6 +99,7 @@
                    (lambda _
                      (setenv "LLVM" "1")
                      (setenv "LLVM_IAS" "1")
+                     (setenv "KCFLAGS" "-O3 -march=skylake -pipe")
                      (let ((port (open-file ".config" "a"))
                            (extra-configuration
                              (ungexp

@@ -394,7 +394,9 @@
               (append
                 '(("net.ipv4.ip_forward" . "1")
                   ("kernel.dmesg_restrict" . "0")
-                  ("kernel.unprivileged_userns_clone" . "1"))
+                  ("kernel.unprivileged_userns_clone" . "1")
+                  ("vm.vfs_cache_pressure" . "10")
+                  ("net.ipv4.tcp_mtu_probing" . "1"))
                 %default-sysctl-settings))))))
     (essential-services
       (modify-services
