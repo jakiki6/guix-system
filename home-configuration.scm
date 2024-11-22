@@ -468,7 +468,8 @@
           (specification->package "kate")
           (specification->package "okular")
           (specification->package "mpv")
-          (specification->package "CasioEmu")))
+          (specification->package "CasioEmu")
+          (specification->package "shepherd-run")))
   (services
     (list (service
             home-zsh-service-type
