@@ -40,6 +40,8 @@ else
     fi  
 fi
 
+export PATH=/run/privileged/bin:$PATH
+
 alias primetime='watch -t -n 1 "factor \$(date +%s)"'
 alias xmlfmt="xmllint --format -"
 export LLVM_COMPILER=clang
