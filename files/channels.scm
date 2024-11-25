@@ -8,13 +8,8 @@
                "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
        (channel
          (name 'rosenthal)
-         (url "https://codeberg.org/hako/rosenthal.git")
-         (branch "trunk")
-         (introduction
-           (make-channel-introduction
-             "7677db76330121a901604dfbad19077893865f35"
-             (openpgp-fingerprint
-               "13E7 6CD6 E649 C28C 3385  4DF5 5E5A A665 6149 17F7"))))
+         (url "https://codeberg.org/laura240406/rosenthal.git")
+         (branch "trunk"))
        (channel
          (name 'lauras-channel)
          (url "https://github.com/jakiki6/lauras-channel"))
@@ -32,11 +27,11 @@
                "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
        (channel
          (name 'shepherd)
-         (url "https://git.savannah.gnu.org/git/shepherd.git"
-              (branch "main")
-              (introduction
-                (make-channel-introduction
-                  "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
-                  (openpgp-fingerprint
-                    "3CE464558A84FDC69DB40CFB090B11993D9AEBB5")))))
+         (url "https://git.savannah.gnu.org/git/shepherd.git")
+         (branch "main")
+           (introduction
+              (make-channel-introduction
+                "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
+                (openpgp-fingerprint
+                  "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
        %default-channels)
