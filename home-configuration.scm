@@ -473,7 +473,8 @@
           (specification->package "okular")
           (specification->package "mpv")
           (specification->package "CasioEmu")
-          (specification->package "shepherd-run")))
+          (specification->package "shepherd-run")
+          (specification->package "flatpak-builder")))
   (services
     (list (service
             home-zsh-service-type
