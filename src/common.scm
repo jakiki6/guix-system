@@ -292,7 +292,10 @@
               (program
                 (file-append cifs-utils "/sbin/mount.cifs")))
             (operating-system-setuid-programs OS)))
-    (skeletons (cons `("home.scm" ,(local-file "../home-configuration.scm")) (operating-system-skeletons OS)))))
+    (skeletons
+      (cons `("home.scm"
+              ,(local-file "../home-configuration.scm"))
+            (operating-system-skeletons OS)))))
 
 (define (add-base-services OS)
   (operating-system
@@ -331,6 +334,11 @@
                     (file-append glibc "/lib/ld-linux-x86-64.so.2"))
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
+                  (udev-rules-service
+                    'picotool
+                    (udev-rule
+                      "99-picotool.rules"
+                      "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"0003\", TAG+=\"uaccess\" MODE=\"660\", GROUP=\"plugdev\"\nSUBSYSTEM==\"usb\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"0009\", TAG+=\"uaccess\" MODE=\"660\", GROUP=\"plugdev\"\nSUBSYSTEM==\"usb\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"000a\", TAG+=\"uaccess\" MODE=\"660\", GROUP=\"plugdev\"\nSUBSYSTEM==\"usb\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"000f\", TAG+=\"uaccess\" MODE=\"660\", GROUP=\"plugdev\""))
                   (service wine-binfmt-service-type)
                   (service
                     qemu-binfmt-service-type
@@ -361,7 +369,10 @@
                       "https://guix.bordeaux.inria.fr")
                 %default-substitute-urls))
             (discover? #t)
-            (extra-options '("--gc-keep-derivations=yes" "--gc-keep-outputs=yes" "--cores=6"))
+            (extra-options
+              '("--gc-keep-derivations=yes"
+                "--gc-keep-outputs=yes"
+                "--cores=6"))
             (authorized-keys
               (append
                 (list (plain-file

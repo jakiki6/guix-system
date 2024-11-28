@@ -24,13 +24,12 @@
 (include "src/secrets.scm")
 
 (define %hashes
-  (list
-
-; insert here
-(list "kernelpanicroom" "1350b2a6e55cb1ffd4192e13fb1f18d89040aafd" "02kds6igmybnclx9rdwxld1k4ys5mplm7x4xxi410ckch0a3h46v")
-(list "dalaptop" "e8ad9682bb5f0e50883eb1573e6686f40a4b26a2" "1wfzrkz7bh0prgwx3kixwvryy873h9fl301b09wrf33n7ky63wmf")
-
-))
+  (list (list "kernelpanicroom"
+              "1350b2a6e55cb1ffd4192e13fb1f18d89040aafd"
+              "02kds6igmybnclx9rdwxld1k4ys5mplm7x4xxi410ckch0a3h46v")
+        (list "dalaptop"
+              "e8ad9682bb5f0e50883eb1573e6686f40a4b26a2"
+              "1wfzrkz7bh0prgwx3kixwvryy873h9fl301b09wrf33n7ky63wmf")))
 
 (define breezex-cursor
   (package
@@ -39,12 +38,13 @@
     (source
       (origin
         (method url-fetch)
-          (uri "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Dark.tar.xz")
-          (sha256
-            (base32
-              "0lxnam952dv4qly0v3a5g0bxj0jcxx4dv47jwmgmdwdhcqs79pwc"))))
+        (uri "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Dark.tar.xz")
+        (sha256
+          (base32
+            "0lxnam952dv4qly0v3a5g0bxj0jcxx4dv47jwmgmdwdhcqs79pwc"))))
     (build-system copy-build-system)
-    (home-page "https://github.com/ful1e5/BreezeX_Cursor")
+    (home-page
+      "https://github.com/ful1e5/BreezeX_Cursor")
     (synopsis "")
     (description "")
     (license license:gpl3)))
@@ -221,7 +221,8 @@
           (specification->package "lld")
           (specification->package "mtools")
           (specification->package "python-next")
-          (list (specification->package "python-next") "tk")
+          (list (specification->package "python-next")
+                "tk")
           (specification->package "python-pystache")
           (specification->package "testdisk")
           (specification->package "pkgconf")
@@ -447,7 +448,6 @@
           (specification->package "font-liberation")
           (specification->package "fatfsck-static")
           (specification->package "gtkwave")
-;          (specification->package "diffoscope")
           (specification->package "wasmtime")
           (specification->package "perl-io-socket-ssl")
           (specification->package "perl-mime-base64")
@@ -480,11 +480,10 @@
             home-zsh-service-type
             (home-zsh-configuration
               (zshrc (list (local-file "./files/zshrc" "zshrc")))))
+          (service home-wineserver-service-type)
+          (service home-pulseaudio-service-type)
           (service
-            home-wineserver-service-type)
-          (service
-            home-pulseaudio-service-type)
-          (service home-shepherd-service-type
+            home-shepherd-service-type
             (home-shepherd-configuration
               (shepherd (specification->package "shepherd"))))
           (simple-service
@@ -497,8 +496,7 @@
                          (url "https://github.com/jakiki6/hyprland-config.git")
                          (commit (car (assoc-ref %hashes (gethostname))))))
                   (sha256
-                    (base32
-                      (cadr (assoc-ref %hashes (gethostname)))))))
+                    (base32 (cadr (assoc-ref %hashes (gethostname)))))))
               (".oh-my-zsh"
                ,(origin
                   (method git-fetch)
@@ -557,8 +555,8 @@
                      (url "https://git.savannah.gnu.org/git/shepherd.git")
                      (branch "main")
                      (introduction
-                      (make-channel-introduction
-                       "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
-                       (openpgp-fingerprint
-                        "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
+                       (make-channel-introduction
+                         "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
+                         (openpgp-fingerprint
+                           "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
                    %default-channels)))))

@@ -29,9 +29,9 @@
          (name 'shepherd)
          (url "https://git.savannah.gnu.org/git/shepherd.git")
          (branch "main")
-           (introduction
-              (make-channel-introduction
-                "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
-                (openpgp-fingerprint
-                  "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
+         (introduction
+           (make-channel-introduction
+             "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
+             (openpgp-fingerprint
+               "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
        %default-channels)
