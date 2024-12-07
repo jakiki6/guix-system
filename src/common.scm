@@ -161,12 +161,15 @@
                         "kvm"
                         "dialout"
                         "adbusers"
-                        "docker"))
+                        "docker"
+                        "plugdev"))
                     (shell (file-append zsh "/bin/zsh"))
                     (password (crypt secret-password "laura")))
                   (operating-system-users OS)))
     (groups
-      (cons* (user-group (name "adbusers"))
+      (append (list
+                (user-group (name "adbusers"))
+                (user-group (name "plugdev")))
              (operating-system-groups OS)))
     (sudoers-file
       (plain-file
