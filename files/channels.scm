@@ -36,11 +36,5 @@
                "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
        (channel
         (name 'efraim-dfsg)
-        (url "https://git.sr.ht/~efraim/my-guix")
-        ;; Enable signature verification:
-        (introduction
-         (make-channel-introduction
-          "4589296d61888fa88de331d5e180713c6a268c6f"
-          (openpgp-fingerprint
-           "A28B F40C 3E55 1372 662D  14F7 41AA E7DC CA3D 8351"))))
+        (url "https://git.sr.ht/~efraim/my-guix"))
        %default-channels)
