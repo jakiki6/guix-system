@@ -48,3 +48,4 @@ export LLVM_COMPILER=clang
 export MPLBACKEND=qtagg
 export CC=clang
 export IPFS_PATH=/ipfs_data
+export XDG_DATA_DIRS=$XDG_DATA_DIRS:~/.local/share/flatpak/exports/share

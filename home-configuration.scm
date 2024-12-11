@@ -476,7 +476,8 @@
           (specification->package "shepherd-run")
           (specification->package "flatpak-builder")
           (specification->package "diffoscope")
-          (specification->package "git-lfs")))
+          (specification->package "git-lfs")
+          (specification->package "bkcrack")))
   (services
     (list (service
             home-zsh-service-type
