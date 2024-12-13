@@ -32,10 +32,9 @@
               "19qabkiqcv0rhgpd9kkys6404ra5z3n7607igy64k4a84gqp06f9")))
 
 (define %flags
-  (list (list "kernelpanicroom"
-              (list "base" "opt" "graphic"))
-        (list "dalaptop" (list "base" "graphic"))
-        (list "s-laura" (list "base" "graphic"))))
+  (list (list "kernelpanicroom" 'base 'opt 'graphic)
+        (list "dalaptop" 'base 'graphic)
+        (list "s-laura" 'base)))
 
 (define breezex-cursor
   (package
@@ -58,7 +57,7 @@
 (home-environment
   (packages
     (append
-      (if (memq "base" (assoc-ref %flags (gethostname)))
+      (if (memq 'base (assoc-ref %flags (gethostname)))
         (list (specification->package "mumi")
               (specification->package "sbctl")
               (specification->package "rocm-toolchain")
@@ -252,8 +251,9 @@
               (specification->package "mutt")
               (specification->package "shepherd-run")
               (specification->package "diffoscope")
-              (specification->package "git-lfs")))
-      (if (memq "opt" (assoc-ref %flags (gethostname)))
+              (specification->package "git-lfs"))
+        '())
+      (if (memq 'opt (assoc-ref %flags (gethostname)))
         (list (specification->package "haunt")
               (list (specification->package "guile") "debug")
               (specification->package "dotnet")
@@ -326,14 +326,13 @@
               (specification->package "libmpdclient")
               (specification->package "dtc")
               (specification->package "wasmtime")
-              (specification->package
-                "gcc-cross-riscv64-linux-gnu-toolchain")
               (specification->package "hipify")
               (specification->package "leopard")
               (specification->package "ricochet-refresh")
               (specification->package "git-repo")
-              (specification->package "bkcrack")))
-      (if (memq "graphic" (assoc-ref %flags (gethostname)))
+              (specification->package "bkcrack"))
+        '())
+      (if (memq 'graphic (assoc-ref %flags (gethostname)))
         (list (specification->package "dragon-drop")
               (specification->package "calibre")
               (specification->package "dino")
@@ -458,7 +457,8 @@
               (specification->package "okular")
               (specification->package "mpv")
               (specification->package "CasioEmu")
-              (specification->package "flatpak-builder")))))
+              (specification->package "flatpak-builder"))
+        '())))
   (services
     (list (service
             home-zsh-service-type
