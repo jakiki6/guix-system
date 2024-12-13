@@ -167,10 +167,10 @@
                     (password (crypt secret-password "laura")))
                   (operating-system-users OS)))
     (groups
-      (append (list
-                (user-group (name "adbusers"))
-                (user-group (name "plugdev")))
-             (operating-system-groups OS)))
+      (append
+        (list (user-group (name "adbusers"))
+              (user-group (name "plugdev")))
+        (operating-system-groups OS)))
     (sudoers-file
       (plain-file
         "sudoers"

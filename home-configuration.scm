@@ -25,11 +25,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "1350b2a6e55cb1ffd4192e13fb1f18d89040aafd"
-              "02kds6igmybnclx9rdwxld1k4ys5mplm7x4xxi410ckch0a3h46v")
+              "542be2502796fb318f06765ae6b7b31a5ef01c24"
+              "08lf50cmfligjh1a5jn1vvbljl2pvq0adax8g28fqmxz4fhgixjv")
         (list "dalaptop"
-              "e8ad9682bb5f0e50883eb1573e6686f40a4b26a2"
-              "1wfzrkz7bh0prgwx3kixwvryy873h9fl301b09wrf33n7ky63wmf")))
+              "cf9dcadb4220fbada4f63d6908363c9b6c3a63be"
+              "19qabkiqcv0rhgpd9kkys6404ra5z3n7607igy64k4a84gqp06f9")))
 
 (define breezex-cursor
   (package
@@ -562,7 +562,7 @@
                          "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
                          (openpgp-fingerprint
                            "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
-                    (channel
-                      (name 'efraim-dfsg)
-                      (url "https://git.sr.ht/~efraim/my-guix"))
+                   (channel
+                     (name 'efraim-dfsg)
+                     (url "https://git.sr.ht/~efraim/my-guix"))
                    %default-channels)))))

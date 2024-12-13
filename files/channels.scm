@@ -35,6 +35,6 @@
              (openpgp-fingerprint
                "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
        (channel
-        (name 'efraim-dfsg)
-        (url "https://git.sr.ht/~efraim/my-guix"))
+         (name 'efraim-dfsg)
+         (url "https://git.sr.ht/~efraim/my-guix"))
        %default-channels)
