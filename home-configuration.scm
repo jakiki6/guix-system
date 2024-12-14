@@ -473,14 +473,15 @@
           (simple-service
             'config-service
             home-files-service-type
-            `((".config/hypr"
-               ,(origin
-                  (method git-fetch)
-                  (uri (git-reference
-                         (url "https://github.com/jakiki6/hyprland-config.git")
-                         (commit (car (assoc-ref %hashes (gethostname))))))
-                  (sha256
-                    (base32 (cadr (assoc-ref %hashes (gethostname)))))))
+            `(,(if (memq 'graphic (assoc-ref %flags (gethostname)))
+                 `(".config/hypr"
+                   ,(origin
+                      (method git-fetch)
+                      (uri (git-reference
+                             (url "https://github.com/jakiki6/hyprland-config.git")
+                             (commit (car (assoc-ref %hashes (gethostname))))))
+                      (sha256
+                        (base32 (cadr (assoc-ref %hashes (gethostname))))))))
               (".oh-my-zsh"
                ,(origin
                   (method git-fetch)
