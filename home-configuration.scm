@@ -284,7 +284,6 @@
               (specification->package "dwarfs")
               (specification->package "uesave")
               (specification->package "ant")
-              (specification->package "conda")
               (specification->package "units")
               (specification->package "mpd-mpc")
               (specification->package "rogue")
