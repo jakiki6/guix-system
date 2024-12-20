@@ -410,7 +410,8 @@
                   ("kernel.dmesg_restrict" . "0")
                   ("kernel.unprivileged_userns_clone" . "1")
                   ("vm.vfs_cache_pressure" . "10")
-                  ("net.ipv4.tcp_mtu_probing" . "1"))
+                  ("net.ipv4.tcp_mtu_probing" . "1")
+                  ("kernel.core_pattern" . "/var/core/core-%e-%s-%u-%g-%p-%t"))
                 %default-sysctl-settings))))))
     (essential-services
       (modify-services
