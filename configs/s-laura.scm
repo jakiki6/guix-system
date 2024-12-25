@@ -7,7 +7,6 @@
         (prepare-base
           (operating-system
             (host-name "s-laura")
-            (services %desktop-services)
             (bootloader
               (bootloader-configuration
                 (bootloader grub-bootloader)
@@ -16,6 +15,16 @@
                   (keyboard-layout "us" "altgr-intl"))
                 (theme (grub-theme
                          (image (local-file "../files/background.png"))))))
+            (services
+              (append
+                (list (service
+                        openssh-service-type
+                        (openssh-configuration
+                          (x11-forwarding? #t)
+                          (permit-root-login 'prohibit-password)
+                          (authorized-keys
+                            `(("root" ,(local-file "../keys/main.pub")))))))
+                %desktop-services))
             (file-systems
               (cons* (file-system
                        (mount-point "/")
