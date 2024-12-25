@@ -5,7 +5,6 @@
     (prepare-desktop
       (operating-system
         (host-name "kernelpanicroom")
-        (services %desktop-services)
         (bootloader
           (bootloader-configuration
             (bootloader
@@ -39,6 +38,16 @@
                     (uuid "81aa6264-1607-439c-8ea6-b5ef981777ab"))
                   (target "root2")
                   (type luks-device-mapping))))
+        (services
+          (append
+            (list (service
+                    openssh-service-type
+                    (openssh-configuration
+                      (x11-forwarding? #t)
+                      (permit-root-login 'prohibit-password)
+                      (authorized-keys
+                        `(("root" ,(local-file "../keys/s-laura.pub")))))))
+            %desktop-services))
         (file-systems
           (cons* (file-system
                    (mount-point "/")
