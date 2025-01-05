@@ -409,7 +409,6 @@
               (specification->package "xdg-utils")
               (specification->package "gqrx-scanner")
               (specification->package "tigervnc-client")
-              (specification->package "xfce4-dev-tools")
               (specification->package "rocm-opencl-runtime")
               (specification->package "rocm-bandwidth-test")
               (specification->package "rocminfo")
