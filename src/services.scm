@@ -22,7 +22,7 @@
           (stop (gexp (make-kill-destructor))))))
 
 (define %kubo-log-rotation
-  (list (log-rotation (files '("/var/log/ipfs.log")))))
+  (list "/var/log/ipfs.log"))
 
 (define (%kubo-activation config)
   (gexp (begin
@@ -52,7 +52,7 @@
               shepherd-root-service-type
               kubo-shepherd-service)
             (service-extension
-              rottlog-service-type
+              log-rotation-service-type
               (const %kubo-log-rotation))))
     (default-value #f)
     (description

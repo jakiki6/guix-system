@@ -458,91 +458,94 @@
               (specification->package "flatpak-builder"))
         '())))
   (services
-    (list (service
-            home-zsh-service-type
-            (home-zsh-configuration
-              (zshrc (list (local-file "./files/zshrc" "zshrc")))))
-          (service home-wineserver-service-type)
-          (service home-pulseaudio-service-type)
-          (service
-            home-shepherd-service-type
-            (home-shepherd-configuration
-              (shepherd (specification->package "shepherd"))))
-          (simple-service
-            'config-service
-            home-files-service-type
-            `(,(if (memq 'graphic (assoc-ref %flags (gethostname)))
-                 `(".config/hypr"
-                   ,(origin
-                      (method git-fetch)
-                      (uri (git-reference
-                             (url "https://github.com/jakiki6/hyprland-config.git")
-                             (commit (car (assoc-ref %hashes (gethostname))))))
-                      (sha256
-                        (base32 (cadr (assoc-ref %hashes (gethostname))))))))
-              (".oh-my-zsh"
-               ,(origin
-                  (method git-fetch)
-                  (uri (git-reference
-                         (url "https://github.com/ohmyzsh/ohmyzsh.git")
-                         (commit
-                           "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
-                  (sha256
-                    (base32
-                      "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
-              (".zsh/zsh-autosuggestions"
-               ,(origin
-                  (method git-fetch)
-                  (uri (git-reference
-                         (url "https://github.com/zsh-users/zsh-autosuggestions")
-                         (commit
-                           "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
-                  (sha256
-                    (base32
-                      "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))
-              (".mutt/muttrc"
-               ,(plain-file "muttrc" secret-muttrc))
-              (".icons/BreezeX" ,breezex-cursor)))
-          (simple-service
-            'variant-packages-service
-            home-channels-service-type
-            (cons* (channel
-                     (name 'nonguix)
-                     (url "https://gitlab.com/nonguix/nonguix")
-                     (introduction
-                       (make-channel-introduction
-                         "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-                         (openpgp-fingerprint
-                           "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
-                   (channel
-                     (name 'rosenthal)
-                     (url "https://codeberg.org/hako/rosenthal.git")
-                     (branch "trunk"))
-                   (channel
-                     (name 'lauras-channel)
-                     (url "https://github.com/jakiki6/lauras-channel"))
-                   (channel
-                     (name 'guix-hpc)
-                     (url "https://gitlab.inria.fr/guix-hpc/guix-hpc.git")
-                     (branch "master"))
-                   (channel
-                     (name 'guix-science)
-                     (url "https://codeberg.org/guix-science/guix-science.git")
-                     (introduction
-                       (make-channel-introduction
-                         "b1fe5aaff3ab48e798a4cce02f0212bc91f423dc"
-                         (openpgp-fingerprint
-                           "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
-                   (channel
-                     (name 'shepherd)
-                     (url "https://git.savannah.gnu.org/git/shepherd.git")
-                     (branch "main")
-                     (introduction
-                       (make-channel-introduction
-                         "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
-                         (openpgp-fingerprint
-                           "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
-                   (channel
-                     (name 'efraim-dfsg)
-                     (url "https://git.sr.ht/~efraim/my-guix"))
-                   %default-channels)))))
+    (append
+      %base-home-services
+      (list (service
+              home-zsh-service-type
+              (home-zsh-configuration
+                (zshrc (list (local-file "./files/zshrc" "zshrc")))))
+            (service home-wineserver-service-type)
+            (service home-pulseaudio-service-type)
+            (service
+              home-shepherd-service-type
+              (home-shepherd-configuration
+                (shepherd (specification->package "shepherd"))))
+            (simple-service
+              'config-service
+              home-files-service-type
+              `(,(if (memq 'graphic (assoc-ref %flags (gethostname)))
+                   `(".config/hypr"
+                     ,(origin
+                        (method git-fetch)
+                        (uri (git-reference
+                               (url "https://github.com/jakiki6/hyprland-config.git")
+                               (commit
+                                 (car (assoc-ref %hashes (gethostname))))))
+                        (sha256
+                          (base32 (cadr (assoc-ref %hashes (gethostname))))))))
+                (".oh-my-zsh"
+                 ,(origin
+                    (method git-fetch)
+                    (uri (git-reference
+                           (url "https://github.com/ohmyzsh/ohmyzsh.git")
+                           (commit
+                             "a72a26406ad3aa9a47c3f5227291bad23494bed0")))
+                    (sha256
+                      (base32
+                        "0jx4bhdrcxgapk7jf2s9c8y82wadk9wsick1gcn1ik0dadhga2dq"))))
+                (".zsh/zsh-autosuggestions"
+                 ,(origin
+                    (method git-fetch)
+                    (uri (git-reference
+                           (url "https://github.com/zsh-users/zsh-autosuggestions")
+                           (commit
+                             "c3d4e576c9c86eac62884bd47c01f6faed043fc5")))
+                    (sha256
+                      (base32
+                        "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))
+                (".mutt/muttrc"
+                 ,(plain-file "muttrc" secret-muttrc))
+                (".icons/BreezeX" ,breezex-cursor)))
+            (simple-service
+              'variant-packages-service
+              home-channels-service-type
+              (cons* (channel
+                       (name 'nonguix)
+                       (url "https://gitlab.com/nonguix/nonguix")
+                       (introduction
+                         (make-channel-introduction
+                           "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                           (openpgp-fingerprint
+                             "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
+                     (channel
+                       (name 'rosenthal)
+                       (url "https://codeberg.org/hako/rosenthal.git")
+                       (branch "trunk"))
+                     (channel
+                       (name 'lauras-channel)
+                       (url "https://github.com/jakiki6/lauras-channel"))
+                     (channel
+                       (name 'guix-hpc)
+                       (url "https://gitlab.inria.fr/guix-hpc/guix-hpc.git")
+                       (branch "master"))
+                     (channel
+                       (name 'guix-science)
+                       (url "https://codeberg.org/guix-science/guix-science.git")
+                       (introduction
+                         (make-channel-introduction
+                           "b1fe5aaff3ab48e798a4cce02f0212bc91f423dc"
+                           (openpgp-fingerprint
+                             "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
+                     (channel
+                       (name 'shepherd)
+                       (url "https://git.savannah.gnu.org/git/shepherd.git")
+                       (branch "main")
+                       (introduction
+                         (make-channel-introduction
+                           "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
+                           (openpgp-fingerprint
+                             "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
+                     (channel
+                       (name 'efraim-dfsg)
+                       (url "https://git.sr.ht/~efraim/my-guix"))
+                     %default-channels))))))
