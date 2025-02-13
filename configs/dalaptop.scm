@@ -33,7 +33,7 @@
                    (type "ext4"))
                  (file-system
                    (mount-point "/smb")
-                   (device "//192.168.69.11/jakob")
+                   (device "//10.10.20.111/jakob")
                    (type "cifs")
                    (mount-may-fail? #t)
                    (options
