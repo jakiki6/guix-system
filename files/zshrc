@@ -7,16 +7,13 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-alias primetime='watch -t -n 1 "factor $(date +%s)"'
-alias copy="xclip -selection copy"
-
 export MOZ_DISABLE_GMP_SANDBOX=1
 export EDITOR=vim
-alias copy="xclip -selection copy"
-#export LD_LIBRARY_PATH=~/.guix-profile/lib:/run/current-system/profile/lib
-
-export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-export PATH=$PATH:/home/laura/.local/bin:/usr/local/bin:/home/laura/.cargo/bin:/home/laura/.config/hypr/scripts:/run/current-system/profile/libexec/fwupd
+export LLVM_COMPILER=clang
+export MPLBACKEND=qtagg
+export CC=clang
+export IPFS_PATH=/ipfs_dataxport ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
+export PATH=$PATH:/home/laura/.local/bin:/usr/local/bin:/home/laura/.cargo/bin:/home/laura/.config/hypr/scripts:/run/current-system/profile/libexec/fwupd:/run/privileged/bin
 
 if [ -f /run/current-system/profile/bin/guix ]; then
     export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
@@ -39,13 +36,3 @@ else
         export EDITOR=vim
     fi  
 fi
-
-export PATH=/run/privileged/bin:$PATH
-
-alias primetime='watch -t -n 1 "factor \$(date +%s)"'
-alias xmlfmt="xmllint --format -"
-export LLVM_COMPILER=clang
-export MPLBACKEND=qtagg
-export CC=clang
-export IPFS_PATH=/ipfs_data
-export XDG_DATA_DIRS=$XDG_DATA_DIRS:~/.local/share/flatpak/exports/share
