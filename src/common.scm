@@ -136,7 +136,8 @@
     (kernel-arguments
       (list "modprobe.blacklist=dvb_usb_rtl28xxu"
             "mitigations=off"
-            "iomem=relaxed"))
+            "iomem=relaxed"
+            "crashkernel=512M"))
     (locale "en_US.utf8")
     (timezone "Europe/Berlin")
     (keyboard-layout (keyboard-layout "de" "us"))
