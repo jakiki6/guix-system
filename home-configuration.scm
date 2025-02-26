@@ -455,6 +455,7 @@
               (specification->package "okular")
               (specification->package "mpv")
               (specification->package "CasioEmu")
+              (specification->package "heimdall")
               (specification->package "flatpak-builder"))
         '())))
   (services
