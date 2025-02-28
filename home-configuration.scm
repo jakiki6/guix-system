@@ -77,7 +77,6 @@
               (specification->package "docker")
               (specification->package "node")
               (specification->package "age")
-              (specification->package "age-keygen")
               (specification->package "encpipe")
               (specification->package "openmpi")
               (specification->package "polkit-kde-agent")
