@@ -25,11 +25,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "542be2502796fb318f06765ae6b7b31a5ef01c24"
-              "08lf50cmfligjh1a5jn1vvbljl2pvq0adax8g28fqmxz4fhgixjv")
+              "4a50a59372b8f2951440b469b1057dcfd12f94c2"
+              "19kn0bzgalhvplp9y8f3azni4i23nib9m8qvlvclx09z61pa4py6")
         (list "dalaptop"
-              "cf9dcadb4220fbada4f63d6908363c9b6c3a63be"
-              "19qabkiqcv0rhgpd9kkys6404ra5z3n7607igy64k4a84gqp06f9")))
+              "1f53d7dd08c3da90bdfadd33263dc46c92822810"
+              "19sksaywr25bvfbbp74xiv737f5rnxkv8gymdw9a8p909p760jsd")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -336,7 +336,7 @@
               (specification->package "dino")
               (specification->package "qemu")
               (specification->package "torbrowser")
-              (specification->package "firefox")
+              (specification->package "librewolf")
               (specification->package "atril")
               (specification->package "libreoffice")
               (specification->package "gqrx")
