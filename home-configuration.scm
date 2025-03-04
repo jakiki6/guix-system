@@ -455,7 +455,9 @@
               (specification->package "mpv")
               (specification->package "CasioEmu")
               (specification->package "heimdall")
-              (specification->package "flatpak-builder"))
+              (specification->package "flatpak-builder")
+              (specification->package "avogadro2")
+              (specification->package "openbabel"))
         '())))
   (services
     (append
