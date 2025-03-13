@@ -19,7 +19,8 @@
   (gnu home services shepherd)
   (gnu home services)
   (laura home services wine)
-  (laura home services audio))
+  (laura home services audio)
+  (laura home services ai))
 
 (include "src/secrets.scm")
 
@@ -250,7 +251,8 @@
               (specification->package "mutt")
               (specification->package "shepherd-run")
               (specification->package "diffoscope")
-              (specification->package "git-lfs"))
+              (specification->package "git-lfs")
+              (specification->package "ollama"))
         '())
       (if (memq 'opt (assoc-ref %flags (gethostname)))
         (list (specification->package "haunt")
@@ -468,6 +470,7 @@
                 (zshrc (list (local-file "./files/zshrc" "zshrc")))))
             (service home-wineserver-service-type)
             (service home-pulseaudio-service-type)
+            (service home-ollama-service-type)
             (service
               home-shepherd-service-type
               (home-shepherd-configuration
