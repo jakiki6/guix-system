@@ -12,7 +12,8 @@ export EDITOR=vim
 export LLVM_COMPILER=clang
 export MPLBACKEND=qtagg
 export CC=clang
-export IPFS_PATH=/ipfs_dataxport ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
+export IPFS_PATH=/ipfs_data
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
 export BORG_REPO=/home/laura/borg
 export PATH=$PATH:/home/laura/.local/bin:/usr/local/bin:/home/laura/.cargo/bin:/home/laura/.config/hypr/scripts:/run/current-system/profile/libexec/fwupd:/run/privileged/bin
 
