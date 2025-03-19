@@ -488,6 +488,8 @@
                                  (car (assoc-ref %hashes (gethostname))))))
                         (sha256
                           (base32 (cadr (assoc-ref %hashes (gethostname))))))))
+                (".config/guix/channels.scm"
+                 ,(local-file "files/channels.scm"))
                 (".oh-my-zsh"
                  ,(origin
                     (method git-fetch)
@@ -510,7 +512,4 @@
                         "1m8yawj7skbjw0c5ym59r1y88klhjl6abvbwzy6b1xyx3vfb7qh7"))))
                 (".mutt/muttrc"
                  ,(plain-file "muttrc" secret-muttrc))
-                (".icons/BreezeX" ,breezex-cursor)))
-            (simple-service
-              'variant-packages-service
-              home-channels-service-type (include "files/channels.scm"))))))
+                (".icons/BreezeX" ,breezex-cursor)))))))
