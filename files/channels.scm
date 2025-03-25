@@ -6,7 +6,7 @@
           (url "https://git.savannah.gnu.org/git/guix.git")
           (transformer
             (patched-upstream-guix
-              '((76728 5 1) (77072 0 1) (77103 0))))
+              '((76728 5 1) (77072 0 1) (77103 0) (77262 0))))
           (introduction
             (make-channel-introduction
               "9edb3f66fd807b096b48283debdcddccfea34bad"
@@ -50,4 +50,13 @@
                 "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
         (channel
           (name 'efraim-dfsg)
-          (url "https://git.sr.ht/~efraim/my-guix"))))
+          (url "https://git.sr.ht/~efraim/my-guix"))
+        (channel
+          (name 'selected-guix-works)
+          (url "https://github.com/gs-101/selected-guix-works.git")
+          (branch "main")
+          (introduction
+            (make-channel-introduction
+              "5d1270d51c64457d61cd46ec96e5599176f315a4"
+              (openpgp-fingerprint
+                "C780 21F7 34E4 07EB 9090  0CF1 4ACA 6D6F 89AB 3162"))))))
