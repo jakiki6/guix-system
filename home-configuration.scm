@@ -26,11 +26,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "4a50a59372b8f2951440b469b1057dcfd12f94c2"
-              "19kn0bzgalhvplp9y8f3azni4i23nib9m8qvlvclx09z61pa4py6")
+              "6c3538a6d40119762f03c971cde8b70d80a2c663"
+              "0irqpz9c0zwhnjjfcn12a6rj02gr7kqczhrv79f089m34w65nidb")
         (list "dalaptop"
-              "1f53d7dd08c3da90bdfadd33263dc46c92822810"
-              "19sksaywr25bvfbbp74xiv737f5rnxkv8gymdw9a8p909p760jsd")))
+              "db782de9bd3f9c198b53b2a3b67d5c651ba563cc"
+              "0f60b46mk0xx8f3fxhl5gy21xm6xl1nbvkagfiswn3w6lg1mjrz5")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
