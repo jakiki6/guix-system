@@ -11,7 +11,8 @@
                 (77103 0)
                 (77262 0)
                 (77293 0)
-                (77294 0))))
+                (77294 0)
+                (77343 0))))
           (introduction
             (make-channel-introduction
               "9edb3f66fd807b096b48283debdcddccfea34bad"
