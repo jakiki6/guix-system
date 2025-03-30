@@ -11,7 +11,6 @@
                 (77103 0)
                 (77262 0)
                 (77293 0)
-                (77294 1)
                 (77343 0))))
           (introduction
             (make-channel-introduction
