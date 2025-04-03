@@ -189,7 +189,6 @@
               (specification->package "ncurses")
               (specification->package "acpica")
               (specification->package "libtree")
-              (specification->package "openssl")
               (specification->package "fastfetch")
               (specification->package "gsl")
               (specification->package "unzip")
@@ -248,7 +247,8 @@
               (specification->package "diffoscope")
               (specification->package "git-lfs")
               (specification->package "ollama")
-              (specification->package "libevent"))
+              (specification->package "libevent")
+              (specification->package "radicle-heartwood"))
         '())
       (if (memq 'opt (assoc-ref %flags (gethostname)))
         (list (specification->package "haunt")
@@ -456,7 +456,8 @@
               (specification->package "heimdall")
               (specification->package "flatpak-builder")
               (specification->package "avogadro2")
-              (specification->package "openbabel"))
+              (specification->package "openbabel")
+              (specification->package "imhex"))
         '())))
   (services
     (append
