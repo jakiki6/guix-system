@@ -6,8 +6,7 @@
           (url "https://git.savannah.gnu.org/git/guix.git")
           (transformer
             (patched-upstream-guix
-              '((76728 5 1)
-                (77072 0 1)
+              '((77072 0 1)
                 (77103 0)
                 (77262 0)
                 (77293 0)
