@@ -3,13 +3,10 @@
   (list (channel
           (name 'guix)
           (branch "master")
-          (url "git://git.savannah.gnu.org/guix.git")
+          (url "https://git.savannah.gnu.org/git/guix.git")
           (transformer
             (patched-upstream-guix
-              '((77072 0 1)
-                (77103 0)
-                (77262 0)
-                (77436 0 1))))
+              '((77072 0 1) (77103 0) (77262 0) (77436 0 1))))
           (introduction
             (make-channel-introduction
               "9edb3f66fd807b096b48283debdcddccfea34bad"
@@ -44,7 +41,7 @@
                 "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
         (channel
           (name 'shepherd)
-          (url "git://git.savannah.gnu.org/shepherd.git")
+          (url "https://git.savannah.gnu.org/git/shepherd.git")
           (branch "main")
           (introduction
             (make-channel-introduction

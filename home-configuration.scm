@@ -26,11 +26,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "6c3538a6d40119762f03c971cde8b70d80a2c663"
-              "0irqpz9c0zwhnjjfcn12a6rj02gr7kqczhrv79f089m34w65nidb")
+              "1057dffe3174196d7f38834f33cc88d3a5c5152f"
+              "031175gl1lfv0n78km3x92hmlnzlzsxvvi5fl6gpa23rrlr8g16l")
         (list "dalaptop"
-              "db782de9bd3f9c198b53b2a3b67d5c651ba563cc"
-              "0f60b46mk0xx8f3fxhl5gy21xm6xl1nbvkagfiswn3w6lg1mjrz5")))
+              "10d0edcd835f1ce441c83c0b97e0574faaa84a9d"
+              "011l88mgbdm7m47jpylf3nza7spf8n2zks3afx2xbgqnp4fxk1ay")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -322,7 +322,6 @@
               (specification->package "i2pd")
               (specification->package "libmpdclient")
               (specification->package "dtc")
-              ;(specification->package "wasmtime")
               (specification->package "hipify")
               (specification->package "leopard")
               (specification->package "ricochet-refresh")
@@ -338,7 +337,6 @@
               (specification->package "eigen")
               (specification->package "cbonsai")
               (specification->package "amdgpu-top"))
-              ;(specification->package "cura"))
         '())
       (if (memq 'graphic (assoc-ref %flags (gethostname)))
         (list (specification->package "dragon-drop")
@@ -406,6 +404,8 @@
               (list (specification->package "gtk") "bin")
               (specification->package "gnome-keyring")
               (specification->package "hyprland")
+              (specification->package "hypridle")
+              (specification->package "hyprlock")
               (specification->package "swww")
               (specification->package "clipmon")
               (specification->package "feh")
