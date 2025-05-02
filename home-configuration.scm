@@ -25,13 +25,13 @@
 (include "src/secrets.scm")
 
 (define %hashes
-  (list
-    (list "kernelpanicroom"
-          "906ead6f651f5d5cb928d6fe6f9e912202e305f5"
-          "01knwgw1rq25rh9dl4js8yd569w4y24kv1zdb4zh0famnhnxdi7z")
-    (list "dalaptop"
-          "4a9347224695b528932aee7b3f8d1885fe49afc6"
-          "1mvrn8krn65f8aapxh2g71zwh60pkfhfw1jrv6wncq2j55s531fy")))
+  (list (list "kernelpanicroom"
+              "cad7e88697c0126a55b15fa21a949a0e6830b2c7"
+              "1i5ilhad1d46w5b7b9vm3nlvpf7sy9x0ijnzcpj517q21yr0vqvm")
+        (list "dalaptop"
+              "8c4d4882d22acf8cc29462218a9afa74582c55d7"
+              "1ywzk3b6p176ymy1kr2gz4zj2q9hrayn2wrmxcmw8iy5c66ym4xy")))
+
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
