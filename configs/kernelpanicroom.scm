@@ -37,6 +37,11 @@
                   (source
                     (uuid "81aa6264-1607-439c-8ea6-b5ef981777ab"))
                   (target "root2")
+                  (type luks-device-mapping))
+                (mapped-device
+                  (source
+                    (uuid "00a0ea7e-1245-4db7-86e2-42d46e6fd497"))
+                  (target "root3")
                   (type luks-device-mapping))))
         (services
           (append
