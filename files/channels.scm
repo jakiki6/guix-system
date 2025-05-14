@@ -3,7 +3,7 @@
   (list (channel
           (name 'guix)
           (branch "master")
-          (url "https://git.savannah.gnu.org/git/guix.git")
+          (url "https://codeberg.org/guix/guix.git")
           (transformer
             (patched-upstream-guix
               '((77072 0 1) (77103 0) (77262 0) (77436 0 1))))

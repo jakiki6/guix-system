@@ -26,12 +26,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "cad7e88697c0126a55b15fa21a949a0e6830b2c7"
-              "1i5ilhad1d46w5b7b9vm3nlvpf7sy9x0ijnzcpj517q21yr0vqvm")
+              "44f677c1a93d8222f369b0f1914c6d5aae8be59f"
+              "1sjrrxhnqrsq7011lfi3ql9x5b5srp8h9y7vzyy19x523pw4xn6y")
         (list "dalaptop"
-              "8c4d4882d22acf8cc29462218a9afa74582c55d7"
-              "1ywzk3b6p176ymy1kr2gz4zj2q9hrayn2wrmxcmw8iy5c66ym4xy")))
-
+              "8be545354a43ae28f41985d6e46f37ebbbc97c6f"
+              "1gpn5qfdpbdix7nbk6hp99hapg05a3yv99gv78f5c5qki57gicvx")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -337,7 +336,11 @@
               (specification->package "libzip")
               (specification->package "eigen")
               (specification->package "cbonsai")
-              (specification->package "amdgpu-top"))
+              (specification->package "amdgpu-top")
+              (specification->package "electrum")
+              (specification->package "die-engine")
+              (specification->package "ioquake3")
+              (specification->package "gzdoom"))
         '())
       (if (memq 'graphic (assoc-ref %flags (gethostname)))
         (list (specification->package "dragon-drop")
