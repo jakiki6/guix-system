@@ -26,11 +26,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "44f677c1a93d8222f369b0f1914c6d5aae8be59f"
-              "1sjrrxhnqrsq7011lfi3ql9x5b5srp8h9y7vzyy19x523pw4xn6y")
+              "095cd1dbfcdf720477e127c27ee615d3aa607513"
+              "054s37g68jrazvcmlj397j4lkfmccxni5pprkrgg44nnqvnzd56l")
         (list "dalaptop"
-              "8be545354a43ae28f41985d6e46f37ebbbc97c6f"
-              "1gpn5qfdpbdix7nbk6hp99hapg05a3yv99gv78f5c5qki57gicvx")))
+              "4673f912612ec669108d2e656c53c3ad3d3a311a"
+              "0bflfpgbv1p6isd3lp9f2rhjdqs3amk2qczgxgkghf8gp4dglxlf")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -61,7 +61,7 @@
       (if (memq 'base (assoc-ref %flags (gethostname)))
         (list (specification->package "mumi")
               (specification->package "sbctl")
-              (specification->package "gcc-toolchain")
+              (specification->package "clang-toolchain")
               (list (specification->package "openjdk") "jdk")
               (specification->package "go")
               (specification->package "dos2unix")
@@ -248,7 +248,7 @@
               (specification->package "git-lfs")
               (specification->package "ollama")
               (specification->package "libevent")
-              (specification->package "radicle-heartwood")
+              (specification->package "radicle")
               (specification->package "dumpasn1"))
         '())
       (if (memq 'opt (assoc-ref %flags (gethostname)))
@@ -340,7 +340,8 @@
               (specification->package "electrum")
               (specification->package "die-engine")
               (specification->package "ioquake3")
-              (specification->package "gzdoom"))
+              (specification->package "gzdoom")
+              (specification->package "lean4"))
         '())
       (if (memq 'graphic (assoc-ref %flags (gethostname)))
         (list (specification->package "dragon-drop")
