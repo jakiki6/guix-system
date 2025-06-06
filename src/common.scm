@@ -370,7 +370,8 @@
             (substitute-urls
               (append
                 (list "https://substitutes.nonguix.org"
-                      "https://guix.bordeaux.inria.fr")
+                      "https://guix.bordeaux.inria.fr"
+                      "https://nonguix-proxy.ditigal.xyz")
                 %default-substitute-urls))
             (discover? #t)
             (extra-options
