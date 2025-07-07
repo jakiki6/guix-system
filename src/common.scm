@@ -87,6 +87,7 @@
   (gnu packages man)
   (gnu packages gettext)
   (gnu packages texinfo)
+  (laura packages utils)
   (laura services utils)
   (gnu system setuid)
   (gnu system image)
@@ -332,10 +333,10 @@
                     "/run/current-system/profile/share")
                   (extra-special-file
                     "/lib/ld-linux-x86-64.so.2"
-                    (file-append glibc "/lib/ld-linux-x86-64.so.2"))
+                    (file-append glibc-ld "/lib/ld-linux-x86-64.so.2"))
                   (extra-special-file
                     "/lib64/ld-linux-x86-64.so.2"
-                    (file-append glibc "/lib/ld-linux-x86-64.so.2"))
+                    (file-append glibc-ld "/lib/ld-linux-x86-64.so.2"))
                   (udev-rules-service 'rtl-sdr rtl-sdr)
                   (udev-rules-service 'android android-udev-rules)
                   (udev-rules-service
