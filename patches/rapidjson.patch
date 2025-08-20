@@ -1,0 +1,43 @@
+diff --git a/gnu/packages/web.scm b/gnu/packages/web.scm
+index fd57213a12..66cd357a1d 100644
+--- a/gnu/packages/web.scm
++++ b/gnu/packages/web.scm
+@@ -1688,9 +1688,9 @@ (define-public krona-tools
+    (license license:bsd-3)))
+ 
+ (define-public rapidjson
+-  ;; Last release was in 2016, but this commit is from 2023.
+-  (let ((commit "949c771b03de448bdedea80c44a4a5f65284bfeb")
+-        (revision "1"))
++  ;; Last release was in 2016, but this commit is from 2025.
++  (let ((commit "24b5e7a8b27f42fa16b96fc70aade9106cf7102f")
++        (revision "2"))
+     (package
+       (name "rapidjson")
+       (version (git-version "1.1.0" revision commit))
+@@ -1702,7 +1702,7 @@ (define-public rapidjson
+                 (file-name (git-file-name name version))
+                 (sha256
+                  (base32
+-                  "1xlj0cj88ls3avwmlhd2gf5757fjpfbqx6qf49z1mzi381gcl72m"))
++                  "1gwzhp43h8j0id82h87nba16abiw67dv3c20jczvcvyc21hwnwd0"))
+                 (modules '((guix build utils)))
+                 (snippet
+                  '(begin
+@@ -1711,7 +1711,7 @@ (define-public rapidjson
+                     (delete-file-recursively "bin/jsonchecker")))))
+       (build-system cmake-build-system)
+       (arguments
+-       '(#:configure-flags (list "-DCMAKE_CXX_FLAGS=-Wno-free-nonheap-object")
++       '(#:configure-flags (list "-DCMAKE_CXX_FLAGS=-Wno-free-nonheap-object -Wno-error=stringop-overflow")
+          #:phases
+          (modify-phases %standard-phases
+            (add-after 'unpack 'fix-march=native
+@@ -1730,7 +1730,6 @@ (define-public rapidjson
+                  ((".*GTEST_SOURCE_DIR.*") "")
+                  (("GTESTSRC_FOUND)")
+                   "GTest_FOUND)")))))))
+-      (native-inputs (list valgrind/pinned))
+       (inputs (list googletest))
+       (home-page "https://github.com/Tencent/rapidjson")
+       (synopsis "JSON parser/generator for C++ with both SAX/DOM style API")

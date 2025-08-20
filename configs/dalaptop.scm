@@ -2,24 +2,36 @@
 
 (define my-os
   (personalize
-    (prepare-laptop
+    (prepare-desktop
       (operating-system
         (host-name "dalaptop")
         (services %desktop-services)
         (bootloader
           (bootloader-configuration
             (bootloader
-              (inherit grub-efi-removable-bootloader)
-              (package grub-efi-fixed))
-            (targets (list "/dev/sda"))
+              (bootloader
+                (inherit grub-efi-removable-bootloader)
+                (package grub-efi-fixed)))
+            (targets (list "/boot"))
             (keyboard-layout
               (keyboard-layout "us" "altgr-intl"))
             (theme (grub-theme
-                     (image (local-file "../files/background.png"))))))
+                     (image (local-file "../files/background.png"))))
+            (menu-entries
+              (list (menu-entry
+                      (label "Memtest86+")
+                      (multiboot-kernel
+                        (file-append
+                          memtest86+
+                          "/lib/memtest86+/memtest.bin")))
+                    (menu-entry
+                      (label "GNU Mach")
+                      (multiboot-kernel
+                        (file-append cross-mach "/boot/gnumach")))))))
         (mapped-devices
           (list (mapped-device
-                  (source "/dev/sda2")
-                  (target "root1")
+                  (source (uuid "227bf599-01bc-48a4-97f0-9496ce7224cb"))
+                  (target "guix_root")
                   (type luks-device-mapping))))
         (file-systems
           (cons* (file-system
@@ -30,7 +42,7 @@
                  (file-system
                    (mount-point "/boot")
                    (device (file-system-label "guix_boot"))
-                   (type "ext4"))
+                   (type "vfat"))
                  (file-system
                    (mount-point "/smb")
                    (device "//10.10.20.111/jakob")

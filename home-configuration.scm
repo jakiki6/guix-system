@@ -27,11 +27,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "095cd1dbfcdf720477e127c27ee615d3aa607513"
-              "054s37g68jrazvcmlj397j4lkfmccxni5pprkrgg44nnqvnzd56l")
+              "9e13c5f5dc83f3ca4cc2b97716f21f5a92106dc2"
+              "019w2sh19s4b25pf42jxzin09wigy4fjrmqky3k16qzz83hkx2m0")
         (list "dalaptop"
-              "4673f912612ec669108d2e656c53c3ad3d3a311a"
-              "0bflfpgbv1p6isd3lp9f2rhjdqs3amk2qczgxgkghf8gp4dglxlf")))
+              "a0cf8bc612f8d7d178cf343b0c4c5130a6f15702"
+              "11v722fdk23kfm4v715cy38yx7k7hnkhpxdy0s1mprza142mn6v8")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -60,8 +60,7 @@
   (packages
     (append
       (if (memq 'base (assoc-ref %flags (gethostname)))
-        (list (specification->package "mumi")
-              (specification->package "sbctl")
+        (list (specification->package "sbctl")
               (specification->package "clang-toolchain")
               (list (specification->package "openjdk") "jdk")
               (specification->package "go")
@@ -79,7 +78,6 @@
               (specification->package "docker")
               (specification->package "node")
               (specification->package "age")
-              (specification->package "encpipe")
               (specification->package "openmpi")
               (specification->package "polkit-kde-agent")
               (specification->package "zig")
@@ -109,9 +107,7 @@
               (specification->package "cmake")
               (specification->package "b3sum")
               (specification->package "mosquitto")
-              (specification->package "aircrack-ng")
               (specification->package "udftools")
-              (specification->package "vlang")
               (specification->package "lld")
               (specification->package "mtools")
               (specification->package "python-next")
@@ -120,7 +116,6 @@
               (specification->package "tor")
               (specification->package "ddrescue")
               (specification->package "mpc")
-              (specification->package "libxml2")
               (specification->package "nanomsg")
               (specification->package "libgfshare")
               (specification->package "valgrind")
@@ -247,7 +242,7 @@
               (specification->package "shepherd-run")
               (specification->package "diffoscope")
               (specification->package "git-lfs")
-              (specification->package "ollama")
+;              (specification->package "ollama")
               (specification->package "libevent")
               (specification->package "radicle")
               (specification->package "dumpasn1")
@@ -281,7 +276,7 @@
               (specification->package "Amogus-File-Encoder")
               (specification->package "hashcat")
               (specification->package "borg")
-              (specification->package "dwarfs")
+;              (specification->package "dwarfs")
               (specification->package "uesave")
               (specification->package "ant")
               (specification->package "units")
@@ -307,7 +302,7 @@
               (specification->package "john-the-ripper-jumbo")
               (specification->package "gifsicle")
               (specification->package "texlive")
-              (specification->package "freehdl")
+;              (specification->package "freehdl")
               (specification->package "debootstrap")
               (specification->package "catimg")
               (specification->package "gnucobol")
@@ -319,7 +314,6 @@
               (specification->package "torsocks")
               (specification->package "mkp224o")
               (specification->package "par2cmdline")
-              (specification->package "minetest-mineclone")
               (specification->package "iucode-tool")
               (specification->package "i2pd")
               (specification->package "libmpdclient")
@@ -375,7 +369,6 @@
               (specification->package "wireplumber")
               (specification->package "ydotool")
               (specification->package "tpt")
-              (specification->package "minetest")
               (specification->package "vala")
               (specification->package "keepassxc")
               (specification->package "vlc")
@@ -385,7 +378,6 @@
               (specification->package "wxwidgets")
               (specification->package "audacity")
               (specification->package "golly")
-              (specification->package "winetricks")
               (specification->package "libxfce4ui")
               (specification->package "flatpak")
               (specification->package "gparted")
@@ -478,7 +470,9 @@
               (specification->package "flatpak-builder")
               (specification->package "avogadro2")
               (specification->package "openbabel")
-              (specification->package "imhex"))
+              (specification->package "imhex")
+              (specification->package "vulkan-loader")
+              (specification->package "vulkan-headers"))
         '())))
   (services
     (append
@@ -488,8 +482,8 @@
               (home-zsh-configuration
                 (zshrc (list (local-file "./files/zshrc" "zshrc")))))
             (service home-wineserver-service-type)
-            (service home-pulseaudio-service-type)
-            (service home-ollama-service-type)
+            (service home-pipewire-service-type)
+;            (service home-ollama-service-type)
             (service home-radicle-service-type)
             (service
               home-shepherd-service-type

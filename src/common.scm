@@ -15,6 +15,7 @@
   (nongnu packages linux)
   (nongnu system linux-initrd)
   (nongnu packages firmware)
+  (small-guix services mullvad)
   (gnu packages shells)
   (gnu packages hurd)
   (gnu packages nvi)
@@ -403,6 +404,14 @@
           config
           =>
           (list (car config)))
+	(wpa-supplicant-service-type
+	  config
+	  =>
+                (wpa-supplicant-configuration
+                  (config-file
+                    (plain-file
+                      "wpa_supplicant.cfg"
+                      secret-wpa-config))))
         (sysctl-service-type
           config
           =>
@@ -436,6 +445,7 @@
       (append
         (list (service gnome-keyring-service-type)
               (service waydroid-service-type)
+              (service mullvad-daemon-service-type)
               (simple-service
                 'fwupd-dbus
                 dbus-root-service-type
@@ -450,20 +460,6 @@
               (service kubo-service-type))
         (operating-system-user-services OS)))))
 
-(define (add-laptop-services OS)
-  (operating-system
-    (inherit OS)
-    (services
-      (append
-        (list (service
-                wpa-supplicant-service-type
-                (wpa-supplicant-configuration
-                  (config-file
-                    (plain-file
-                      "wpa_supplicant.cfg"
-                      secrets-wpa-config)))))
-        (operating-system-user-services OS)))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (prepare-base OS)
   (add-base-services
@@ -472,9 +468,6 @@
 (define (prepare-desktop OS)
   (add-desktop-services
     (add-desktop-packages (prepare-base OS))))
-
-(define (prepare-laptop OS)
-  (add-laptop-services OS))
 
 (define (personalize OS)
   (apply-personal-config OS))
