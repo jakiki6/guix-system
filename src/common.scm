@@ -122,13 +122,6 @@
 (include "packages.scm")
 (include "services.scm")
 
-(define gdm-patch-file
-  (with-store
-    store
-    (run-with-store
-      store
-      (text-file "gdm.patch" secret-gdm-patch))))
-
 (define (apply-base OS)
   (operating-system
     (inherit OS)
@@ -136,7 +129,7 @@
     (initrd microcode-initrd)
     (firmware (list linux-firmware))
     (kernel-arguments
-      (list "modprobe.blacklist=dvb_usb_rtl28xxu"
+      (list "modprobe.blacklist=dvb_usb_rtl28xxu,pcspkr"
             "mitigations=off"
             "iomem=relaxed"
             "crashkernel=512M"))
@@ -378,8 +371,7 @@
             (discover? #t)
             (extra-options
               '("--gc-keep-derivations=yes"
-                "--gc-keep-outputs=yes"
-                "--cores=6"))
+                "--gc-keep-outputs=yes"))
             (authorized-keys
               (append
                 (list (plain-file
@@ -393,25 +385,20 @@
           config
           =>
           (gdm-configuration
-            (gdm ((options->transformation
-                    `((with-patch
-                        unquote
-                        (string-append "gdm=" gdm-patch-file))))
-                  gdm))
             (auto-suspend? #f)
             (wayland? #t)))
         (special-files-service-type
           config
           =>
           (list (car config)))
-	(wpa-supplicant-service-type
-	  config
-	  =>
-                (wpa-supplicant-configuration
-                  (config-file
-                    (plain-file
-                      "wpa_supplicant.cfg"
-                      secret-wpa-config))))
+;      (wpa-supplicant-service-type
+;        config
+;        =>
+;        (wpa-supplicant-configuration
+;          (config-file
+;            (plain-file
+;              "wpa_supplicant.cfg"
+;              secret-wpa-config))))
         (sysctl-service-type
           config
           =>
