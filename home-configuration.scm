@@ -17,6 +17,8 @@
   (gnu home services shells)
   (gnu home services guix)
   (gnu home services shepherd)
+  (gnu home services sound)
+  (gnu home services desktop)
   (gnu home services)
   (laura home services wine)
   (laura home services audio)
@@ -483,6 +485,7 @@
                 (zshrc (list (local-file "./files/zshrc" "zshrc")))))
             (service home-wineserver-service-type)
             (service home-pipewire-service-type)
+            (service home-dbus-service-type)
 ;            (service home-ollama-service-type)
             (service home-radicle-service-type)
             (service
