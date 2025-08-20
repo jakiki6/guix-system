@@ -15,7 +15,6 @@
   (nongnu packages linux)
   (nongnu system linux-initrd)
   (nongnu packages firmware)
-  (small-guix services mullvad)
   (gnu packages shells)
   (gnu packages hurd)
   (gnu packages nvi)
@@ -432,7 +431,6 @@
       (append
         (list (service gnome-keyring-service-type)
               (service waydroid-service-type)
-              (service mullvad-daemon-service-type)
               (simple-service
                 'fwupd-dbus
                 dbus-root-service-type
