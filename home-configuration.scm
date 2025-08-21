@@ -255,7 +255,6 @@
         (list (specification->package "haunt")
               (list (specification->package "guile") "debug")
               (specification->package "dotnet")
-              (specification->package "pesign")
               (specification->package "yggdrasil")
               (specification->package "yosys")
               (specification->package "mpd")
@@ -508,6 +507,8 @@
                  ,(local-file "files/channels.scm"))
                 (".vimrc"
                  ,(local-file "files/vimrc"))
+                (".local/bin/scmfmt"
+                 ,(local-file "files/scmfmt"))
                 (".oh-my-zsh"
                  ,(origin
                     (method git-fetch)
