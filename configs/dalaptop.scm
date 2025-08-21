@@ -28,6 +28,16 @@
                       (label "GNU Mach")
                       (multiboot-kernel
                         (file-append cross-mach "/boot/gnumach")))))))
+        (services
+          (append
+            (list (service
+                    openssh-service-type
+                    (openssh-configuration
+                      (x11-forwarding? #t)
+                      (permit-root-login 'prohibit-password)
+                      (authorized-keys
+                        `(("root" ,(local-file "../keys/s-laura.pub")))))))
+            %desktop-services))
         (mapped-devices
           (list (mapped-device
                   (source (uuid "227bf599-01bc-48a4-97f0-9496ce7224cb"))
