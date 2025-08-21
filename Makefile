@@ -18,7 +18,7 @@ gc:
 	guix home delete-generations
 	guix gc
 
-src/secrets.scm: src/secrets.scm.gpg
-	gpg -d $< > $@
+src/secrets.scm: src/secrets.scm.age
+	age -d $< > $@
 
 .PHONY: update deploy test gc
