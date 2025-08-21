@@ -29,7 +29,15 @@
                         (file-append cross-mach "/boot/gnumach")))))))
         (services
           (append
-            (list (service
+            (list (service tlp-service-type
+                    (tlp-configuration
+                    (cpu-scaling-governor-on-ac (list "performance"))
+                    (sched-powersave-on-bat? #t)
+                    (cpu-boost-on-ac? #t)
+                    (stop-charge-thresh-bat0 80)
+                    (start-charge-thresh-bat0 70)))
+                  (service thermald-service-type)
+                  (service
                     openssh-service-type
                     (openssh-configuration
                       (x11-forwarding? #t)

@@ -38,6 +38,7 @@
   (gnu services syncthing)
   (gnu services admin)
   (gnu services dbus)
+  (gnu services pm)
   (gnu packages python-xyz)
   (gnu packages python-crypto)
   (gnu packages version-control)
