@@ -1,0 +1,14 @@
+let mapleader = "'"
+syntax on
+set number
+set noswapfile
+set hlsearch
+set ignorecase
+set incsearch
+set backspace=indent,eol,start
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+au BufRead,BufNewFile *.fs set filetype=tforth

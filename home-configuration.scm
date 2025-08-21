@@ -29,11 +29,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "9e13c5f5dc83f3ca4cc2b97716f21f5a92106dc2"
-              "019w2sh19s4b25pf42jxzin09wigy4fjrmqky3k16qzz83hkx2m0")
+              "96666895a96a85dc2af1e6ac954bddd0c3242096"
+              "0592bbr89m3pwn0jlvmyz4dqfa1ynhxd3mpr5265m27g6hhqmh92")
         (list "dalaptop"
-              "a0cf8bc612f8d7d178cf343b0c4c5130a6f15702"
-              "11v722fdk23kfm4v715cy38yx7k7hnkhpxdy0s1mprza142mn6v8")))
+              "be1d8811d1d5f6685b6782c350fd78ca055c102e"
+              "1f4wnvj4n043xdjyy5kibh4i1z77nbvxp5zhgvd51a1qgji8c9vk")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -343,6 +343,7 @@
       (if (memq 'graphic (assoc-ref %flags (gethostname)))
         (list (specification->package "dragon-drop")
               (specification->package "calibre")
+              (specification->package "brightnessctl")
               (specification->package "dino")
               (specification->package "qemu")
               (specification->package "torbrowser")
@@ -504,6 +505,8 @@
                           (base32 (cadr (assoc-ref %hashes (gethostname))))))))
                 (".config/guix/channels.scm"
                  ,(local-file "files/channels.scm"))
+                (".vimrc"
+                 ,(local-file "files/vimrc"))
                 (".oh-my-zsh"
                  ,(origin
                     (method git-fetch)
