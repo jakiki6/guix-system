@@ -5,7 +5,6 @@
     (prepare-desktop
       (operating-system
         (host-name "dalaptop")
-        (services %desktop-services)
         (bootloader
           (bootloader-configuration
             (bootloader
