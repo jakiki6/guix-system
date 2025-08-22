@@ -508,7 +508,7 @@
                 (".vimrc"
                  ,(local-file "files/vimrc"))
                 (".local/bin/scmfmt"
-                 ,(local-file "files/scmfmt"))
+                 ,(local-file "files/scmfmt" #:recursive? #t))
                 (".oh-my-zsh"
                  ,(origin
                     (method git-fetch)
