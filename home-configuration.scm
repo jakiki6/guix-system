@@ -32,8 +32,8 @@
               "96666895a96a85dc2af1e6ac954bddd0c3242096"
               "0592bbr89m3pwn0jlvmyz4dqfa1ynhxd3mpr5265m27g6hhqmh92")
         (list "dalaptop"
-              "36fae4710adba74e0064cae7c44cc690eecc89a8"
-              "0gqdpcydrslwvc2vjz53f8pc1iqc7l6xhv2aa8mnk1pnw4qc6qds")))
+              "2aceb42f6d96dfcb237ead66ad125a7fa0782565"
+              "0n9x44vk3ay46j3fvqwch3ggwsx7krn0mjmnd69qvs9ib7hkqy0m")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
