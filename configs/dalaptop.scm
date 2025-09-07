@@ -28,26 +28,36 @@
                       (multiboot-kernel
                         (file-append cross-mach "/boot/gnumach")))))))
         (services
-          (append
-            (list (service tlp-service-type
-                    (tlp-configuration
-                    (cpu-scaling-governor-on-ac (list "performance"))
-                    (sched-powersave-on-bat? #t)
-                    (cpu-boost-on-ac? #t)
-                    (stop-charge-thresh-bat0 80)
-                    (start-charge-thresh-bat0 70)))
-                  (service thermald-service-type)
-                  (service
-                    openssh-service-type
-                    (openssh-configuration
-                      (x11-forwarding? #t)
-                      (permit-root-login 'prohibit-password)
-                      (authorized-keys
-                        `(("root" ,(local-file "../keys/s-laura.pub")))))))
-            %desktop-services))
+          (modify-services
+            (append
+              (list (service
+                      tlp-service-type
+                      (tlp-configuration
+                        (cpu-scaling-governor-on-ac (list "performance"))
+                        (sched-powersave-on-bat? #t)
+                        (cpu-boost-on-ac? #t)
+                        (stop-charge-thresh-bat0 80)
+                        (start-charge-thresh-bat0 70)))
+                    (service thermald-service-type)
+                    (service bluetooth-service-type)
+                    (service
+                      openssh-service-type
+                      (openssh-configuration
+                        (x11-forwarding? #t)
+                        (permit-root-login 'prohibit-password)
+                        (authorized-keys
+                          `(("root" ,(local-file "../keys/s-laura.pub")))))))
+              %desktop-services)
+            (dbus-root-service-type
+              config
+              =>
+              (dbus-configuration
+                (inherit config)
+                (services (list blueman))))))
         (mapped-devices
           (list (mapped-device
-                  (source (uuid "227bf599-01bc-48a4-97f0-9496ce7224cb"))
+                  (source
+                    (uuid "227bf599-01bc-48a4-97f0-9496ce7224cb"))
                   (target "guix_root")
                   (type luks-device-mapping))))
         (file-systems

@@ -32,8 +32,8 @@
               "96666895a96a85dc2af1e6ac954bddd0c3242096"
               "0592bbr89m3pwn0jlvmyz4dqfa1ynhxd3mpr5265m27g6hhqmh92")
         (list "dalaptop"
-              "2aceb42f6d96dfcb237ead66ad125a7fa0782565"
-              "0n9x44vk3ay46j3fvqwch3ggwsx7krn0mjmnd69qvs9ib7hkqy0m")))
+              "d0aa2c0f2836bf815fc7f8c5d12aec0f2cca65eb"
+              "1r54im071war2ra4gnxgkii67ha4gshr30vl75w6qxwzvz9lnawl")))
 
 (define %flags
   (list (list "kernelpanicroom" 'base 'opt 'graphic)
@@ -102,7 +102,6 @@
               (specification->package "rsync")
               (specification->package "radare2")
               (specification->package "drand-rs")
-              (specification->package "rust-cargo")
               (specification->package "docker-compose")
               (specification->package "nomadnet")
               (specification->package "magic-wormhole")
@@ -249,7 +248,8 @@
               (specification->package "radicle")
               (specification->package "dumpasn1")
               (specification->package "luajit")
-              (specification->package "tlp"))
+              (specification->package "tlp")
+              (specification->package "bluedevil"))
         '())
       (if (memq 'opt (assoc-ref %flags (gethostname)))
         (list (specification->package "haunt")
