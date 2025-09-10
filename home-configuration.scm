@@ -319,7 +319,6 @@
               (specification->package "i2pd")
               (specification->package "libmpdclient")
               (specification->package "dtc")
-              (specification->package "hipify")
               (specification->package "leopard")
               (specification->package "ricochet-refresh")
               (specification->package "git-repo")

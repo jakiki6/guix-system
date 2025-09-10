@@ -6,7 +6,7 @@
           (url "https://codeberg.org/guix/guix.git")
           (transformer (patched-upstream-guix '("patches/guix-transformer.patch"
                                                 "patches/swww.patch"
-                                                "patches/guix-ui.patch")))
+                                                "patches/guix-ui.patch" (2600))))
           (introduction
            (make-channel-introduction
             "9edb3f66fd807b096b48283debdcddccfea34bad"
@@ -24,10 +24,6 @@
           (name 'rosenthal)
           (url "https://codeberg.org/hako/rosenthal.git")
           (branch "trunk"))
-;        (channel
-;          (name 'guix-rust-past-crates)
-;          (url "https://codeberg.org/guix/guix-rust-past-crates.git")
-;          (branch "trunk"))
         (channel
           (name 'lauras-channel)
           (url "https://github.com/jakiki6/lauras-channel"))
@@ -51,15 +47,6 @@
            (make-channel-introduction
             "788a6d6f1d5c170db68aa4bbfb77024fdc468ed3"
             (openpgp-fingerprint "3CE464558A84FDC69DB40CFB090B11993D9AEBB5"))))
-;        (channel
-;          (name 'selected-guix-works)
-;          (url "https://github.com/gs-101/selected-guix-works.git")
-;          (branch "main")
-;          (introduction
-;           (make-channel-introduction
-;            "5d1270d51c64457d61cd46ec96e5599176f315a4"
-;            (openpgp-fingerprint
-;             "C780 21F7 34E4 07EB 9090  0CF1 4ACA 6D6F 89AB 3162"))))
         (channel
           (name 'small-guix)
           (url "https://codeberg.org/fishinthecalculator/small-guix.git")
