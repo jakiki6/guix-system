@@ -27,8 +27,8 @@
               "b3392b760b58335ebebfcd6a2663465da470dc4c"
               "00gzphd5w4kh9pzl1ixd6f43mr20rjrfq507l876cqp6s0fgxa53")
         (list "dalaptop"
-              "defd3ed5831085562a786895a19a8d61d190427d"
-              "1rjgzsffqvrndhxix0v2m1jcnkiygk8jmqzpv6x0y1169dhiq48i")))
+              "d0aa2c0f2836bf815fc7f8c5d12aec0f2cca65eb"
+              "1r54im071war2ra4gnxgkii67ha4gshr30vl75w6qxwzvz9lnawl")))
 
 (define breezex-cursor
   (package
