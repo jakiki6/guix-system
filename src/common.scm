@@ -372,7 +372,13 @@
                         "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))")
                       (plain-file
                         "hpc.pub"
-                        "(public-key (ecc (curve Ed25519) (q #89FBA276A976A8DE2A69774771A92C8C879E0F24614AAAAE23119608707B3F06#)))"))
+                        "(public-key (ecc (curve Ed25519) (q #89FBA276A976A8DE2A69774771A92C8C879E0F24614AAAAE23119608707B3F06#)))")
+                      (plain-file
+                        "kernelpanicroom.pub"
+                        "(public-key (ecc (curve Ed25519) (q #9D61AD24EBFFF452C63F8AA19548013645F6BC399189FD47CD4242DD46450349#)))")
+                      (plain-file
+                        "dalaptop.pub"
+                        "(public-key (ecc (curve Ed25519) (q #F3FB950A0FB71F396873783E52EB12AA84EB94248C005C1EB71F41418248BBF7#)))"))
                 %default-authorized-guix-keys))))
         (gdm-service-type
           config

@@ -5,8 +5,7 @@
           (branch "master")
           (url "https://codeberg.org/guix/guix.git")
           (transformer (patched-upstream-guix '("patches/guix-transformer.patch"
-                                                "patches/swww.patch"
-                                                "patches/guix-ui.patch" (2600))))
+                                                "patches/guix-ui.patch")))
           (introduction
            (make-channel-introduction
             "9edb3f66fd807b096b48283debdcddccfea34bad"
