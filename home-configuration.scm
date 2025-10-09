@@ -24,8 +24,8 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "6683ad374c83aff55d7c908b192f482c9da2c4b1"
-              "11r1gw1r8h8l3j3h4is24z2zglnbil96ncmidic0w0rz4gwg6ibg")
+              "41cba8b89e8cde959ecb1c8a45ee735399887b1d"
+              "1lwn3vgga70xngmvhgi5jqs97n50nn47gr0hr66931rpfw58q4i9")
         (list "dalaptop"
               "d0aa2c0f2836bf815fc7f8c5d12aec0f2cca65eb"
               "1r54im071war2ra4gnxgkii67ha4gshr30vl75w6qxwzvz9lnawl")))
@@ -86,7 +86,7 @@
                    "grub-efi"
                    "efibootmgr"
                    "uefitool"
-                   "ffmpeg@6"
+                   "prismlauncher"
                    "perf"
                    "ruby"
                    "rsync"
@@ -121,7 +121,6 @@
                    "pv"
                    "imagemagick"
                    "swig"
-                   "qdl"
                    "fastboot"
                    "flashrom"
                    "graphviz"
@@ -154,7 +153,7 @@
                    "nmap"
                    "iverilog"
                    "hexedit"
-                   "p7zip"
+                   "p7zip-nonfree"
                    "upx"
                    ("openssl" "doc")
                    "socat"
@@ -333,7 +332,6 @@
                    "vscodium"
                    "waybar"
                    "krita"
-                   "xwaylandvideobridge"
                    "kdenlive"
                    "krdc"
                    "xdot"
@@ -433,7 +431,6 @@
                    "qtwayland"
                    "kdeconnect"
                    "libfive"
-                   "wl-screenrec"
                    "kate"
                    "okular"
                    "mpv"
@@ -444,7 +441,12 @@
                    "openbabel"
                    "imhex"
                    "vulkan-loader"
-                   "vulkan-headers")))
+                   "vulkan-headers"
+                   "protobuf-c"
+                   "mullvad-vpn-desktop"
+                   "acarsdec"
+                   "sslscan"
+                   "smartmontools")))
   (services
    (append %base-home-services
            (list (service home-zsh-service-type
