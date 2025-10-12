@@ -24,8 +24,8 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "41cba8b89e8cde959ecb1c8a45ee735399887b1d"
-              "1lwn3vgga70xngmvhgi5jqs97n50nn47gr0hr66931rpfw58q4i9")
+              "9b0afe16e3b02628b928232c4c68c61a412dffd4"
+              "1asbfjp8x61grdlq4l1mn78byr1by7k1wjhrdbk2nsbjk62pxyn2")
         (list "dalaptop"
               "d0aa2c0f2836bf815fc7f8c5d12aec0f2cca65eb"
               "1r54im071war2ra4gnxgkii67ha4gshr30vl75w6qxwzvz9lnawl")))
@@ -446,7 +446,8 @@
                    "mullvad-vpn-desktop"
                    "acarsdec"
                    "sslscan"
-                   "smartmontools")))
+                   "smartmontools"
+                   "openssl")))
   (services
    (append %base-home-services
            (list (service home-zsh-service-type
