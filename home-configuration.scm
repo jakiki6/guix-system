@@ -24,11 +24,11 @@
 
 (define %hashes
   (list (list "kernelpanicroom"
-              "9b0afe16e3b02628b928232c4c68c61a412dffd4"
-              "1asbfjp8x61grdlq4l1mn78byr1by7k1wjhrdbk2nsbjk62pxyn2")
+              "4e57e0c8ed20c35cea36eed67a2bf37a65792aea"
+              "1y8ag8f2i4rr0qzrmd69wzh9jasgc4yr5i6pwhdxwa4qjf81hrmi")
         (list "dalaptop"
-              "d0aa2c0f2836bf815fc7f8c5d12aec0f2cca65eb"
-              "1r54im071war2ra4gnxgkii67ha4gshr30vl75w6qxwzvz9lnawl")))
+              "91aad851ed41b77a8326eac17a7cd435b97eeefb"
+              "1vpdgxn39dk20pxlqhfmwxkbynifp99kar75h1ldn9ylimcfb1lw")))
 
 (define breezex-cursor
   (package
@@ -479,6 +479,9 @@
                                    (".vimrc" ,(local-file "files/vimrc"))
                                    (".local/bin/scmfmt" ,(local-file
                                                           "files/scmfmt"
+                                                          #:recursive? #t))
+                                   (".local/bin/gentotp" ,(local-file
+                                                          "files/gentotp"
                                                           #:recursive? #t))
                                    (".oh-my-zsh" ,(origin
                                                     (method git-fetch)
