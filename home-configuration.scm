@@ -447,7 +447,8 @@
                    "acarsdec"
                    "sslscan"
                    "smartmontools"
-                   "openssl")))
+                   "openssl"
+                   "wireguard-tools")))
   (services
    (append %base-home-services
            (list (service home-zsh-service-type

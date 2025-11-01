@@ -210,14 +210,13 @@
         (list (list gtk "bin") (list mesa "bin"))
         (list font-adobe-source-code-pro
               font-adobe-source-han-sans
-              font-adobe-source-sans-pro
-              font-adobe-source-serif-pro
+              font-adobe-source-sans
+              font-adobe-source-serif
               font-anonymous-pro
               font-anonymous-pro-minus
               font-awesome
               font-bitstream-vera
               font-blackfoundry-inria
-              font-cns11643
               font-cns11643-swjz
               font-comic-neue
               font-culmus
@@ -258,7 +257,7 @@
               font-terminus
               font-tex-gyre
               font-un
-              font-vazir
+              font-vazirmatn
               font-wqy-microhei
               font-wqy-zenhei
               font-adobe100dpi
