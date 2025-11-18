@@ -1,6 +1,0 @@
-#!/usr/bin/env python3
-import os
-import pyotp
-
-with open(os.path.expanduser("~/.config/totp"), "r") as f:
-    print(pyotp.TOTP(f.read().strip()).now())

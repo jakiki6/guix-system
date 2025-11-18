@@ -23,6 +23,7 @@ if [ -f /run/current-system/profile/bin/guix ]; then
     fi
 
     export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
+    export PATH="$HOME/.elan/bin:$PATH"
 else
     if [ -f /etc/alpine-release ]; then
         export PS1="(alpine) $PS1"

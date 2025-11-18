@@ -7,6 +7,7 @@
              (guix git-download)
              (guix download)
              (guix build-system copy)
+             (guix build-system gnu)
              ((guix licenses)
               #:prefix license:)
              (gnu home services shells)
@@ -46,6 +47,29 @@
     (synopsis "")
     (description "")
     (license license:gpl3)))
+
+
+(define-public totp
+  (package
+    (name "totp")
+    (version "1.0")
+    (source
+      (origin
+        (method url-fetch)
+        (uri "https://gist.githubusercontent.com/jakiki6/3ac44a50901e85e2b48de99fb232391f/raw/d9da61d1f48960912182c21dbb8759d0e803f826/totp.c")
+        (sha256 (base32 "10v2hjiyvrp9v3ar8ra975n457mh176hv2i3c7ifbimsg2qf3p6l"))))
+    (build-system gnu-build-system)
+    (arguments (list
+      #:tests? #f
+      #:phases #~(modify-phases %standard-phases
+        (delete 'configure)
+        (replace 'build (lambda _
+          (system (string-append "gcc -O2 totp.c -o " #$output))))
+        (delete 'install))))
+    (home-page "")
+    (synopsis "")
+    (description "")
+    (license license:public-domain)))
 
 (home-environment
   (packages (map (lambda (package
@@ -481,9 +505,7 @@
                                    (".local/bin/scmfmt" ,(local-file
                                                           "files/scmfmt"
                                                           #:recursive? #t))
-                                   (".local/bin/gentotp" ,(local-file
-                                                          "files/gentotp"
-                                                          #:recursive? #t))
+                                   (".local/bin/gentotp" ,totp)
                                    (".oh-my-zsh" ,(origin
                                                     (method git-fetch)
                                                     (uri (git-reference (url
