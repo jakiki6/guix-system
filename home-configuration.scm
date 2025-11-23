@@ -341,7 +341,7 @@
                    "lean4"
                    "monero-gui"
                    "dragon-drop"
-                   "calibre"
+;                   "calibre"
                    "brightnessctl"
                    "dino"
                    "qemu"
@@ -472,7 +472,9 @@
                    "sslscan"
                    "smartmontools"
                    "openssl"
-                   "wireguard-tools")))
+                   "wireguard-tools"
+                   "modem-manager"
+                   "python-wxpython")))
   (services
    (append %base-home-services
            (list (service home-zsh-service-type

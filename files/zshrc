@@ -20,6 +20,8 @@ if [ -f /run/current-system/profile/bin/guix ]; then
     if [ ! -z "${GUIX_ENVIRONMENT}" ]; then
         export GUIX_PROFILE=$GUIX_ENVIRONMENT
         . $GUIX_PROFILE/etc/profile
+
+        export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$GUIX_PROFILE/lib/pkgconfig
     fi
 
     export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
