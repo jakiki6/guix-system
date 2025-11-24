@@ -56,8 +56,8 @@
     (source
       (origin
         (method url-fetch)
-        (uri "https://gist.githubusercontent.com/jakiki6/3ac44a50901e85e2b48de99fb232391f/raw/d9da61d1f48960912182c21dbb8759d0e803f826/totp.c")
-        (sha256 (base32 "10v2hjiyvrp9v3ar8ra975n457mh176hv2i3c7ifbimsg2qf3p6l"))))
+        (uri "https://gist.githubusercontent.com/laura240406/3ac44a50901e85e2b48de99fb232391f/raw/028db17265d86c62485278beacc21cfb2ed40020/totp.c")
+        (sha256 (base32 "0xr8n1ig6xvh4id6wclk1wzgkdn9j9bdwlvpqzs2g68fkm0kdjfa"))))
     (build-system gnu-build-system)
     (arguments (list
       #:tests? #f
