@@ -28,8 +28,8 @@
               "4e57e0c8ed20c35cea36eed67a2bf37a65792aea"
               "1y8ag8f2i4rr0qzrmd69wzh9jasgc4yr5i6pwhdxwa4qjf81hrmi")
         (list "dalaptop"
-              "6dde0e62c3c0461a2dd43048d90382770129d4a5"
-              "07c1rg3695gvf9wyka8lq1vqvj1vgflxiw3g0igrklqkmpk9l3zq")))
+              "dfa26a504d6428b3fac588585df25aded7826113"
+              "009qkz94gpcfil2b4xsn2rm0hgbi3jz5d7q494c0sdfg081cgkhx")))
 
 (define breezex-cursor
   (package
@@ -56,15 +56,15 @@
     (source
       (origin
         (method url-fetch)
-        (uri "https://gist.githubusercontent.com/laura240406/3ac44a50901e85e2b48de99fb232391f/raw/028db17265d86c62485278beacc21cfb2ed40020/totp.c")
-        (sha256 (base32 "0xr8n1ig6xvh4id6wclk1wzgkdn9j9bdwlvpqzs2g68fkm0kdjfa"))))
+        (uri "https://gist.githubusercontent.com/laura240406/3ac44a50901e85e2b48de99fb232391f/raw/264e61f0f7adced6b9f0fbf81522b0888c83a231/totp.c")
+        (sha256 (base32 "1w2kbg59hxp45f6jawlgy3bb8isfain5z4hfi7a18wby96fxdmqf"))))
     (build-system gnu-build-system)
     (arguments (list
       #:tests? #f
       #:phases #~(modify-phases %standard-phases
         (delete 'configure)
         (replace 'build (lambda _
-          (system (string-append "gcc -O2 totp.c -o " #$output))))
+          (system (string-append "gcc -O3 totp.c -o " #$output))))
         (delete 'install))))
     (home-page "")
     (synopsis "")
