@@ -125,7 +125,8 @@
       (list "modprobe.blacklist=dvb_usb_rtl28xxu,pcspkr"
             "mitigations=off"
             "iomem=relaxed"
-            "crashkernel=512M"))
+            "crashkernel=512M"
+            "elevator=bfq"))
     (locale "en_US.utf8")
     (timezone "Europe/Berlin")
     (keyboard-layout (keyboard-layout "de" "us"))
@@ -389,14 +390,6 @@
           config
           =>
           (list (car config)))
-;      (wpa-supplicant-service-type
-;        config
-;        =>
-;        (wpa-supplicant-configuration
-;          (config-file
-;            (plain-file
-;              "wpa_supplicant.cfg"
-;              secret-wpa-config))))
         (sysctl-service-type
           config
           =>
@@ -410,7 +403,9 @@
                   ("net.ipv4.tcp_mtu_probing" . "1")
                   ("kernel.core_pattern"
                    .
-                   "/var/core/core-%e-%s-%u-%g-%p-%t"))
+                   "/var/core/core-%e-%s-%u-%g-%p-%t")
+                  ("vm.dirty_background_ratio" . "1")
+                  ("vm.dirty_ratio" . "5"))
                 %default-sysctl-settings))))))
     (essential-services
       (modify-services

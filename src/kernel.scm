@@ -69,7 +69,7 @@
   (package
     (inherit linux)
     (name "linux-zen")
-    (version "6.11.8-zen1")
+    (version "6.17.9-zen1")
     (source
       (origin
         (method git-fetch)
@@ -77,12 +77,9 @@
                (url "https://github.com/zen-kernel/zen-kernel")
                (commit (string-append "v" version))))
         (file-name (git-file-name name version))
-        (patches
-          (list (local-file
-                  "../patches/linux-max-cipher-blocksize.patch")))
         (sha256
           (base32
-            "08fghj8hvbgr5imk2hhl2iadz4w3agxznzh21772hpmsljjr1rhq"))))
+            "0xrmhs2kabiszdldqx7c4bj3zicbslvvgmw8j77zlc49zddxhz1q"))))
     (native-inputs
       (modify-inputs
         (package-native-inputs linux)
@@ -99,7 +96,6 @@
                    (lambda _
                      (setenv "LLVM" "1")
                      (setenv "LLVM_IAS" "1")
-                     (setenv "KCFLAGS" "-O3 -march=skylake -pipe")
                      (let ((port (open-file ".config" "a"))
                            (extra-configuration
                              (ungexp
