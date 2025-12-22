@@ -1,5 +1,4 @@
 (begin
-  (use-modules (laura utils))
   (list (channel
           (name 'guix)
           (branch "master")
